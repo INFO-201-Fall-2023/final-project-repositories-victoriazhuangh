@@ -26,7 +26,9 @@ _"Watching Chinatown's Gentrifying/Generational Change" by Shaun Kuo_
 
 _"Race, Immigration, and Gentrification in Seattle, 1970-2013" by David Luberoff_
 - URL: https://www.jchs.harvard.edu/blog/race-immigration-and-gentrification-in-seattle-1970-2013
-- Luberoff discusses findings from Jackelyn Hwang’s article “Gentrification without Segregation? Race, Immigration, and Renewal in a Diversifying City.” 
+- Luberoff discusses findings from Jackelyn Hwang’s article “Gentrification without Segregation? Race, Immigration, and Renewal in a Diversifying City.” Hwang finds that in the 1990s and 2000s, gentrification was more likely to occur in areas with a larger Black population than in areas with a smaller Asian population. 
+- Like Hwang, we will investigate gentrification in two areas with very different racial makeups: Wallingford (a predominantly white area) and the CID (a predominantly Asian area). 
+- Our project may build on Hwang’s findings, as we will explore gentrification from 2013 to 2020, which is immediately after her period of study. 
 
 _"In high-rise cities like Seattle, can Chinatowns survive?" by Glenn Nelson_
 - URL: https://crosscut.com/2019/05/high-rise-cities-seattle-can-chinatowns-survive 
