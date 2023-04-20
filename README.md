@@ -16,7 +16,7 @@ _Table B02001 from the U.S. Census_
 
 **Background Research**
 
-In our research, we found the articles listed below. Here, we discuss how our project builds upon or extends prior ideas and discoveries.
+In our research, we found the articles and posts listed below. Here, we discuss how our project builds upon or extends prior ideas and discoveries.
 
 _"Watching Chinatown's Gentrifying/Generational Change" by Shaun Kuo_
 - URL: https://www.theurbanist.org/2022/06/14/kuo-%E9%83%AD-watching-chinatowns-gentrifying-generational-change/ 
@@ -27,4 +27,12 @@ _"Watching Chinatown's Gentrifying/Generational Change" by Shaun Kuo_
 _"Race, Immigration, and Gentrification in Seattle, 1970-2013" by David Luberoff_
 - URL: https://www.jchs.harvard.edu/blog/race-immigration-and-gentrification-in-seattle-1970-2013
 - Luberoff discusses findings from Jackelyn Hwang’s article “Gentrification without Segregation? Race, Immigration, and Renewal in a Diversifying City.” 
-- 
+
+_"In high-rise cities like Seattle, can Chinatowns survive?" by Glenn Nelson_
+- URL: https://crosscut.com/2019/05/high-rise-cities-seattle-can-chinatowns-survive 
+
+_"Seattle Neighborhoods: Wallingford - Thumbnail History" by Paul Dorpat_
+- URL: https://www.historylink.org/file/3461 
+
+_"Visualizing Inequities in Seattle" by Shisham Adhikari and Dominick Ta_
+- URL: https://homes.cs.washington.edu/~domta/seattle-inequity.html
