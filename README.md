@@ -30,6 +30,10 @@ _"Race, Immigration, and Gentrification in Seattle, 1970-2013" by David Luberoff
 - Like Hwang, we will investigate gentrification in two areas with very different racial makeups: Wallingford (a predominantly white area) and the CID (a predominantly Asian area). 
 - Our project may build on Hwang’s findings, as we will explore gentrification from 2013 to 2020, which is immediately after her period of study. 
 
+_"International District Development Wave Comes with Growing Pains and Opportunities" by Shaun Kuo_
+- URL: https://www.theurbanist.org/2022/03/22/cid-growing-pains-and-opportunities/ 
+- 
+
 _"In high-rise cities like Seattle, can Chinatowns survive?" by Glenn Nelson_
 - URL: https://crosscut.com/2019/05/high-rise-cities-seattle-can-chinatowns-survive 
 
