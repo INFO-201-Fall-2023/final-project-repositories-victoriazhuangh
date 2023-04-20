@@ -33,6 +33,3 @@ _"In high-rise cities like Seattle, can Chinatowns survive?" by Glenn Nelson_
 
 _"Seattle Neighborhoods: Wallingford - Thumbnail History" by Paul Dorpat_
 - URL: https://www.historylink.org/file/3461 
-
-_"Visualizing Inequities in Seattle" by Shisham Adhikari and Dominick Ta_
-- URL: https://homes.cs.washington.edu/~domta/seattle-inequity.html
