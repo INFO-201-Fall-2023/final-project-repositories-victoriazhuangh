@@ -38,7 +38,9 @@ _"Race, Immigration, and Gentrification in Seattle, 1970-2013" by David Luberoff
 
 _"International District Development Wave Comes with Growing Pains and Opportunities" by Shaun Kuo_
 - URL: https://www.theurbanist.org/2022/03/22/cid-growing-pains-and-opportunities/ 
-- 
+- In this article, Kuo examines the development and permit activity in the CID from 2019-2022. He uses maps to visualize the locations of expected high- and mid-rise developments in Japantown, Chinatown, and Little Saigon. 
+- Like Kuo, we will examine development and permit data; our project departs from his in that we will compare development and permit data from Wallingford and the CID.
+- Kuo visually differentiates expected developments that will be market-rate from those that are affordable or income-restriction. We will not be doing this, as we do not have the necessary data, but it would be a fascinating topic for a future project. 
 
 _"In high-rise cities like Seattle, can Chinatowns survive?" by Glenn Nelson_
 - URL: https://crosscut.com/2019/05/high-rise-cities-seattle-can-chinatowns-survive 
