@@ -1,5 +1,7 @@
 **Pitch**
 
+Gentrification occurs when affluent people and families move into neighborhoods that have historically been home to Black, indigenous, and other people of color, leading to the displacement of the original residents (Fogel, [Link](https://urban.uw.edu/news/gentrification-and-changing-foodscapes-in-seattle/#:~:text=In%20Seattle%2C%2050%25%20of%20eligible,47%25%20between%202000%20and%202013)). In the past few decades, gentrification has become an increasingly important issue within major U.S. cities. Developers and corporations often claim that gentrification increases the quality of life within target neighborhoods; however, in reality, it can also lead to a loss of culture, history, and feelings of connection between community members. And, not only does gentrification impact culture, it threatens the food and housing security of existing residents in gentrifying areas who may not be able to afford increasing rent and food prices (Fogel). 
+
 **Data**
 
 In this project, we will utilize the following two datasets:
