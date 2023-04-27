@@ -16,6 +16,14 @@ dem_2020_df <- read.csv("2020_B02001.csv")
 # datasets together). This means that the records in your two datasets need to 
 # be related some how, either by a shared key or a combination of fields.
 
+# Can join dem_2013_df to dem_2019_df 
+
+# Aggregate dem_2020_df
+
+# Join dem_2020_df to joined dem_20XX_df
+
+# Join dem_df to built_units 
+
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
 # dataset is clean and usable. i.e. make sure your columns properly formatted as
