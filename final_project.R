@@ -51,15 +51,10 @@ dem_2013_df <- rename(dem_2013_df, totalEstPop2013 = B02001_001E,
                       totalTwoRacesIncOther2013 = B02001_009E,
                       totalTwoRacesExcOther2013 = B02001_010E)
 
-col_2013_df <- data.frame(colnames(dem_2013_df))
+# data.frame(colnames(dem_2013_df))
 
-col_mask <- col_2013_df == "totalEstPop2013" | col_2013_df == "totalEstWhite2013" | 
-  col_2013_df == "totalEstBlack2013" | col_2013_df == "totalEstAIAN2013" |
-  col_2013_df == "totalEstAsian2013" | col_2013_df == "totalEstNHPI2013" |
-  col_2013_df == "totalEstOther2013" | col_2013_df == "totalTwoRaces2013" |
-  col_2013_df == "totalTwoRacesIncOther2013" | col_2013_df == "totalTwoRacesExcOther2013"
-
-col_filtered <- col_2013_df[col_mask == FALSE]
+dem_2013_df <- dem_2013_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2014: 
 dem_2014_df <- rename(dem_2014_df, totalEstPop2014 = B02001_001E, 
@@ -73,6 +68,9 @@ dem_2014_df <- rename(dem_2014_df, totalEstPop2014 = B02001_001E,
                       totalTwoRacesIncOther2014 = B02001_009E,
                       totalTwoRacesExcOther2014 = B02001_010E)
 
+dem_2014_df <- dem_2014_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
+
 # For 2015:
 dem_2015_df <- rename(dem_2015_df, totalEstPop2015 = B02001_001E, 
                       totalEstWhite2015 = B02001_002E,
@@ -84,6 +82,9 @@ dem_2015_df <- rename(dem_2015_df, totalEstPop2015 = B02001_001E,
                       totalTwoRaces2015 = B02001_008E,
                       totalTwoRacesIncOther2015 = B02001_009E,
                       totalTwoRacesExcOther2015 = B02001_010E)
+
+dem_2015_df <- dem_2015_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2016:
 dem_2016_df <- rename(dem_2016_df, totalEstPop2016 = B02001_001E, 
@@ -97,6 +98,9 @@ dem_2016_df <- rename(dem_2016_df, totalEstPop2016 = B02001_001E,
                       totalTwoRacesIncOther2016 = B02001_009E,
                       totalTwoRacesExcOther2016 = B02001_010E)
 
+dem_2016_df <- dem_2016_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
+
 # For 2017:
 dem_2017_df <- rename(dem_2017_df, totalEstPop2017 = B02001_001E, 
                       totalEstWhite2017 = B02001_002E,
@@ -108,6 +112,9 @@ dem_2017_df <- rename(dem_2017_df, totalEstPop2017 = B02001_001E,
                       totalTwoRaces2017 = B02001_008E,
                       totalTwoRacesIncOther2017 = B02001_009E,
                       totalTwoRacesExcOther2017 = B02001_010E)
+
+dem_2017_df <- dem_2017_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2018:
 dem_2018_df <- rename(dem_2018_df, totalEstPop2018 = B02001_001E, 
@@ -121,6 +128,9 @@ dem_2018_df <- rename(dem_2018_df, totalEstPop2018 = B02001_001E,
                       totalTwoRacesIncOther2018 = B02001_009E,
                       totalTwoRacesExcOther2018 = B02001_010E)
 
+dem_2018_df <- dem_2018_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
+
 # For 2019:
 dem_2019_df <- rename(dem_2019_df, totalEstPop2019 = B02001_001E, 
                       totalEstWhite2019 = B02001_002E,
@@ -132,6 +142,9 @@ dem_2019_df <- rename(dem_2019_df, totalEstPop2019 = B02001_001E,
                       totalTwoRaces2019 = B02001_008E,
                       totalTwoRacesIncOther2019 = B02001_009E,
                       totalTwoRacesExcOther2019 = B02001_010E)
+
+dem_2019_df <- dem_2019_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2020: 
 dem_2020_df <- rename(dem_2020_df, totalEstPop2020 = B02001_001E, 
@@ -145,14 +158,21 @@ dem_2020_df <- rename(dem_2020_df, totalEstPop2020 = B02001_001E,
                       totalTwoRacesIncOther2020 = B02001_009E,
                       totalTwoRacesExcOther2020 = B02001_010E)
 
+dem_2020_df <- dem_2020_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
+                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
+
 # Join 2013-2019 data sets
 
-#dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
-                    #dem_2018_df, dem_2019_df)
+dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
+                    dem_2018_df, dem_2019_df)
 
-#Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
+Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
 
-#dem_df <- dem_list_df %>% reduce(inner_join, by='GEO_ID')
+dem_df <- dem_list_df %>% reduce(left_join, by='GEO_ID')
+
+dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
+
+dem_df <- rename(dem_df, NAME = NAME.x)
 
 # Aggregate built_units so that it can be joined 
 
