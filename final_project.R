@@ -175,7 +175,9 @@ dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
 dem_df <- rename(dem_df, NAME = NAME.x)
 
 # Aggregate built_units so that it can be joined 
+cleanyr_built_units <- built_units_df %>% filter(YEAR_FINAL == '2013|2014|2015|2016|2017|2018|2019|2020')
 
+#Aggregate 2020 data
 # Join all demographic data frames
 
 # Join demographic data frame to built units data frame 
