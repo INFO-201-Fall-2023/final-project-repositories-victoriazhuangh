@@ -1,5 +1,5 @@
 # Aileen Kuang, aileenk@uw.edu
-# Victoria Zhuang 
+# Victoria Zhuang, vzhuang@uw.edu 
 
 # Load libraries 
 library(dplyr)
