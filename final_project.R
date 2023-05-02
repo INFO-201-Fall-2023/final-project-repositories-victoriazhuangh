@@ -161,18 +161,20 @@ dem_2020_df <- rename(dem_2020_df, totalEstPop2020 = B02001_001E,
 dem_2020_df <- dem_2020_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
+
+
 # Join 2013-2019 data sets
 
-dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
-                    dem_2018_df, dem_2019_df)
+# dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
+                    # dem_2018_df, dem_2019_df)
 
-Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
+# Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
 
-dem_df <- dem_list_df %>% reduce(left_join, by='GEO_ID')
+# dem_df <- dem_list_df %>% reduce(left_join, by='GEO_ID')
 
-dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
+# dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
 
-dem_df <- rename(dem_df, NAME = NAME.x)
+# dem_df <- rename(dem_df, NAME = NAME.x)
 
 # Aggregate built_units so that it can be joined 
 
@@ -188,7 +190,7 @@ dem_df <- rename(dem_df, NAME = NAME.x)
 # dataset than that I recommend you consider narrowing your dataset down in some 
 # way either by filtering or through aggregation.  
 # ------------------------------------------------------------------------------
-# You will then also need to create additional columns in your datase:
+# You will then also need to create additional columns in your data set:
 # Must create at least one new categorical variable
 
 
