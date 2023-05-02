@@ -167,13 +167,9 @@ dem_2020_df <- dem_2020_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 2
 
 # dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
                     # dem_2018_df, dem_2019_df)
-
 # Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
-
 # dem_df <- dem_list_df %>% reduce(left_join, by='GEO_ID')
-
 # dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
-
 # dem_df <- rename(dem_df, NAME = NAME.x)
 
 # Aggregate built_units so that it can be joined 
