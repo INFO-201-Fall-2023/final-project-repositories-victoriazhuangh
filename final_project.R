@@ -5,6 +5,7 @@
 library(dplyr)
 library(stringr)
 library(ggplot2)
+library(tidyr)
 
 # Load data sets  
 df_1 <- read.csv("Built_Units_Since_2010_Edited.csv")
@@ -15,14 +16,14 @@ df_5 <- read.csv("2016_B02001.csv")
 df_6 <- read.csv("2017_B02001.csv")
 df_7 <- read.csv("2018_B02001.csv")
 df_8 <- read.csv("2019_B02001.csv")
-df_9 <- read.csv("2020_B02001.csv")
 
 # Data Joining -----------------------------------------------------------------
+
 # You first need to to create a unified dataset (i.e. you need to join your 
 # datasets together). This means that the records in your two data sets need to 
 # be related some how, either by a shared key or a combination of fields.
 
-# Name data frames
+# Create duplicates of data frames 
 built_units_df <- df_1
 dem_2013_df <- df_2
 dem_2014_df <- df_3
@@ -31,152 +32,169 @@ dem_2016_df <- df_5
 dem_2017_df <- df_6
 dem_2018_df <- df_7
 dem_2019_df <- df_8
-dem_2020_df <- df_9
 
 # Convert GEOID10 and GEOID20 in built_units_df from scientific notation to actual numbers 
 built_units_df$built_units_geo10 <- paste("1500000US", built_units_df$GEOID10, sep = "")
 built_units_df$built_units_geo20 <- paste("1500000US", built_units_df$GEOID20, sep = "")
 
-# Edit column names and remove unnecessary columns for 2013-2020 data sets 
+# Edit column names and remove unnecessary columns for 2013-2019 data sets 
   
 # For 2013:
-dem_2013_df <- rename(dem_2013_df, totalEstPop2013 = B02001_001E, 
-                      totalEstWhite2013 = B02001_002E,
-                      totalEstBlack2013 = B02001_003E,
-                      totalEstAIAN2013 = B02001_004E,
-                      totalEstAsian2013 = B02001_005E,
-                      totalEstNHPI2013 = B02001_006E,
-                      totalEstOther2013 = B02001_007E,
-                      totalTwoRaces2013 = B02001_008E,
-                      totalTwoRacesIncOther2013 = B02001_009E,
-                      totalTwoRacesExcOther2013 = B02001_010E)
-
-# data.frame(colnames(dem_2013_df))
+dem_2013_df <- rename(dem_2013_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2013_df <- dem_2013_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2014: 
-dem_2014_df <- rename(dem_2014_df, totalEstPop2014 = B02001_001E, 
-                      totalEstWhite2014 = B02001_002E,
-                      totalEstBlack2014 = B02001_003E,
-                      totalEstAIAN2014 = B02001_004E,
-                      totalEstAsian2014 = B02001_005E,
-                      totalEstNHPI2014 = B02001_006E,
-                      totalEstOther2014 = B02001_007E,
-                      totalTwoRaces2014 = B02001_008E,
-                      totalTwoRacesIncOther2014 = B02001_009E,
-                      totalTwoRacesExcOther2014 = B02001_010E)
+dem_2014_df <- rename(dem_2014_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2014_df <- dem_2014_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2015:
-dem_2015_df <- rename(dem_2015_df, totalEstPop2015 = B02001_001E, 
-                      totalEstWhite2015 = B02001_002E,
-                      totalEstBlack2015 = B02001_003E,
-                      totalEstAIAN2015 = B02001_004E,
-                      totalEstAsian2015 = B02001_005E,
-                      totalEstNHPI2015 = B02001_006E,
-                      totalEstOther2015 = B02001_007E,
-                      totalTwoRaces2015 = B02001_008E,
-                      totalTwoRacesIncOther2015 = B02001_009E,
-                      totalTwoRacesExcOther2015 = B02001_010E)
+dem_2015_df <- rename(dem_2015_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2015_df <- dem_2015_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2016:
-dem_2016_df <- rename(dem_2016_df, totalEstPop2016 = B02001_001E, 
-                      totalEstWhite2016 = B02001_002E,
-                      totalEstBlack2016 = B02001_003E,
-                      totalEstAIAN2016 = B02001_004E,
-                      totalEstAsian2016 = B02001_005E,
-                      totalEstNHPI2016 = B02001_006E,
-                      totalEstOther2016 = B02001_007E,
-                      totalTwoRaces2016 = B02001_008E,
-                      totalTwoRacesIncOther2016 = B02001_009E,
-                      totalTwoRacesExcOther2016 = B02001_010E)
+dem_2016_df <- rename(dem_2016_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2016_df <- dem_2016_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2017:
-dem_2017_df <- rename(dem_2017_df, totalEstPop2017 = B02001_001E, 
-                      totalEstWhite2017 = B02001_002E,
-                      totalEstBlack2017 = B02001_003E,
-                      totalEstAIAN2017 = B02001_004E,
-                      totalEstAsian2017 = B02001_005E,
-                      totalEstNHPI2017 = B02001_006E,
-                      totalEstOther2017 = B02001_007E,
-                      totalTwoRaces2017 = B02001_008E,
-                      totalTwoRacesIncOther2017 = B02001_009E,
-                      totalTwoRacesExcOther2017 = B02001_010E)
+dem_2017_df <- rename(dem_2017_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2017_df <- dem_2017_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2018:
-dem_2018_df <- rename(dem_2018_df, totalEstPop2018 = B02001_001E, 
-                      totalEstWhite2018 = B02001_002E,
-                      totalEstBlack2018 = B02001_003E,
-                      totalEstAIAN2018 = B02001_004E,
-                      totalEstAsian2018 = B02001_005E,
-                      totalEstNHPI2018 = B02001_006E,
-                      totalEstOther2018 = B02001_007E,
-                      totalTwoRaces2018 = B02001_008E,
-                      totalTwoRacesIncOther2018 = B02001_009E,
-                      totalTwoRacesExcOther2018 = B02001_010E)
+dem_2018_df <- rename(dem_2018_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2018_df <- dem_2018_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
 # For 2019:
-dem_2019_df <- rename(dem_2019_df, totalEstPop2019 = B02001_001E, 
-                      totalEstWhite2019 = B02001_002E,
-                      totalEstBlack2019 = B02001_003E,
-                      totalEstAIAN2019 = B02001_004E,
-                      totalEstAsian2019 = B02001_005E,
-                      totalEstNHPI2019 = B02001_006E,
-                      totalEstOther2019 = B02001_007E,
-                      totalTwoRaces2019 = B02001_008E,
-                      totalTwoRacesIncOther2019 = B02001_009E,
-                      totalTwoRacesExcOther2019 = B02001_010E)
+dem_2019_df <- rename(dem_2019_df, totalEstPop = B02001_001E, 
+                      totalEstWhite = B02001_002E,
+                      totalEstBlack = B02001_003E,
+                      totalEstAIAN = B02001_004E,
+                      totalEstAsian = B02001_005E,
+                      totalEstNHPI = B02001_006E,
+                      totalEstOther = B02001_007E,
+                      totalTwoRaces = B02001_008E,
+                      totalTwoRacesIncOther = B02001_009E,
+                      totalTwoRacesExcOther = B02001_010E)
 
 dem_2019_df <- dem_2019_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
                                 28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
 
-# For 2020: 
-dem_2020_df <- rename(dem_2020_df, totalEstPop2020 = B02001_001E, 
-                      totalEstWhite2020 = B02001_002E,
-                      totalEstBlack2020 = B02001_003E,
-                      totalEstAIAN2020 = B02001_004E,
-                      totalEstAsian2020 = B02001_005E,
-                      totalEstNHPI2020 = B02001_006E,
-                      totalEstOther2020 = B02001_007E,
-                      totalTwoRaces2020 = B02001_008E,
-                      totalTwoRacesIncOther2020 = B02001_009E,
-                      totalTwoRacesExcOther2020 = B02001_010E)
+# Add "Year" column to all the individual demographic data sets 
+dem_2013_df$Year <- 2013
+dem_2014_df$Year <- 2014
+dem_2015_df$Year <- 2015
+dem_2016_df$Year <- 2016
+dem_2017_df$Year <- 2017
+dem_2018_df$Year <- 2018
+dem_2019_df$Year <- 2019
 
-dem_2020_df <- dem_2020_df[, -c(4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 17, 18, 20, 21, 22, 24, 25, 26, 
-                                28, 29, 30, 32, 33, 34, 36, 37, 38, 40, 41, 42, 43)]
+# Remove first row from each data set
+dem_2013_df <- dem_2013_df[-1,]
+dem_2014_df <- dem_2014_df[-1,]
+dem_2015_df <- dem_2015_df[-1,]
+dem_2016_df <- dem_2016_df[-1,]
+dem_2017_df <- dem_2017_df[-1,]
+dem_2018_df <- dem_2018_df[-1,]
+dem_2019_df <- dem_2019_df[-1,]
 
+# Filter data sets for relevant census tracts: 
+# Chinatown: 90 & 91
+# Wallingford: 50, 51, 52 
 
+# Find indices of relevant census tracts 
+tract_90 <- which(str_detect(dem_2013_df$NAME, "Census Tract 90"))
+tract_91 <- which(str_detect(dem_2013_df$NAME, "Census Tract 91"))
+tract_50 <- which(str_detect(dem_2013_df$NAME, "Census Tract 50"))
+tract_51 <- which(str_detect(dem_2013_df$NAME, "Census Tract 51"))
+tract_52 <- which(str_detect(dem_2013_df$NAME, "Census Tract 52"))
 
-# Join 2013-2019 data sets
+# Combine indices into one vector: rel_tracts
+rel_tracts <- c(tract_50, tract_51, tract_52, tract_90, tract_91)
 
-# dem_list_df <- list(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df, 
-                    # dem_2018_df, dem_2019_df)
-# Reduce(function(x, y) merge(x, y, all=FALSE), dem_list_df)
-# dem_df <- dem_list_df %>% reduce(left_join, by='GEO_ID')
-# dem_df <- dem_df[, -c(13, 24, 35, 46, 57, 68)]
-# dem_df <- rename(dem_df, NAME = NAME.x)
+# Use rel_tracts to filter down each data set 
+dem_2013_df <- dem_2013_df[rel_tracts,]
+dem_2014_df <- dem_2014_df[rel_tracts,]
+dem_2015_df <- dem_2015_df[rel_tracts,]
+dem_2015_df <- dem_2015_df[rel_tracts,]
+dem_2016_df <- dem_2016_df[rel_tracts,]
+dem_2017_df <- dem_2017_df[rel_tracts,]
+dem_2018_df <- dem_2018_df[rel_tracts,]
+dem_2019_df <- dem_2019_df[rel_tracts,]
+
+# Append all demographics data sets 
+dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
+                dem_2018_df, dem_2019_df)
 
 # Aggregate built_units so that it can be joined 
 
 # Join all demographic data frames
 
-# Join demographic data frame to built units data frame 
+# Join demographic data frame to built units data frame
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
