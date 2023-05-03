@@ -193,7 +193,7 @@ dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
 dem_df <- dem_df %>% relocate(Year, .after = NAME)
 
 # Aggregate built_units so that it can be joined
-cleanyr_built_units <- built_units_df %>% filter(YEAR_FINAL == '2021|2022|2023')
+cleanyr_built_units <- built_units_df %>% filter(YEAR_FINAL == '2010|2011|2012|2021|2022|2023')
 
 # Move updated GEOID10 and GEOID20 to the beginning of the data set
 built_units_df <- built_units_df %>% relocate(built_units_geo20)
