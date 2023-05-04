@@ -38,7 +38,7 @@ built_units_df$built_units_geo10 <- paste("1500000US", built_units_df$GEOID10, s
 built_units_df$built_units_geo20 <- paste("1500000US", built_units_df$GEOID20, sep = "")
 
 # Edit column names and remove unnecessary columns for 2013-2019 data sets 
-  
+
 # For 2013:
 dem_2013_df <- rename(dem_2013_df, totalEstPop = B02001_001E, 
                       totalEstWhite = B02001_002E,
@@ -233,7 +233,7 @@ rel_indices <- c(find_geo_id("1500000US530330050001"),
                  find_geo_id("1500000US530330090002"),
                  find_geo_id("1500000US530330091001"),
                  find_geo_id("1500000US530330091002")
-                 )
+)
 
 # Filter built units by rel_indices
 built_units_df <- built_units_df[rel_indices,]
