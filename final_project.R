@@ -238,9 +238,29 @@ rel_indices <- c(find_geo_id("1500000US530330050001"),
 # Filter built units by rel_indices
 built_units_df <- built_units_df[rel_indices,]
 
-# Join dem_df to built_units_df
+# Remove GEOID20 and permit number
+built_units_df <- built_units_df[, -c(2, 4)]
 
 # Remove observations after 2019
+
+obs_2020 <- which(built_units_df$YEAR_FINAL == 2020)
+obs_2021 <- which(built_units_df$YEAR_FINAL == 2021)
+obs_2022 <- which(built_units_df$YEAR_FINAL == 2022)
+obs_2023 <- which(built_units_df$YEAR_FINAL == 2023)
+
+obs_all <- c(obs_2020, obs_2021, obs_2022, obs_2023)
+
+built_units_df <- built_units_df[-obs_all,]
+
+# Edit GEO_ID column so that it shows only the first 21 characters 
+# nchar(1500000US530330052002) = 21
+
+trimmed_geo_id <- strtrim(built_units_df$GEO_ID, 21)
+built_units_df$GEO_ID <- trimmed_geo_id
+
+# Join dem_df to built_units_df
+joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), by.y=c("GEO_ID", "Year"))
+
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
