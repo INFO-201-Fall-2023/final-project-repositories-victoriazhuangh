@@ -287,10 +287,10 @@ maxrace <- pmax(joined_df$totalEstWhite,
                 joined_df$totalEstOther,
                 joined_df$totalTwoRaces)
 
-joined_df$Pre_race <- maxrace/c(select(joined_df, totalEstPop))
+#joined_df$Pre_race <- maxrace/c(select(joined_df, totalEstPop))
 
 # Categorical variable: check which percentage is the highest and assign 
 # that census tract "Predominantly..." (ex. "Predominantly Black")
-# if (maxrace ==)
+# if (maxrace == col)
 
 # Must create at least one summarization data frame 
