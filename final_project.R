@@ -180,7 +180,6 @@ rel_tracts <- c(tract_50, tract_51, tract_52, tract_90, tract_91)
 dem_2013_df <- dem_2013_df[rel_tracts,]
 dem_2014_df <- dem_2014_df[rel_tracts,]
 dem_2015_df <- dem_2015_df[rel_tracts,]
-dem_2015_df <- dem_2015_df[rel_tracts,]
 dem_2016_df <- dem_2016_df[rel_tracts,]
 dem_2017_df <- dem_2017_df[rel_tracts,]
 dem_2018_df <- dem_2018_df[rel_tracts,]
@@ -190,11 +189,58 @@ dem_2019_df <- dem_2019_df[rel_tracts,]
 dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
                 dem_2018_df, dem_2019_df)
 
-# Aggregate built_units so that it can be joined 
+# Move "Year" column in dem_df up
+dem_df <- dem_df %>% relocate(Year, .after = NAME)
 
-# Join all demographic data frames
+# Clean built_units_df 
 
-# Join demographic data frame to built units data frame
+# Move updated GEOID10 and GEOID20 to the beginning of the data set
+built_units_df <- built_units_df %>% relocate(built_units_geo20)
+built_units_df <- built_units_df %>% relocate(built_units_geo10)
+
+# Remove unnecessary columns from built_units_df (X, Y)
+unnecessary <- c(3, 4, 6, 7, 10, 17, 20, 21, 23, 34, 35, 36, 38, 39, 40, 41, 42, 
+                 44, 45, 46, 53, 54, 55)
+
+built_units_df <- built_units_df[, -unnecessary]
+
+# Rename/shorten GEOID columns 
+colnames(built_units_df)[1] = "GEO_ID"
+colnames(built_units_df)[2] = "GEOID20"
+
+# Remove unnecessary rows from built_units_df by filtering down to relevant 
+# GEO IDs
+
+# Write a function to find the index of the GEO ID in built_units_df 
+find_geo_id <- function(GEOID){
+  mask <- str_detect(built_units_df$GEO_ID, GEOID)
+  which(mask == TRUE)
+}
+
+# Find indices of relevant tracts using find_geo_id 
+rel_indices <- c(find_geo_id("1500000US530330050001"),
+                 find_geo_id("1500000US530330050002"),
+                 find_geo_id("1500000US530330050003"),
+                 find_geo_id("1500000US530330051001"),
+                 find_geo_id("1500000US530330051002"),
+                 find_geo_id("1500000US530330051003"),
+                 find_geo_id("1500000US530330052001"),
+                 find_geo_id("1500000US530330052002"),
+                 find_geo_id("1500000US530330052003"),
+                 find_geo_id("1500000US530330052004"),
+                 find_geo_id("1500000US530330052005"),
+                 find_geo_id("1500000US530330090001"),
+                 find_geo_id("1500000US530330090002"),
+                 find_geo_id("1500000US530330091001"),
+                 find_geo_id("1500000US530330091002")
+                 )
+
+# Filter built units by rel_indices
+built_units_df <- built_units_df[rel_indices,]
+
+# Join dem_df to built_units_df
+
+# Remove observations after 2019
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -205,6 +251,7 @@ dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
 # way either by filtering or through aggregation.  
 # ------------------------------------------------------------------------------
 # You will then also need to create additional columns in your data set:
+
 # Must create at least one new categorical variable
 
 
