@@ -279,18 +279,36 @@ joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 # One new continuous/numerical variable 
 
 # Numerical variable: demographic percentages in each block group
-maxrace <- pmax(joined_df$totalEstWhite, 
+
+# Convert demographics columns to numeric type 
+joined_df$totalEstPop <- as.numeric(unlist(joined_df$totalEstPop))
+joined_df$totalEstWhite <- as.numeric(unlist(joined_df$totalEstWhite))
+joined_df$totalEstBlack <- as.numeric(unlist(joined_df$totalEstBlack))
+joined_df$totalEstAIAN <- as.numeric(unlist(joined_df$totalEstAIAN))
+joined_df$totalEstAsian <- as.numeric(unlist(joined_df$totalEstAsian))
+joined_df$totalEstNHPI <- as.numeric(unlist(joined_df$totalEstNHPI))
+joined_df$totalEstOther <- as.numeric(unlist(joined_df$totalEstOther))
+joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
+joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
+joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
+
+# Find max 
+maxrace <- pmax(joined_df$totalEstWhite,
                 joined_df$totalEstBlack,
                 joined_df$totalEstAIAN,
-                joined_df$totalEstAsian,
                 joined_df$totalEstNHPI,
                 joined_df$totalEstOther,
-                joined_df$totalTwoRaces)
+                joined_df$totalTwoRaces,
+                joined_df$totalTwoRacesExcOther)
 
-#joined_df$Pre_race <- maxrace/c(select(joined_df, totalEstPop))
+# Find the maximum percentage
+joined_df$preRacePercent <- maxrace/c(joined_df$totalEstPop) * 100
 
 # Categorical variable: check which percentage is the highest and assign 
 # that census tract "Predominantly..." (ex. "Predominantly Black")
+
+
+
 # if (maxrace == col)
 
 # Must create at least one summarization data frame 
