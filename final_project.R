@@ -243,24 +243,28 @@ built_units_df <- built_units_df[, -c(2, 4)]
 
 # Remove observations after 2019
 
+# Find indices of observations from 2020-2023
 obs_2020 <- which(built_units_df$YEAR_FINAL == 2020)
 obs_2021 <- which(built_units_df$YEAR_FINAL == 2021)
 obs_2022 <- which(built_units_df$YEAR_FINAL == 2022)
 obs_2023 <- which(built_units_df$YEAR_FINAL == 2023)
 
+# Collect all observations into a vector
 obs_all <- c(obs_2020, obs_2021, obs_2022, obs_2023)
 
+# Remove obs_all from built_units df
 built_units_df <- built_units_df[-obs_all,]
 
 # Edit GEO_ID column so that it shows only the first 21 characters 
 # nchar(1500000US530330052002) = 21
-
 trimmed_geo_id <- strtrim(built_units_df$GEO_ID, 21)
 built_units_df$GEO_ID <- trimmed_geo_id
 
 # Join dem_df to built_units_df
 joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), by.y=c("GEO_ID", "Year"))
 
+# Move "Year" column to the beginning of the joined df
+joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -271,11 +275,14 @@ joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), b
 # way either by filtering or through aggregation.  
 # ------------------------------------------------------------------------------
 # You will then also need to create additional columns in your data set:
+# One new categorical variable
+# One new continuous/numerical variable 
 
-# Must create at least one new categorical variable
+# Numerical variable: demographic percentages in each block group
 
-
-# Must create at least one new continuous/numerical variable
-
+# Categorical variable: check which percentage is the highest and assign 
+# that census tract "Predominantly..." (ex. "Predominantly Black")
 
 # Must create at least one summarization data frame 
+
+# ???
