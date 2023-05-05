@@ -304,15 +304,22 @@ maxrace <- pmax(joined_df$totalEstWhite,
 # Find the maximum percentage
 joined_df$preRacePercent <- maxrace/c(joined_df$totalEstPop) * 100
 
-# Categorical variable: check which percentage is the highest and assign 
-# that census tract "Predominantly..." (ex. "Predominantly Black")
+# Categorical variable: whether the census block group is white or non-white (T/F)
 
-# Filter by maxrace
-col_names <- names(joined_df[joined_df[40:49] == maxrace])
+# Find the percentage of white people
+joined_df$percWhite <- joined_df$totalEstWhite / joined_df$totalEstPop * 100
 
-# if (maxrace == col)
+# If percWhite == preRacePercent, assign TRUE to isMaxWhite
 
-# Create summarization data frame 
+joined_df$isMaxWhite <- for (x in 1:341){
+  if (joined_df$percWhite[x] == joined_df$preRacePercent[x]){
+    return(TRUE)
+  } else{
+    return(FALSE)
+  }
+}
+
+# Create summarization data frame ----------------------------------------------
 
 # For built units data 
 
