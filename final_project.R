@@ -278,9 +278,7 @@ joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 # One new categorical variable
 # One new continuous/numerical variable 
 
-# Numerical variable: demographic percentages in each block group
-
-# Convert demographics columns to numeric type 
+# Convert demographics columns to numeric type ---------------------------------
 joined_df$totalEstPop <- as.numeric(unlist(joined_df$totalEstPop))
 joined_df$totalEstWhite <- as.numeric(unlist(joined_df$totalEstWhite))
 joined_df$totalEstBlack <- as.numeric(unlist(joined_df$totalEstBlack))
@@ -292,19 +290,9 @@ joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
 joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
 joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
 
-# Find max 
-maxrace <- pmax(joined_df$totalEstWhite,
-                joined_df$totalEstBlack,
-                joined_df$totalEstAIAN,
-                joined_df$totalEstNHPI,
-                joined_df$totalEstOther,
-                joined_df$totalTwoRaces,
-                joined_df$totalTwoRacesExcOther)
-
-# Find the maximum percentage
-joined_df$preRacePercent <- maxrace/c(joined_df$totalEstPop) * 100
-
-# Categorical variable: whether the census block group is white or non-white (T/F)
+# Continuous variable ----------------------------------------------------------
+# Percentage of white people, percentage of non-white people, sum of non-white people
+# Percent of the dominant group 
 
 # Find the percentage of white people
 joined_df$percWhite <- joined_df$totalEstWhite / joined_df$totalEstPop * 100
@@ -315,6 +303,15 @@ joined_df$totalEstNonWhite <- joined_df$totalEstBlack + joined_df$totalEstAIAN +
 
 # Find the percentage of non-white people
 joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 100
+
+# Percentage of the dominant group 
+
+max_race <- apply(joined_df[,40:49], 1, max)
+perc_max_race <- maxrace / joined_df$totalEstPop * 100
+joined_df$percMaxRace <- perc_max_race
+
+# Categorical variable ---------------------------------------------------------
+# Whether the census block group is white or non-white (T/F)
 
 # If percWhite == preRacePercent, assign TRUE to isMaxWhite
 joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
