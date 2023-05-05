@@ -309,15 +309,15 @@ joined_df$preRacePercent <- maxrace/c(joined_df$totalEstPop) * 100
 # Find the percentage of white people
 joined_df$percWhite <- joined_df$totalEstWhite / joined_df$totalEstPop * 100
 
-# If percWhite == preRacePercent, assign TRUE to isMaxWhite
+# Find the sum of non-white people
+joined_df$totalEstNonWhite <- joined_df$totalEstBlack + joined_df$totalEstAIAN +
+  joined_df$totalEstAsian + joined_df$totalEstNHPI
 
-joined_df$isMaxWhite <- for (x in 1:341){
-  if (joined_df$percWhite[x] == joined_df$preRacePercent[x]){
-    return(TRUE)
-  } else{
-    return(FALSE)
-  }
-}
+# Find the percentage of non-white people
+joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 100
+
+# If percWhite == preRacePercent, assign TRUE to isMaxWhite
+joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
 
 # Create summarization data frame ----------------------------------------------
 
