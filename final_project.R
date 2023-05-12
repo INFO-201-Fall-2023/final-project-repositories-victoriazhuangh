@@ -192,8 +192,7 @@ dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
 # Move "Year" column in dem_df up
 dem_df <- dem_df %>% relocate(Year, .after = NAME)
 
-# Aggregate built_units so that it can be joined
-cleanyr_built_units <- built_units_df %>% filter(YEAR_FINAL == '2010|2011|2012|2021|2022|2023')
+# Clean built_units_df
 
 # Move updated GEOID10 and GEOID20 to the beginning of the data set
 built_units_df <- built_units_df %>% relocate(built_units_geo20)
@@ -234,7 +233,7 @@ rel_indices <- c(find_geo_id("1500000US530330050001"),
                  find_geo_id("1500000US530330090002"),
                  find_geo_id("1500000US530330091001"),
                  find_geo_id("1500000US530330091002")
-                 )
+)
 
 # Filter built units by rel_indices
 built_units_df <- built_units_df[rel_indices,]
@@ -279,7 +278,9 @@ joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 # One new categorical variable
 # One new continuous/numerical variable
 
-# Convert demographics columns to numeric type ---------------------------------
+# Numerical variable: demographic percentages in each block group
+
+# Convert demographics columns to numeric type
 joined_df$totalEstPop <- as.numeric(unlist(joined_df$totalEstPop))
 joined_df$totalEstWhite <- as.numeric(unlist(joined_df$totalEstWhite))
 joined_df$totalEstBlack <- as.numeric(unlist(joined_df$totalEstBlack))
@@ -291,33 +292,31 @@ joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
 joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
 joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
 
-# Continuous variable ----------------------------------------------------------
-# Percentage of white people, percentage of non-white people, sum of non-white people
-# Percent of the dominant group
+# Find max
+maxrace <- pmax(joined_df$totalEstWhite,
+                joined_df$totalEstBlack,
+                joined_df$totalEstAIAN,
+                joined_df$totalEstNHPI,
+                joined_df$totalEstOther,
+                joined_df$totalTwoRaces,
+                joined_df$totalTwoRacesExcOther)
 
-# Find the percentage of white people
-joined_df$percWhite <- joined_df$totalEstWhite / joined_df$totalEstPop * 100
+# Find the maximum percentage
+joined_df$preRacePercent <- maxrace/c(joined_df$totalEstPop) * 100
 
-# Find the sum of non-white people
-joined_df$totalEstNonWhite <- joined_df$totalEstBlack + joined_df$totalEstAIAN +
-  joined_df$totalEstAsian + joined_df$totalEstNHPI
+# Categorical variable: check which percentage is the highest and assign
+# that census tract "Predominantly..." (ex. "Predominantly Black")
 
-# Find the percentage of non-white people
-joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 100
+# Filter by maxrace
+col_names <- names(joined_df[joined_df[40:49] == maxrace])
 
-# Percentage of the dominant group
+# for loop within each row targeting columns [40;49]
+#within each loop we look through columns 40-49 and find the max
+#once we find the max we find the correspoinding column index
+# reset max to 0
+#iterate through this 341 times
 
-max_race <- apply(joined_df[,40:49], 1, max)
-perc_max_race <- maxrace / joined_df$totalEstPop * 100
-joined_df$percMaxRace <- perc_max_race
-
-# Categorical variable ---------------------------------------------------------
-# Whether the census block group is white or non-white (T/F)
-
-# If percWhite == preRacePercent, assign TRUE to isMaxWhite
-joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
-
-# Create summarization data frame ----------------------------------------------
+# Create summarization data frame
 
 # For built units data
 
@@ -347,8 +346,8 @@ built_units_2019 <- nrow(joined_df[joined_df$YEAR_FINAL == 2019,])
 
 # Average number of built units from 2013-2019
 avg_built_units <- mean(c(built_units_2013, built_units_2014, built_units_2015,
-                        built_units_2016, built_units_2017, built_units_2018,
-                        built_units_2019))
+                          built_units_2016, built_units_2017, built_units_2018,
+                          built_units_2019))
 
 # Write a function to find the built units for a year and a census block group
 find_built_units <- function(year, geo_id){
@@ -551,4 +550,4 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
                                bu_2019_1500000US530330090001, bu_2019_1500000US530330090002,
                                bu_2019_1500000US530330091001, bu_2019_1500000US530330091002
 
-                               )
+)
