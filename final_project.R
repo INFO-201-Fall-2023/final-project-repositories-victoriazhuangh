@@ -37,8 +37,10 @@ dem_2019_df <- df_8
 built_units_df$built_units_geo10 <- paste("1500000US", built_units_df$GEOID10, sep = "")
 built_units_df$built_units_geo20 <- paste("1500000US", built_units_df$GEOID20, sep = "")
 
+# Edit column names and remove unnecessary columns for 2013-2019 data sets
+
 # For 2013:
-dem_2013_df <- rename(dem_2013_df, totalEstPop = B02001_001E, 
+dem_2013_df <- rename(dem_2013_df, totalEstPop = B02001_001E,
                       totalEstWhite = B02001_002E,
                       totalEstBlack = B02001_003E,
                       totalEstAIAN = B02001_004E,
