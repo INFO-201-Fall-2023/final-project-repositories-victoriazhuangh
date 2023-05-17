@@ -307,7 +307,7 @@ joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 1
 # Percentage of the dominant group 
 
 max_race <- apply(joined_df[,40:49], 1, max)
-perc_max_race <- maxrace / joined_df$totalEstPop * 100
+perc_max_race <- max_race / joined_df$totalEstPop * 100
 joined_df$percMaxRace <- perc_max_race
 
 # Categorical variable ---------------------------------------------------------
