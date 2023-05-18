@@ -616,4 +616,28 @@ bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y
 
 plot(bar_bu_wallingford)
 
+# Create demographics plot 
 
+# Group and summarize data frames by year 
+
+chinatown_grp_df_2 <- group_by(chinatown_filt_df, YEAR_FINAL)
+
+nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
+                                   perc_nonwhite = mean(percNonWhite))
+
+bar_nonwhite_chinatown <- ggplot(nonwhite_chinatown_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) + 
+  geom_bar(stat = "identity") + 
+  geom_smooth(method=lm, se=FALSE)
+
+plot(bar_nonwhite_chinatown)
+
+wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
+
+nonwhite_wallingford_df <- summarize(wallingford_grp_df_2,
+                                     perc_nonwhite = mean(percNonWhite))
+
+bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) + 
+  geom_bar(stat = "identity") + 
+  geom_smooth(method=lm, se=FALSE)
+
+plot(bar_nonwhite_wallingford)
