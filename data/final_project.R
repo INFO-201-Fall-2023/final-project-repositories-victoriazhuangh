@@ -7,7 +7,7 @@ library(stringr)
 library(ggplot2)
 library(tidyr)
 
-# Load data sets  
+# Load data sets ---------------------------------------------------------------
 df_1 <- read.csv("Built_Units_Since_2010_Edited.csv")
 df_2 <- read.csv("2013_B02001.csv")
 df_3 <- read.csv("2014_B02001.csv")
@@ -273,12 +273,12 @@ joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 # dataset doesn't have more than roughly 25,000 rows -- if you have a larger 
 # dataset than that I recommend you consider narrowing your dataset down in some 
 # way either by filtering or through aggregation.  
-# ------------------------------------------------------------------------------
+
 # You will then also need to create additional columns in your data set:
 # One new categorical variable
 # One new continuous/numerical variable 
 
-# Convert demographics columns to numeric type ---------------------------------
+# Convert demographics columns to numeric type
 joined_df$totalEstPop <- as.numeric(unlist(joined_df$totalEstPop))
 joined_df$totalEstWhite <- as.numeric(unlist(joined_df$totalEstWhite))
 joined_df$totalEstBlack <- as.numeric(unlist(joined_df$totalEstBlack))
@@ -290,7 +290,7 @@ joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
 joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
 joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
 
-# Continuous variable ----------------------------------------------------------
+# Continuous variable
 # Percentage of white people, percentage of non-white people, sum of non-white people
 # Percent of the dominant group 
 
@@ -310,13 +310,14 @@ max_race <- apply(joined_df[,40:49], 1, max)
 perc_max_race <- max_race / joined_df$totalEstPop * 100
 joined_df$percMaxRace <- perc_max_race
 
-# Categorical variable ---------------------------------------------------------
+# Categorical variable
 # Whether the census block group is white or non-white (T/F)
 
 # If percWhite == preRacePercent, assign TRUE to isMaxWhite
 joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
 
-# Create summarization data frame ----------------------------------------------
+# Create summarization data frame
+
 
 # For built units data 
 
@@ -551,3 +552,68 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
                                bu_2019_1500000US530330091001, bu_2019_1500000US530330091002
                                
 )
+
+# Create Plots -----------------------------------------------------------------
+
+# Create change over time (gentrification) plot
+
+# Filter data frame to census tracts in Chinatown
+# Census tracts 90, 91
+
+# Create mask
+chinatown_ct <- joined_df$GEO_ID == "1500000US530330090001" | 
+  joined_df$GEO_ID == "1500000US530330090002" | 
+  joined_df$GEO_ID == "1500000US530330091001" | 
+  joined_df$GEO_ID == "1500000US530330091002"
+
+# Filter data frame for Chinatown
+chinatown_filt_df <- joined_df[chinatown_ct,]
+
+# Filter data frame to census tracts in Wallingford 
+# Census tracts 50, 51, 52
+
+# Create mask 
+wallingford_ct <- joined_df$GEO_ID == "1500000US530330050001" | 
+  joined_df$GEO_ID == "1500000US530330050002" | 
+  joined_df$GEO_ID == "1500000US530330050003" | 
+  joined_df$GEO_ID == "1500000US530330051001" |
+  joined_df$GEO_ID == "1500000US530330051002" |
+  joined_df$GEO_ID == "1500000US530330051003" |
+  joined_df$GEO_ID == "1500000US530330052001" |
+  joined_df$GEO_ID == "1500000US530330052002" |
+  joined_df$GEO_ID == "1500000US530330052003" |
+  joined_df$GEO_ID == "1500000US530330052004" |
+  joined_df$GEO_ID == "1500000US530330052005"
+
+# Filter data frame for Wallingford
+wallingford_filt_df <- joined_df[wallingford_ct,]
+
+# Group and summarize data frames by year 
+
+chinatown_grp_df <- group_by(chinatown_filt_df, YEAR_FINAL)
+
+bu_per_yr_chinatown <- summarize(chinatown_grp_df, 
+                                 units_built = n_distinct(GEO_ID))
+
+wallingford_grp_df <- group_by(wallingford_filt_df, YEAR_FINAL)
+
+bu_per_yr_wallingford <- summarize(wallingford_grp_df, 
+                                 units_built = n_distinct(GEO_ID))
+
+# Create Chinatown bar graph
+
+bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
+  geom_bar(stat = "identity") + 
+  geom_smooth(method=lm, se=FALSE)
+
+plot(bar_bu_chinatown)
+
+# Create Wallingford bar graph
+
+bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
+  geom_bar(stat = "identity") + 
+  geom_smooth(method=lm, se=FALSE)
+
+plot(bar_bu_wallingford)
+
+
