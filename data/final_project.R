@@ -359,8 +359,7 @@ joined_df$totalEstNonWhite <- joined_df$totalEstBlack + joined_df$totalEstAIAN +
 joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 100
 
 # Percentage of the dominant group 
-
-max_race <- apply(joined_df[,40:49], 1, max)
+max_race <- apply(joined_df[,40:48], 1, max)
 perc_max_race <- max_race / joined_df$totalEstPop * 100
 joined_df$percMaxRace <- perc_max_race
 
@@ -383,6 +382,52 @@ joined_df$perc_100k_124.99k <- joined_df$X100k_to_124.99k / joined_df$totalSurve
 joined_df$perc_125k_149.99k <- joined_df$X125k_to_149.99k / joined_df$totalSurveyPop * 100
 joined_df$perc_150k_199.99k <- joined_df$X150k_to_199.99k / joined_df$totalSurveyPop * 100
 joined_df$perc_200k_more <- joined_df$X200k_or_more / joined_df$totalSurveyPop * 100
+
+# Percentage of dominant income group 
+max_income_grp <- apply(joined_df[,50:65], 1, max)
+perc_max_inc <- max_income_grp / joined_df$totalSurveyPop * 100
+joined_df$max_inc_perc <- perc_max_inc
+
+# Categorical variable (income)
+# Match max percentage to one of the percentages 
+# Assign column name to variable (which income group is dominant)
+
+joined_df$max_inc_grp <- for (x in joined_df[,50:65]){
+  
+  if (joined_df$max_inc_perc == joined_df$perc_10k_less){
+    return("10k or less")
+  } else if (joined_df$max_inc_perc == joined_df$perc_10k_14.99k){
+    return("10k to 14.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_15k_19.99k){
+    return("15k to 19.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_20k_24.99k){
+    return("20k to 24.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_25k_29.99k){
+    return("25k to 29.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_30k_34.99k){
+    return("30k to 34.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_35k_39.99k){
+    return("35k to 39.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_40k_44.99k){
+    return("40k to 44.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_45k_49.99k){
+    return("45k to 49.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_50k_59.99k){
+    return("50k to 59.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_60k_74.99k){
+    return("60k to 74.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_75k_99.99k){
+    return("75k to 99.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_100k_124.99k){
+    return("100k to 124.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_125k_149.99k){
+    return("125k to 149.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_150k_199.99k){
+    return("150k to 199.999k")
+  } else if (joined_df$max_inc_perc == joined_df$perc_200k_more){
+    return("200k or more")
+  }
+}
 
 # Categorical variable (race)
 # Whether the census block group is white or non-white (T/F)
