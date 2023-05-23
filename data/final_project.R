@@ -317,8 +317,8 @@ joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 # Join income_df to dem_df and built_units_df 
 joined_df <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), by.y = c("GEO_ID", "Year"))
 
-# Remove extra "NAME" column from joined_df_2 
-joined_df <- joined_df_2[,-49]
+# Remove extra "NAME" column from joined_d 
+joined_df <- joined_df[,-49]
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -344,7 +344,7 @@ joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
 joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
 joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
 
-# Continuous variable
+# Continuous variable (race)
 # Percentage of white people, percentage of non-white people, sum of non-white people
 # Percent of the dominant group 
 
@@ -364,7 +364,27 @@ max_race <- apply(joined_df[,40:49], 1, max)
 perc_max_race <- max_race / joined_df$totalEstPop * 100
 joined_df$percMaxRace <- perc_max_race
 
-# Categorical variable
+# Continuous variable (income)
+# Percentage of individuals that belong to each income group
+
+joined_df$perc_10k_less <- joined_df$less_than_10k / joined_df$totalSurveyPop * 100
+joined_df$perc_10k_14.99k <- joined_df$X10k_to_14.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_15k_19.99k <- joined_df$X15k_to_19.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_20k_24.99k <- joined_df$X20k_to_24.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_25k_29.99k <- joined_df$X25k_to_29.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_30k_34.99k <- joined_df$X30k_to_34.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_35k_39.99k <- joined_df$X35k_to_39.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_40k_44.99k <- joined_df$X40k_to_44.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_45k_49.99k <- joined_df$X45k_to_49.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_50k_59.99k <- joined_df$X50k_to_59.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_60k_74.99k <- joined_df$X60k_to_74.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_75k_99.99k <- joined_df$X75k_99.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_100k_124.99k <- joined_df$X100k_to_124.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_125k_149.99k <- joined_df$X125k_to_149.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_150k_199.99k <- joined_df$X150k_to_199.99k / joined_df$totalSurveyPop * 100
+joined_df$perc_200k_more <- joined_df$X200k_or_more / joined_df$totalSurveyPop * 100
+
+# Categorical variable (race)
 # Whether the census block group is white or non-white (T/F)
 
 # If percWhite == preRacePercent, assign TRUE to isMaxWhite
