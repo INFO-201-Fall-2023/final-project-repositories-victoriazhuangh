@@ -725,6 +725,7 @@ joined_df$percBlack <- joined_df$totalEstBlack / joined_df$totalEstPop *100
 #Find percentage of Asian residents in all populations 
 joined_df$percAsian <- joined_df$totalEstAsian/ joined_df$totalEstPop * 100 
 
+chinatown_filt_df$percAsian <- joined_df$percAsian[chinatown_ct]
 #Find percentage of AIAN residents in all populations 
 joined_df$percAIAN <- joined_df$totalEstAIAN/ joined_df$totalEstPop * 100 
 
@@ -733,3 +734,16 @@ joined_df$percNHPI <- joined_df$totalEstNHPI/ joined_df$totalEstPop * 100
 
 #Find percentage of other residents in all populations 
 joined_df$percOther <- joined_df$totalEstOther / joined_df$totalEstPop * 100
+
+#Bar plot for Asian demographic in Chinatown 
+
+# Group by and summarize 
+chinatown_asian_dem_df <- group_by(chinatown_filt_df, YEAR_FINAL) 
+
+asian_chinatown_df <- summarize(chinatown_asian_dem_df, 
+                                perc_asian = mean(percAsian))
+bar_asian_chinatown <- ggplot(data = asian_chinatown_df, aes(x = YEAR_FINAL, y = perc_asian)) + 
+  geom_bar(stat = "identity") + 
+  geom_smooth(method=lm, se=FALSE)
+
+plot(bar_asian_chinatown)
