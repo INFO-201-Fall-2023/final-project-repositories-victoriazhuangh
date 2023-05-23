@@ -409,8 +409,6 @@ indices_125k_149.99k <- which(joined_df$max_inc_perc == joined_df$perc_125k_149.
 indices_150k_199.99k <- which(joined_df$max_inc_perc == joined_df$perc_150k_199.99k)
 indices_200k <- which(joined_df$max_inc_perc == joined_df$perc_200k_more)
 
-
-
 # Categorical variable (race)
 # Whether the census block group is white or non-white (T/F)
 
