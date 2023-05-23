@@ -17,6 +17,15 @@ df_6 <- read.csv("2017_B02001.csv")
 df_7 <- read.csv("2018_B02001.csv")
 df_8 <- read.csv("2019_B02001.csv")
 
+df_10 <- read.csv("2013_income.csv")
+df_11 <- read.csv("2014_income.csv")
+df_12 <- read.csv("2015_income.csv")
+df_13 <- read.csv("2016_income.csv")
+df_14 <- read.csv("2017_income.csv")
+df_15 <- read.csv("2018_income.csv")
+df_16 <- read.csv("2019_income.csv")
+
+
 # Data Joining -----------------------------------------------------------------
 
 # You first need to to create a unified dataset (i.e. you need to join your 
@@ -32,6 +41,14 @@ dem_2016_df <- df_5
 dem_2017_df <- df_6
 dem_2018_df <- df_7
 dem_2019_df <- df_8
+
+income_2013 <- df_10
+income_2014 <- df_11
+income_2015 <- df_12
+income_2016 <- df_13
+income_2017 <- df_14
+income_2018 <- df_15
+income_2019 <- df_16
 
 # Convert GEOID10 and GEOID20 in built_units_df from scientific notation to actual numbers 
 built_units_df$built_units_geo10 <- paste("1500000US", built_units_df$GEOID10, sep = "")
@@ -192,6 +209,37 @@ dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
 # Move "Year" column in dem_df up
 dem_df <- dem_df %>% relocate(Year, .after = NAME)
 
+# Clean income data 
+
+# Add "Year" column to all income data sets 
+
+income_2013$Year <- 2013
+income_2014$Year <- 2014
+income_2015$Year <- 2015
+income_2016$Year <- 2016
+income_2017$Year <- 2017
+income_2018$Year <- 2018
+income_2019$Year <- 2019
+
+# Delete duplicate rows from all income data sets 
+
+duplicates <- c(4, 5, 6, 10, 11, 12, 20, 21, 24, 25)
+
+income_2013 <- income_2013[-duplicates,]
+income_2014 <- income_2014[-duplicates,]
+income_2015 <- income_2015[-duplicates,]
+income_2016 <- income_2016[-duplicates,]
+income_2017 <- income_2017[-duplicates,]
+income_2018 <- income_2018[-duplicates,]
+income_2019 <- income_2019[-duplicates,]
+
+# Append all income data sets
+income_df <- rbind(income_2013, income_2014, income_2015, income_2016, income_2017,
+                   income_2018, income_2019)
+
+# Move "Year" column in income_df up
+income_df <- income_df %>% relocate(Year, .after = NAME)
+
 # Clean built_units_df 
 
 # Move updated GEOID10 and GEOID20 to the beginning of the data set
@@ -265,6 +313,12 @@ joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), b
 
 # Move "Year" column to the beginning of the joined df
 joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
+
+# Join income_df to dem_df and built_units_df 
+joined_df_2 <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), by.y = c("GEO_ID", "Year"))
+
+# Remove extra "NAME" column from joined_df_2 
+joined_df_2 <- joined_df_2[,-49]
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -550,8 +604,9 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
                                bu_2019_1500000US530330052004, bu_2019_1500000US530330052005, 
                                bu_2019_1500000US530330090001, bu_2019_1500000US530330090002, 
                                bu_2019_1500000US530330091001, bu_2019_1500000US530330091002
-                               
 )
+
+                               
 
 # Create Plots -----------------------------------------------------------------
 
