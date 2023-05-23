@@ -7,7 +7,7 @@ library(stringr)
 library(ggplot2)
 library(tidyr)
 
-# Load data sets ---------------------------------------------------------------
+# Load data sets  
 df_1 <- read.csv("Built_Units_Since_2010_Edited.csv")
 df_2 <- read.csv("2013_B02001.csv")
 df_3 <- read.csv("2014_B02001.csv")
@@ -16,15 +16,6 @@ df_5 <- read.csv("2016_B02001.csv")
 df_6 <- read.csv("2017_B02001.csv")
 df_7 <- read.csv("2018_B02001.csv")
 df_8 <- read.csv("2019_B02001.csv")
-
-df_10 <- read.csv("2013_income.csv")
-df_11 <- read.csv("2014_income.csv")
-df_12 <- read.csv("2015_income.csv")
-df_13 <- read.csv("2016_income.csv")
-df_14 <- read.csv("2017_income.csv")
-df_15 <- read.csv("2018_income.csv")
-df_16 <- read.csv("2019_income.csv")
-
 
 # Data Joining -----------------------------------------------------------------
 
@@ -41,14 +32,6 @@ dem_2016_df <- df_5
 dem_2017_df <- df_6
 dem_2018_df <- df_7
 dem_2019_df <- df_8
-
-income_2013 <- df_10
-income_2014 <- df_11
-income_2015 <- df_12
-income_2016 <- df_13
-income_2017 <- df_14
-income_2018 <- df_15
-income_2019 <- df_16
 
 # Convert GEOID10 and GEOID20 in built_units_df from scientific notation to actual numbers 
 built_units_df$built_units_geo10 <- paste("1500000US", built_units_df$GEOID10, sep = "")
@@ -209,37 +192,6 @@ dem_df <- rbind(dem_2013_df, dem_2014_df, dem_2015_df, dem_2016_df, dem_2017_df,
 # Move "Year" column in dem_df up
 dem_df <- dem_df %>% relocate(Year, .after = NAME)
 
-# Clean income data 
-
-# Add "Year" column to all income data sets 
-
-income_2013$Year <- 2013
-income_2014$Year <- 2014
-income_2015$Year <- 2015
-income_2016$Year <- 2016
-income_2017$Year <- 2017
-income_2018$Year <- 2018
-income_2019$Year <- 2019
-
-# Delete duplicate rows from all income data sets 
-
-duplicates <- c(4, 5, 6, 10, 11, 12, 20, 21, 24, 25)
-
-income_2013 <- income_2013[-duplicates,]
-income_2014 <- income_2014[-duplicates,]
-income_2015 <- income_2015[-duplicates,]
-income_2016 <- income_2016[-duplicates,]
-income_2017 <- income_2017[-duplicates,]
-income_2018 <- income_2018[-duplicates,]
-income_2019 <- income_2019[-duplicates,]
-
-# Append all income data sets
-income_df <- rbind(income_2013, income_2014, income_2015, income_2016, income_2017,
-                   income_2018, income_2019)
-
-# Move "Year" column in income_df up
-income_df <- income_df %>% relocate(Year, .after = NAME)
-
 # Clean built_units_df 
 
 # Move updated GEOID10 and GEOID20 to the beginning of the data set
@@ -314,12 +266,6 @@ joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), b
 # Move "Year" column to the beginning of the joined df
 joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 
-# Join income_df to dem_df and built_units_df 
-joined_df <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), by.y = c("GEO_ID", "Year"))
-
-# Remove extra "NAME" column from joined_d 
-joined_df <- joined_df[,-49]
-
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
 # dataset is clean and usable. i.e. make sure your columns properly formatted as
@@ -327,12 +273,12 @@ joined_df <- joined_df[,-49]
 # dataset doesn't have more than roughly 25,000 rows -- if you have a larger 
 # dataset than that I recommend you consider narrowing your dataset down in some 
 # way either by filtering or through aggregation.  
-
+# ------------------------------------------------------------------------------
 # You will then also need to create additional columns in your data set:
 # One new categorical variable
 # One new continuous/numerical variable 
 
-# Convert demographics columns to numeric type
+# Convert demographics columns to numeric type ---------------------------------
 joined_df$totalEstPop <- as.numeric(unlist(joined_df$totalEstPop))
 joined_df$totalEstWhite <- as.numeric(unlist(joined_df$totalEstWhite))
 joined_df$totalEstBlack <- as.numeric(unlist(joined_df$totalEstBlack))
@@ -344,7 +290,7 @@ joined_df$totalTwoRaces <- as.numeric(unlist(joined_df$totalTwoRaces))
 joined_df$totalTwoRacesIncOther <- as.numeric(unlist(joined_df$totalTwoRacesIncOther))
 joined_df$totalTwoRacesExcOther <- as.numeric(unlist(joined_df$totalTwoRacesExcOther))
 
-# Continuous variable (race)
+# Continuous variable ----------------------------------------------------------
 # Percentage of white people, percentage of non-white people, sum of non-white people
 # Percent of the dominant group 
 
@@ -361,36 +307,16 @@ joined_df$percNonWhite <- joined_df$totalEstNonWhite / joined_df$totalEstPop * 1
 # Percentage of the dominant group 
 
 max_race <- apply(joined_df[,40:49], 1, max)
-perc_max_race <- max_race / joined_df$totalEstPop * 100
+perc_max_race <- maxrace / joined_df$totalEstPop * 100
 joined_df$percMaxRace <- perc_max_race
 
-# Continuous variable (income)
-# Percentage of individuals that belong to each income group
-
-joined_df$perc_10k_less <- joined_df$less_than_10k / joined_df$totalSurveyPop * 100
-joined_df$perc_10k_14.99k <- joined_df$X10k_to_14.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_15k_19.99k <- joined_df$X15k_to_19.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_20k_24.99k <- joined_df$X20k_to_24.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_25k_29.99k <- joined_df$X25k_to_29.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_30k_34.99k <- joined_df$X30k_to_34.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_35k_39.99k <- joined_df$X35k_to_39.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_40k_44.99k <- joined_df$X40k_to_44.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_45k_49.99k <- joined_df$X45k_to_49.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_50k_59.99k <- joined_df$X50k_to_59.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_60k_74.99k <- joined_df$X60k_to_74.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_75k_99.99k <- joined_df$X75k_99.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_100k_124.99k <- joined_df$X100k_to_124.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_125k_149.99k <- joined_df$X125k_to_149.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_150k_199.99k <- joined_df$X150k_to_199.99k / joined_df$totalSurveyPop * 100
-joined_df$perc_200k_more <- joined_df$X200k_or_more / joined_df$totalSurveyPop * 100
-
-# Categorical variable (race)
+# Categorical variable ---------------------------------------------------------
 # Whether the census block group is white or non-white (T/F)
 
 # If percWhite == preRacePercent, assign TRUE to isMaxWhite
 joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
 
-# Create summarization data frame
+# Create summarization data frame ----------------------------------------------
 
 # For built units data 
 
@@ -623,113 +549,5 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
                                bu_2019_1500000US530330052004, bu_2019_1500000US530330052005, 
                                bu_2019_1500000US530330090001, bu_2019_1500000US530330090002, 
                                bu_2019_1500000US530330091001, bu_2019_1500000US530330091002
-)
-
                                
-
-# Create Plots -----------------------------------------------------------------
-
-# Create change over time (built units) plot
-
-# Filter data frame to census tracts in Chinatown (census tracts 90, 91)
-
-# Create mask
-chinatown_ct <- joined_df$GEO_ID == "1500000US530330090001" | 
-  joined_df$GEO_ID == "1500000US530330090002" | 
-  joined_df$GEO_ID == "1500000US530330091001" | 
-  joined_df$GEO_ID == "1500000US530330091002"
-
-# Filter data frame for Chinatown
-chinatown_filt_df <- joined_df[chinatown_ct,]
-
-# Filter data frame to census tracts in Wallingford (census tracts 50, 51, 52)
-
-# Create mask 
-wallingford_ct <- joined_df$GEO_ID == "1500000US530330050001" | 
-  joined_df$GEO_ID == "1500000US530330050002" | 
-  joined_df$GEO_ID == "1500000US530330050003" | 
-  joined_df$GEO_ID == "1500000US530330051001" |
-  joined_df$GEO_ID == "1500000US530330051002" |
-  joined_df$GEO_ID == "1500000US530330051003" |
-  joined_df$GEO_ID == "1500000US530330052001" |
-  joined_df$GEO_ID == "1500000US530330052002" |
-  joined_df$GEO_ID == "1500000US530330052003" |
-  joined_df$GEO_ID == "1500000US530330052004" |
-  joined_df$GEO_ID == "1500000US530330052005"
-
-# Filter data frame for Wallingford
-wallingford_filt_df <- joined_df[wallingford_ct,]
-
-# Group and summarize data frames by year for Chinatown
-
-chinatown_grp_df <- group_by(chinatown_filt_df, YEAR_FINAL)
-
-bu_per_yr_chinatown <- summarize(chinatown_grp_df, 
-                                 units_built = n_distinct(GEO_ID))
-
-# Group and summarize data frames by year for Wallingford 
-
-wallingford_grp_df <- group_by(wallingford_filt_df, YEAR_FINAL)
-
-bu_per_yr_wallingford <- summarize(wallingford_grp_df, 
-                                 units_built = n_distinct(GEO_ID))
-
-# Create Chinatown bar graph
-bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
-  geom_bar(stat = "identity") + 
-  geom_smooth(method=lm, se=FALSE)
-
-plot(bar_bu_chinatown)
-
-# Create Wallingford bar graph
-bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
-  geom_bar(stat = "identity") + 
-  geom_smooth(method=lm, se=FALSE)
-
-plot(bar_bu_wallingford)
-
-# Create demographics plot 
-
-# Group and summarize data frames by year 
-
-chinatown_grp_df_2 <- group_by(chinatown_filt_df, YEAR_FINAL)
-
-nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
-                                   perc_nonwhite = mean(percNonWhite))
-
-bar_nonwhite_chinatown <- ggplot(nonwhite_chinatown_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) + 
-  geom_bar(stat = "identity") + 
-  coord_flip() + 
-  labs(
-    title = "Percentage of Non-White Residents in Chinatown (2013-2018)",
-    x = "Year",
-    y = "Percentage"
-  )
-
-plot(bar_nonwhite_chinatown)
-
-wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
-
-nonwhite_wallingford_df <- summarize(wallingford_grp_df_2,
-                                     perc_nonwhite = mean(percNonWhite))
-
-bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) + 
-  geom_bar(stat = "identity") + 
-  geom_smooth(method=lm, se=FALSE)
-
-plot(bar_nonwhite_wallingford)
-
-#Find percentage of Black residents in all populations
-joined_df$percBlack <- joined_df$totalEstBlack / joined_df$totalEstPop *100
-
-#Find percentage of Asian residents in all populations 
-joined_df$percAsian <- joined_df$totalEstAsian/ joined_df$totalEstPop * 100 
-
-#Find percentage of AIAN residents in all populations 
-joined_df$percAIAN <- joined_df$totalEstAIAN/ joined_df$totalEstPop * 100 
-
-#Find percentage of NHPI residents in all populations 
-joined_df$percNHPI <- joined_df$totalEstNHPI/ joined_df$totalEstPop * 100
-
-#Find percentage of other residents in all populations 
-joined_df$percOther <- joined_df$totalEstOther / joined_df$totalEstPop * 100
+)
