@@ -555,10 +555,9 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
 
 # Create Plots -----------------------------------------------------------------
 
-# Create change over time (gentrification) plot
+# Create change over time (built units) plot
 
-# Filter data frame to census tracts in Chinatown
-# Census tracts 90, 91
+# Filter data frame to census tracts in Chinatown (census tracts 90, 91)
 
 # Create mask
 chinatown_ct <- joined_df$GEO_ID == "1500000US530330090001" | 
@@ -569,8 +568,7 @@ chinatown_ct <- joined_df$GEO_ID == "1500000US530330090001" |
 # Filter data frame for Chinatown
 chinatown_filt_df <- joined_df[chinatown_ct,]
 
-# Filter data frame to census tracts in Wallingford 
-# Census tracts 50, 51, 52
+# Filter data frame to census tracts in Wallingford (census tracts 50, 51, 52)
 
 # Create mask 
 wallingford_ct <- joined_df$GEO_ID == "1500000US530330050001" | 
@@ -588,12 +586,14 @@ wallingford_ct <- joined_df$GEO_ID == "1500000US530330050001" |
 # Filter data frame for Wallingford
 wallingford_filt_df <- joined_df[wallingford_ct,]
 
-# Group and summarize data frames by year 
+# Group and summarize data frames by year for Chinatown
 
 chinatown_grp_df <- group_by(chinatown_filt_df, YEAR_FINAL)
 
 bu_per_yr_chinatown <- summarize(chinatown_grp_df, 
                                  units_built = n_distinct(GEO_ID))
+
+# Group and summarize data frames by year for Wallingford 
 
 wallingford_grp_df <- group_by(wallingford_filt_df, YEAR_FINAL)
 
@@ -601,7 +601,6 @@ bu_per_yr_wallingford <- summarize(wallingford_grp_df,
                                  units_built = n_distinct(GEO_ID))
 
 # Create Chinatown bar graph
-
 bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity") + 
   geom_smooth(method=lm, se=FALSE)
@@ -609,7 +608,6 @@ bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = u
 plot(bar_bu_chinatown)
 
 # Create Wallingford bar graph
-
 bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity") + 
   geom_smooth(method=lm, se=FALSE)
@@ -627,7 +625,12 @@ nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
 
 bar_nonwhite_chinatown <- ggplot(nonwhite_chinatown_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) + 
   geom_bar(stat = "identity") + 
-  geom_smooth(method=lm, se=FALSE)
+  coord_flip() + 
+  labs(
+    title = "Percentage of Non-White Residents in Chinatown (2013-2018)",
+    x = "Year",
+    y = "Percentage"
+  )
 
 plot(bar_nonwhite_chinatown)
 
