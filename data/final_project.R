@@ -315,10 +315,10 @@ joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), b
 joined_df <- joined_df %>% relocate(NAME.y, .after = GEO_ID)
 
 # Join income_df to dem_df and built_units_df 
-joined_df_2 <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), by.y = c("GEO_ID", "Year"))
+joined_df <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), by.y = c("GEO_ID", "Year"))
 
 # Remove extra "NAME" column from joined_df_2 
-joined_df_2 <- joined_df_2[,-49]
+joined_df <- joined_df_2[,-49]
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -371,7 +371,6 @@ joined_df$percMaxRace <- perc_max_race
 joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
 
 # Create summarization data frame
-
 
 # For built units data 
 
@@ -699,3 +698,4 @@ bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, 
   geom_smooth(method=lm, se=FALSE)
 
 plot(bar_nonwhite_wallingford)
+
