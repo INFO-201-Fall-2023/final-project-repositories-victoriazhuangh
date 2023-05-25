@@ -420,6 +420,7 @@ indices_200k <- which(joined_df$max_inc_perc == joined_df$perc_200k_more)
 joined_df$isMaxWhite <- ifelse(joined_df$percWhite > joined_df$percNonWhite, TRUE, FALSE)
 
 
+
 # Create Plots -----------------------------------------------------------------
 
 # Create change over time (built units) plot
