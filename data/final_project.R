@@ -289,7 +289,7 @@ built_units_df <- built_units_df[rel_indices,]
 # Remove GEOID20 and permit number
 built_units_df <- built_units_df[, -c(2, 4)]
 
-# Remove observations after 2019
+# Remove observations after 2019 (ROWS)
 
 # Find indices of observations from 2020-2023
 obs_2020 <- which(built_units_df$YEAR_FINAL == 2020)
@@ -308,7 +308,7 @@ built_units_df <- built_units_df[-obs_all,]
 trimmed_geo_id <- strtrim(built_units_df$GEO_ID, 21)
 built_units_df$GEO_ID <- trimmed_geo_id
 
-# Join dem_df to built_units_df
+# Join dem_df to built_units_df 
 joined_df <- merge(x=built_units_df, y=dem_df, by.x=c("GEO_ID", "YEAR_FINAL"), by.y=c("GEO_ID", "Year"))
 
 # Move "Year" column to the beginning of the joined df

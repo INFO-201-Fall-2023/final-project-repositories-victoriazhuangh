@@ -2,9 +2,9 @@ library(shiny)
 
 source("final_project.r")
 
-# Create about page
-about_pg <- tabPanel("About",
-  h1("A Comparison of Gentrification in Seattle's Chinatown and Wallingford (2013-2019)"),
+# Create introduction page
+intro_pg <- tabPanel("Introduction",
+  h1("A Comparative Analysis of Gentrification in Seattle's Chinatown and Wallingford (2013-2019)"),
   h4("By Aileen Kuang and Victoria Zhuang"),
   p("Gentrification occurs when affluent people and families move into neighborhoods 
   that have historically been home to Black, indigenous, and other people of color, 
@@ -18,13 +18,21 @@ about_pg <- tabPanel("About",
   increasing rent and food prices (Fogel).")
 )
 
-# Create analysis page
+# Create analysis page 1: Comparing New Built Units in Chinatown and Wallingford (2013-2019)
 
-# Create references page
+# Create analysis page 2: Comparing White-to-Nonwhite Population Ratio in Chinatown and Wallingford (2013-2019)
+
+# Create analysis page 3: Comparing Racial Demographics Breakdown in Chinatown and Wallingford (2013-2019)
+
+# Create summary page 
+summary_pg <- tabPanel("Project Summary"
+                       
+)
 
 # Create UI 
-ui <- fluidPage(
-  about_pg
+ui <- navbarPage("INFO 201 Final Project",
+  intro_pg,
+  summary_pg,
 )
 
 # Create server
