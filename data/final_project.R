@@ -1,11 +1,12 @@
 # Aileen Kuang, aileenk@uw.edu
 # Victoria Zhuang, vzhuang@uw.edu 
 
-# Load libraries 
+# Load libraries ---------------------------------------------------------------
 library(dplyr)
 library(stringr)
 library(ggplot2)
 library(tidyr)
+
 
 # Load data sets ---------------------------------------------------------------
 df_1 <- read.csv("Built_Units_Since_2010_Edited.csv")
@@ -24,6 +25,7 @@ df_13 <- read.csv("2016_income.csv")
 df_14 <- read.csv("2017_income.csv")
 df_15 <- read.csv("2018_income.csv")
 df_16 <- read.csv("2019_income.csv")
+
 
 
 # Data Joining -----------------------------------------------------------------
@@ -319,6 +321,7 @@ joined_df <- merge(x=joined_df, y=income_df, by.x = c("GEO_ID", "YEAR_FINAL"), b
 
 # Remove extra "NAME" column from joined_d 
 joined_df <- joined_df[,-49]
+
 
 # Data Cleaning ----------------------------------------------------------------
 # Once you have created your joined dataset, you should then make sure your 
@@ -649,6 +652,7 @@ summarization_df <- data.frame(built_units_2013, built_units_2014, built_units_2
                                bu_2019_1500000US530330090001, bu_2019_1500000US530330090002, 
                                bu_2019_1500000US530330091001, bu_2019_1500000US530330091002
 )
+
 
 
 
