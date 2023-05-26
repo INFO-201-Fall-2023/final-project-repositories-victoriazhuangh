@@ -413,7 +413,7 @@ indices_125k_149.99k <- which(joined_df$max_inc_perc == joined_df$perc_125k_149.
 indices_150k_199.99k <- which(joined_df$max_inc_perc == joined_df$perc_150k_199.99k)
 indices_200k <- which(joined_df$max_inc_perc == joined_df$perc_200k_more)
 
-joined_df$max_inc_grp <- assign_column
+#joined_df$max_inc_grp <- assign_column
 
 # Categorical variable (race)
 # Whether the census block group is white or non-white (T/F)
@@ -534,36 +534,36 @@ joined_df$percOther <- joined_df$totalEstOther / joined_df$totalEstPop * 100
 #Bar plot for Asian demographic in Chinatown
 
 # Group by and summarize
-chinatown_asian_dem_df <- group_by(chinatown_filt_df, YEAR_FINAL)
+#chinatown_asian_dem_df <- group_by(chinatown_filt_df, YEAR_FINAL)
 
-asian_chinatown_df <- summarize(chinatown_asian_dem_df,
-                                perc_asian = median(percAsian))
+#asian_chinatown_df <- summarize(chinatown_asian_dem_df,
+                                #perc_asian = median(percAsian))
 
 #Create a stacked bar graph for all Non-White residents in Chinatown
-bar_asian_chinatown <- ggplot(data = asian_chinatown_df, aes(x = YEAR_FINAL, y = perc_asian)) +
-  geom_bar(stat = "identity") +
-  geom_smooth(method=lm, se=FALSE) +
-  labs(
-    title = "Percentage of Asian Residents in Chinatown (2013-2019)",
-    x = "Year",
-    y = "Percentage of Asian Residents"
-  )
+#bar_asian_chinatown <- ggplot(data = asian_chinatown_df, aes(x = YEAR_FINAL, y = perc_asian)) +
+  #geom_bar(stat = "identity") +
+  #geom_smooth(method=lm, se=FALSE) +
+  #labs(
+    #title = "Percentage of Asian Residents in Chinatown (2013-2019)",
+    #x = "Year",
+    #y = "Percentage of Asian Residents"
+  #)
 
 
-plot(bar_asian_chinatown)
+#plot(bar_asian_chinatown)
 
 ##Create a stacked bar graph for all Non-White residents in Wallingford
-wallingford_asian_dem_df <- group_by(wallingford_filt_df, YEAR_FINAL)
+#wallingford_asian_dem_df <- group_by(wallingford_filt_df, YEAR_FINAL)
 
-asian_wallingford_df <- summarize(wallingford_asian_dem_df,
-                                  perc_asian = mean(percAsian))
-bar_asian_wallingford <- ggplot(data = asian_wallingford_df, aes(x= YEAR_FINAL, y = perc_asian)) +
-  geom_bar(stat = "identity") +
-  geom_smooth(method=lm, se = FALSE) +
-  labs(
-    titles = "Percentage of Asian Residents in Wallingford (2013-2019)",
-    x = "Years",
-    y = "Percentage of Asian Residents"
-  )
+#asian_wallingford_df <- summarize(wallingford_asian_dem_df,
+                                #  perc_asian = mean(percAsian))
+#bar_asian_wallingford <- ggplot(data = asian_wallingford_df, aes(x= YEAR_FINAL, y = perc_asian)) +
+ # geom_bar(stat = "identity") +
+  #geom_smooth(method=lm, se = FALSE) +
+  #labs(
+   # titles = "Percentage of Asian Residents in Wallingford (2013-2019)",
+    #x = "Years",
+    #y = "Percentage of Asian Residents"
+  #)
 
-plot(bar_asian_wallingford)
+#plot(bar_asian_wallingford)
