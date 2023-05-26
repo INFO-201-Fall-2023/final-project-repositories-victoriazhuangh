@@ -5,6 +5,7 @@ library(jsonlite)
 library(cowplot)
 library(ggsn)
 library(ggspatial)
+library(plotly)
 
 # Source final_project.R file for data ----
 source("final_project.R")
@@ -49,10 +50,7 @@ rel_bg_sf <- seattle_sf[bg_indices,]
 # Need to create a map for every year from 2013-2019 (2013, 2014, 2015, 2016,
 # 2017, 2018, 2019) displaying net units built (NET_UNITS) for each block group
 
-
-
-
-# Write a function to create a new year data frame that is summarized by net units ----
+# Write a function to create a new data frame that has columns summarizing net units, demo units, and new units ----
 aggregate <- function(year){
   # Create a new data frame that only includes observations from that year
   year_sf <- map_sf[map_sf$YEAR_FINAL == year,]
@@ -65,10 +63,11 @@ aggregate <- function(year){
   return(net_sf)
 }
 
+
 # MAKE MAPS !!! ----
 
 # Write a function to create a proportional symbols map given the year and shapefile
-make_map <- function(year, sf){
+make_map_new <- function(year, sf){
   
   # Create centroids 
   centroids <- st_centroid(sf, of_largest_polygon = TRUE)
@@ -96,7 +95,64 @@ make_map <- function(year, sf){
     ) +
     labs(
       title = paste("Net Units Built in Chinatown and Wallingford in", year, sep = " "),
-      size = "Units"
+      size = "Units Built"
+    ) + theme_void()
+  
+  # Create inset map 
+  inset_map <- ggplot() +
+    geom_sf(data = seattle_sf, fill = "white") +
+    geom_sf(data = rel_bg_sf, fill = "grey60") +
+    coord_sf(crs = 4326) + 
+    annotation_scale(
+      width_hint = 0.4,
+      unit_category = "metric",
+      style = "bar",
+      location = "bl"
+    ) +
+    annotation_north_arrow(
+      location = "tr",
+      style = north_arrow_fancy_orienteering
+    ) + theme_void() +
+    blank()
+  
+  # Create full map 
+  map <- ggdraw() +
+    draw_plot(main_map) +
+    draw_plot(inset_map, x = 0.6, y = 0.6, width = 0.3, height = 0.35)
+  
+  # Plot map
+  plot(map)
+}
+
+make_map_dem <- function(year, sf){
+  
+  # Create centroids 
+  centroids <- st_centroid(sf, of_largest_polygon = TRUE)
+  
+  # Create main map
+  main_map <- ggplot() + 
+    geom_sf(data = seattle_sf, fill = "white") +
+    geom_sf(data = rel_bg_sf, fill = "grey60") +
+    geom_sf(data = centroids, 
+            pch = 21,
+            aes(size = bg_demo_units),
+            fill = alpha("red", 0.7),
+            col = "grey20") +
+    xlim(c(122.35, 122.30)) + 
+    ylim(c(47.58, 47.68)) +
+    annotation_scale(
+      width_hint = 0.4,
+      unit_category = "metric",
+      style = "bar",
+      location = "br"
+    ) +
+    annotation_north_arrow(
+      location = "tl",
+      style = north_arrow_fancy_orienteering
+    ) +
+    labs(
+      title = paste("Net Units Demolished in Chinatown and Wallingford in", year, sep = " "),
+      size = "Units Demolished"
     ) + theme_void()
   
   # Create inset map 
@@ -127,28 +183,35 @@ make_map <- function(year, sf){
 
 # For 2013 
 sf_2013 <- aggregate(2013)
-make_map(2013, sf_2013)
+new_2013_map <- make_map_new(2013, sf_2013)
+dem_2013_map <- make_map_dem(2013, sf_2013)
 
 # For 2014 
 sf_2014 <- aggregate(2014)
-make_map(2014, sf_2014)
+new_2014_map <- make_map_new(2014, sf_2014)
+dem_2014_map <- make_map_dem(2014, sf_2014)
 
 # For 2015 
 sf_2015 <- aggregate(2015)
-make_map(2015, sf_2015)
+new_2015_map <- make_map_new(2015, sf_2015)
+dem_2015_map <- make_map_dem(2015, sf_2015)
 
 # For 2016
 sf_2016 <- aggregate(2016)
-make_map(2016, sf_2016)
+new_2016_map <- make_map_new(2016, sf_2016)
+dem_2016_map <- make_map_dem(2016, sf_2016)
 
 # For 2017 
 sf_2017 <- aggregate(2017)
-make_map(2017, sf_2017)
+new_2017_map <- make_map_new(2017, sf_2017)
+dem_2017_map <- make_map_dem(2017, sf_2017)
 
 # For 2018
 sf_2018 <- aggregate(2018)
-make_map(2018, sf_2018)
+new_2018_map <- make_map_new(2018, sf_2018)
+dem_2018_map <- make_map_dem(2018, sf_2018)
 
 # For 2019
 sf_2019 <- aggregate(2019)
-make_map(2019, sf_2019)
+new_2019_map <- make_map_new(2019, sf_2019)
+dem_2019_map <- make_map_dem(2019, sf_2019)
