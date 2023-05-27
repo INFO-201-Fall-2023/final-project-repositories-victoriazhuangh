@@ -195,34 +195,34 @@ make_map_dem <- function(year, sf){
 }
 
 # For 2013 
-sf_2013 <- aggregate(2013)
-new_2013_map <- make_map_new(2013, sf_2013)
-dem_2013_map <- make_map_dem(2013, sf_2013)
+# sf_2013 <- aggregate(2013)
+# new_2013_map <- make_map_new(2013, sf_2013)
+# dem_2013_map <- make_map_dem(2013, sf_2013)
 
 # For 2014 
-sf_2014 <- aggregate(2014)
-new_2014_map <- make_map_new(2014, sf_2014)
-dem_2014_map <- make_map_dem(2014, sf_2014)
+# sf_2014 <- aggregate(2014)
+# new_2014_map <- make_map_new(2014, sf_2014)
+ #dem_2014_map <- make_map_dem(2014, sf_2014)
 
 # For 2015 
-sf_2015 <- aggregate(2015)
-new_2015_map <- make_map_new(2015, sf_2015)
-dem_2015_map <- make_map_dem(2015, sf_2015)
+# sf_2015 <- aggregate(2015)
+# new_2015_map <- make_map_new(2015, sf_2015)
+# dem_2015_map <- make_map_dem(2015, sf_2015)
 
 # For 2016
-sf_2016 <- aggregate(2016)
-new_2016_map <- make_map_new(2016, sf_2016)
-dem_2016_map <- make_map_dem(2016, sf_2016)
+# sf_2016 <- aggregate(2016)
+# new_2016_map <- make_map_new(2016, sf_2016)
+# dem_2016_map <- make_map_dem(2016, sf_2016)
 
 # For 2017 
-sf_2017 <- aggregate(2017)
-new_2017_map <- make_map_new(2017, sf_2017)
-dem_2017_map <- make_map_dem(2017, sf_2017)
+# sf_2017 <- aggregate(2017)
+# new_2017_map <- make_map_new(2017, sf_2017)
+# dem_2017_map <- make_map_dem(2017, sf_2017)
 
 # For 2018
-sf_2018 <- aggregate(2018)
-new_2018_map <- make_map_new(2018, sf_2018)
-dem_2018_map <- make_map_dem(2018, sf_2018)
+# sf_2018 <- aggregate(2018)
+# new_2018_map <- make_map_new(2018, sf_2018)
+# dem_2018_map <- make_map_dem(2018, sf_2018)
 
 # For 2019
 sf_2019 <- aggregate(2019)
