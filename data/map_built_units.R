@@ -46,11 +46,9 @@ bg_indices <- seattle_sf$GEOID10 == "1500000US530330090001" |
 rel_bg_sf <- seattle_sf[bg_indices,]
 
 
-# Create a choropleth map w/ tooltips ----
-# Need to create a map for every year from 2013-2019 (2013, 2014, 2015, 2016,
-# 2017, 2018, 2019) displaying net units built (NET_UNITS) for each block group
 
-# Write a function to create a new data frame that has columns summarizing net units, demo units, and new units ----
+# Write a function to create a new data frame that has columns summarizing net 
+# units, demo units, and new units
 aggregate <- function(year){
   # Create a new data frame that only includes observations from that year
   year_sf <- map_sf[map_sf$YEAR_FINAL == year,]
@@ -63,8 +61,11 @@ aggregate <- function(year){
   return(net_sf)
 }
 
+# MAKE MAPS ----
 
-# MAKE MAPS !!! ----
+# Create a proportional symbol map w/ tooltips 
+# Need to create a map for every year from 2013-2019 (2013, 2014, 2015, 2016, 
+# 2017, 2018, 2019) displaying net units built (NET_UNITS) for each block group
 
 # Write a function to create a proportional symbols map given the year and shapefile
 make_map_new <- function(year, sf){
@@ -95,6 +96,9 @@ make_map_new <- function(year, sf){
     ) +
     labs(
       title = paste("Net Units Built in Chinatown and Wallingford in", year, sep = " "),
+      caption = "The neighborhoods of Chinatown and Wallingford are highlighted in gray.
+      The northernmost highlighted neighborhood is Wallingford, and the southernmost highlighted 
+      neighborhood is Chinatown.",
       size = "Units Built"
     ) + theme_void()
   
@@ -113,6 +117,9 @@ make_map_new <- function(year, sf){
       location = "tr",
       style = north_arrow_fancy_orienteering
     ) + theme_void() +
+    labs(
+      title = "Map of Seattle"
+    ) + 
     blank()
   
   # Create full map 
@@ -152,9 +159,12 @@ make_map_dem <- function(year, sf){
     ) +
     labs(
       title = paste("Net Units Demolished in Chinatown and Wallingford in", year, sep = " "),
+      caption = "The neighborhoods of Chinatown and Wallingford are highlighted in gray.
+      The northernmost highlighted neighborhood is Wallingford, and the southernmost highlighted 
+      neighborhood is Chinatown.",
       size = "Units Demolished"
     ) + theme_void()
-  
+
   # Create inset map 
   inset_map <- ggplot() +
     geom_sf(data = seattle_sf, fill = "white") +
@@ -169,7 +179,10 @@ make_map_dem <- function(year, sf){
     annotation_north_arrow(
       location = "tr",
       style = north_arrow_fancy_orienteering
-    ) + theme_void() +
+    ) + labs(
+      title = "Map of Seattle",
+    ) + 
+    theme_void() +
     blank()
   
   # Create full map 

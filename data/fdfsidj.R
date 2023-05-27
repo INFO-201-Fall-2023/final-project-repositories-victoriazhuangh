@@ -13,22 +13,14 @@ main_map <- ggplot() +
           col = "grey20") +
   xlim(c(122.35, 122.30)) + 
   ylim(c(47.58, 47.68)) +
-  annotation_scale(
-    width_hint = 0.4,
-    unit_category = "metric",
-    style = "bar",
-    location = "br"
-  ) +
-  annotation_north_arrow(
-    location = "tl",
-    style = north_arrow_fancy_orienteering
-  ) +
   labs(
     title = "Net Units Demolished in Chinatown and Wallingford in 2019",
     size = "Units Demolished"
   ) + theme_void()
 
 main_map_int <- ggplotly(main_map)
+
+main_map_int 
 
 # Create inset map 
 inset_map <- ggplot() +
@@ -48,9 +40,9 @@ inset_map <- ggplot() +
   blank()
 
 # Create full map 
-map <- ggdraw() +
-  draw_plot(main_map_int) +
-  draw_plot(inset_map, x = 0.6, y = 0.6, width = 0.3, height = 0.35)
+#map <- ggdraw() +
+  #draw_plot(main_map_int) +
+  #draw_plot(inset_map, x = 0.6, y = 0.6, width = 0.3, height = 0.35)
 
 # Plot map
-plot(map)
+#plot(map)
