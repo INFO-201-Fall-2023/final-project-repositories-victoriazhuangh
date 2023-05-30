@@ -1,5 +1,7 @@
 source("final_project.R")
 
+library(plotly)
+
 # Create Plots -----------------------------------------------------------------
 # Create change over time (built units) plot ----
 
@@ -152,36 +154,110 @@ cid_grp <- group_by(chinatown_filt_df, YEAR_FINAL)
 # Summarize 
 cid_w_df <- summarize(cid_grp,
                     perc = mean(percWhite),
-                    group = "Percent White")
+                    group = "White")
 
 cid_nw_df <- summarize(cid_grp,
                        perc = mean(percNonWhite),
-                       group = "Percent Non-white")
+                       group = "Non-white")
 
 # Append
 cid_df <- rbind(cid_nw_df, cid_w_df)
 
 # Plot
-cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group)) +
-  geom_bar(position="stack", stat="identity")
+cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
+  geom_bar(position="stack", stat="identity") + 
+  labs(
+    title = "Percentage of white vs. nonwhite residents (2013-2019)",
+    x = "Year",
+    y = "Percentage",
+    fill = "Racial demographic"
+  ) + theme(legend.spacing.y = unit(1, "cm")) 
+
+# Make interactive plot 
+cid_bar + geom_text()
+cid_bar <- ggplotly(cid_bar, tooltip = "text")
+cid_bar
 
 # Create stacked white/nonwhite plot for Wallingford ----
 wall_grp <- group_by(wallingford_filt_df, YEAR_FINAL)
 
-# Summarzie 
+# Summarize 
 wall_w_df <- summarize(wall_grp,
                        perc = mean(percWhite),
-                       group = "Percent White")
+                       group = "White")
 
 wall_nw_df <- summarize(wall_grp,
                         perc = mean(percNonWhite),
-                        group = "Percent Non-white")
+                        group = "Non-white")
 
 # Append 
 wall_df <- rbind(wall_nw_df, wall_w_df)
 
 # Plot 
-wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group)) +
-  geom_bar(position="stack", stat="identity")
+wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
+  geom_bar(position="stack", stat="identity") +
+  labs(
+    title = "Percentage of white vs. nonwhite residents (2013-2019)",
+    x = "Year",
+    y = "Percentage",
+    fill = "Racial demographic"
+  )
+
+# Make interactive plot 
+wall_bar + geom_text()
+wall_bar <- ggplotly(wall_bar, tooltip = "text")
 
 
+
+
+# Create line charts for demo/new units in Chinatown ----
+
+cid_demo_df <- summarize(cid_grp,
+                         total = sum(DEMO),
+                         unit_status = "Demolished")
+
+cid_new_df <- summarize(cid_grp,
+                        total = sum(NEW),
+                        unit_status = "Constructed")
+
+cid_bu_df <- rbind(cid_demo_df, cid_new_df)
+
+cid_line <- ggplot(cid_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_status, color = unit_status, text = total)) +
+  geom_line() +
+  labs(
+    title = "Number of Units Constructed and Demolished in Chinatown (2013-2019)",
+    x = "Year",
+    y = "Total Units",
+    color = "Unit Status"
+  )
+
+cid_line + geom_text()
+cid_line <- ggplotly(cid_line, tooltip = "text")
+
+# Create line charts for demo/new units in Wallingford ----
+
+wall_demo_df <- summarize(
+  wall_grp,
+  total = sum(DEMO),
+  unit_status = "Demolished"
+)
+
+wall_new_df <- summarize(
+  wall_grp,
+  total = sum(NEW),
+  unit_status = "Constructed"
+)
+
+wall_bu_df <- rbind(wall_new_df, wall_demo_df)
+
+wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_status, color = unit_status, text = total)) +
+  geom_line() +
+  labs(
+    title = "Number of Units Constructed and Demolished in Wallingford (2013-2019)",
+    x = "Year",
+    y = "Total Units",
+    color = "Unit Status"
+  )
+
+wall_line + geom_text()
+wall_line <- ggplotly(wall_line, tooltip = "text")
