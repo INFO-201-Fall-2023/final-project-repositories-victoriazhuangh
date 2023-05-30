@@ -172,13 +172,15 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
-  ) + theme(legend.spacing.y = unit(1, "cm")) 
+  ) + theme(legend.spacing.y = unit(1, "cm")) +
+  geom_smooth(method = 'lm', se = FALSE)
 
 # Make interactive plot 
 cid_bar + ylim(0,100)
 cid_bar + geom_text()
 cid_bar <- ggplotly(cid_bar, tooltip = "text")
 cid_bar
+
 
 # Create stacked white/nonwhite plot for Wallingford ----
 wall_grp <- group_by(wallingford_filt_df, YEAR_FINAL)
@@ -203,7 +205,9 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
-  )
+  ) +
+  geom_smooth(method = 'lm', se = FALSE)
+
 
 # Make interactive plot
 wall_bar + ylim(0,100)
