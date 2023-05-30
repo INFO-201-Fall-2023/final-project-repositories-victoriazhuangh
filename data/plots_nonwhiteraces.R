@@ -1,5 +1,7 @@
 source("final_project.R")
 
+library(plotly)
+
 #Filter Chinatown specific dataframes
 chinatown_ct <- joined_df$GEO_ID == "1500000US530330090001" |
   joined_df$GEO_ID == "1500000US530330090002" |
@@ -98,6 +100,24 @@ chinatown_bar <- chinatown_bar + ylim(0,100)
 chinatown_bar + geom_text()
 chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
 
+#Add line chart 
+cid_line_race_df <- group_by(chinatown_filt_df, YEAR_FINAL)
+
+cid_line_race_df <- summarize(cid_line_race_df,
+                              perc_Asian = mean(perc_asian),
+                              perc_Black = mean(perc_black),
+                              perc_AIAN = mean(perc_aian),
+                              perc_NHPI = mean(perc_nhpi)
+                              )
+chinatown_line<- ggplot(cid_line_race_df, aes(x = YEAR_FINAL)) +
+  geom_line(aes(y = perc_Asian), color = "forestgreen") +
+  geom_line(aes(y = perc_Black), color = "red") +
+  geom_line(aes(y = perc_AIAN), color = "blue") + 
+  geom_line(aes(y = perc_NHPI), color = "purple") +
+  labs( x = "Year" , y = "Race Distribution")
+
+chinatown_line <- chinatown_line + ylim(0,100)
+
 #Create stacked barchart for Wallingford 
 
 #group by Year 
@@ -151,4 +171,4 @@ wallingford_line <- ggplot(w_line_race_df, aes(x = YEAR_FINAL)) +
   geom_line(aes(y = perc_NHPI), color = "purple") +
   labs( x = "Year" , y = "Race Distribution")
   
-wallingford_line + ylim(0,100)
+wallingford_line <- wallingford_line + ylim(0,100)
