@@ -16,7 +16,7 @@ intro_pg <- tabPanel("Introduction",
     # Authors 
     h4("Aileen Kuang and Victoria Zhuang"),
     
-    h2("So, what is gentrification, and why is it important?"),
+    h2("What is gentrification, and why is it important?"),
     p("Gentrification results from migration of affluent people into areas that have 
     historically been home to Black, indigenous, and other people of color, which displaces
     those original residents. Developers and corporations often claim that gentrification 

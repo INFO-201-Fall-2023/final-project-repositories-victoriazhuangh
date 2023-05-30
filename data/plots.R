@@ -209,9 +209,6 @@ wall_bar + ylim(0,100)
 wall_bar + geom_text()
 wall_bar <- ggplotly(wall_bar, tooltip = "text")
 
-
-
-
 # Create line charts for demo/new units in Chinatown ----
 
 cid_demo_df <- summarize(cid_grp,
