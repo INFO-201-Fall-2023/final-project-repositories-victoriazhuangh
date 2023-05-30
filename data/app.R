@@ -185,13 +185,20 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
   
 )
 
-# Create analysis page 3: Comparing Racial Demographics Breakdown in Chinatown and Wallingford (2013-2019) ----
+# Create analysis page 3: Comparing Income Distribution in Chinatown and Wallingford (2013-2019) ----
+
+income_pg <- tabPanel("Income Distribution",
+  fluidPage(
+    
+  )
+)
 
 # Create UI  ----
 ui <- navbarPage("INFO 201 Final Project",
   intro_pg,
   built_units_pg, 
-  comp_white_pg
+  comp_white_pg,
+  income_pg
 )
 
 # Create server ----
