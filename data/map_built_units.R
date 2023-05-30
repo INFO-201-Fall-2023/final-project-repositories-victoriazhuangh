@@ -45,8 +45,6 @@ bg_indices <- seattle_sf$GEOID10 == "1500000US530330090001" |
 # Create data frame
 rel_bg_sf <- seattle_sf[bg_indices,]
 
-
-
 # Write a function to create a new data frame that has columns summarizing net 
 # units, demo units, and new units
 aggregate <- function(year){

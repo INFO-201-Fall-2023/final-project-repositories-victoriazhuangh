@@ -2,6 +2,8 @@ library(shiny)
 library(shinythemes)
 source("final_project.r")
 source("map_built_units.r")
+source("plots.R")
+source("plots_nonwhiteraces.R")
 
 # Create introduction page ----
 intro_pg <- tabPanel("Introduction",
@@ -180,6 +182,11 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
     fluidRow(
       column(6, wellPanel(plotlyOutput(outputId = "cid_nw_w"))),
       column(6, wellPanel(plotlyOutput(outputId = "wall_nw_w")))
+    ),
+    
+    fluidRow(
+      column(6, wellPanel(plotOutput(outputId = "cid_dem"))),
+      column(6, wellPanel(plotOutput(outputId = "wall_dem")))
     )
   )
   
@@ -189,9 +196,27 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
 
 income_pg <- tabPanel("Income Distribution",
   fluidPage(
+    titlePanel("Comparing the Income Distribution of Chinatown and Wallingford (2013-2019)"),
     
+    p("In the maps below, we examine the income distribution in Chinatown and Wallingford by year. 
+    Select a year from the dropdown menu to display the maps for that year."),
+    
+    # Create sidebar layout
+    sidebarLayout(
+      # Select a year on the sidebar 
+      sidebarPanel(
+        selectInput(inputId = "inc_year", 
+                    label = "Year",
+                    choices = c(2013, 2014, 2015, 2016, 2017, 2018, 2019)),
+        width = 2
+      ),
+      
+      mainPanel(
+        # Display maps associated with the selected year 
+        plotOutput(outputId = "map_inc"))
+      )
+    ),
   )
-)
 
 # Create UI  ----
 ui <- navbarPage("INFO 201 Final Project",
@@ -232,6 +257,33 @@ server <- function(input, output){
     return(wall_bar)
   })
   
+  output$cid_dem <- renderPlot({
+    return(chinatown_bar)
+  })
+  
+  output$wall_dem <- renderPlot({
+    return(wallingford_bar)
+  })
+  
+  output$map_inc <- renderPlot({
+    
+    if (input$inc_year == 2013){
+      make_inc_map(2013, sf_2013)
+    } else if (input$inc_year == 2014){
+      make_inc_map(2014, sf_2014)
+    } else if (input$inc_year == 2015){
+      make_inc_map(2015, sf_2015)
+    } else if (input$inc_year == 2016){
+      make_inc_map(2016, sf_2016)
+    } else if (input$inc_year == 2017){
+      make_inc_map(2017, sf_2017)
+    } else if (input$inc_year == 2018){
+      make_inc_map(2018, sf_2018)
+    } else if (input$inc_year == 2019){
+      make_inc_map(2019, sf_2019)
+    } 
+    
+  })
 }
 
 # Run app ----

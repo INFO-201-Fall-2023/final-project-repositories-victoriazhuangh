@@ -413,15 +413,22 @@ indices_125k_149.99k <- which(joined_df$max_inc_perc == joined_df$perc_125k_149.
 indices_150k_199.99k <- which(joined_df$max_inc_perc == joined_df$perc_150k_199.99k)
 indices_200k <- which(joined_df$max_inc_perc == joined_df$perc_200k_more)
 
-joined_df$max_inc_grp[indices_10k] <- "10,000 or less"
-joined_df$max_inc_grp[indices_20k_24.99k] <- "20,000 to 24,999"
-joined_df$max_inc_grp[indices_50k_59.99k] <- "50,000 to 59,999"
-joined_df$max_inc_grp[indices_60k_74.99k] <- "60,000 to 74,999"
-joined_df$max_inc_grp[indices_75k_99.99k] <- "75,000 to 99,999"
-joined_df$max_inc_grp[indices_100k_124.99k] <- "100,000 to 124,999"
-joined_df$max_inc_grp[indices_125k_149.99k] <- "125,000 to 149,999"
-joined_df$max_inc_grp[indices_150k_199.99k] <- "150,000 to 199,999"
+joined_df$max_inc_grp[indices_10k] <- "10,000 or less" # or less
+joined_df$max_inc_grp[indices_20k_24.99k] <- "20,000-24,999"
+joined_df$max_inc_grp[indices_50k_59.99k] <- "50,000-59,999"
+joined_df$max_inc_grp[indices_60k_74.99k] <- "60,000-74,999"
+joined_df$max_inc_grp[indices_75k_99.99k] <- "75,000-99,999"
+joined_df$max_inc_grp[indices_100k_124.99k] <- "100,000-124,999"
+joined_df$max_inc_grp[indices_125k_149.99k] <- "125,000-149,999"
+joined_df$max_inc_grp[indices_150k_199.99k] <- "150,000-199,999"
 joined_df$max_inc_grp[indices_200k] <- "200,000 or more"
+
+joined_df$max_inc_grp_vec <- factor(joined_df$max_inc_grp, ordered = TRUE,
+                                    levels = c("10,000 or less", "20,000-24,999",
+                                               "50,000-59,999", "60,000-74,999",
+                                               "75,000-99,999", "100,000-124,999",
+                                               "125,000-149,999", "150,000-199,999",
+                                               "200,000 or more"))
 
 # Categorical variable (race)
 # Whether the census block group is white or non-white (T/F)
