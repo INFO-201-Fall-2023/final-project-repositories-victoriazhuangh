@@ -2,6 +2,7 @@ library(shiny)
 library(shinythemes)
 source("final_project.r")
 source("map_built_units.r")
+source("map_income.r")
 source("plots.R")
 source("plots_nonwhiteraces.R")
 
