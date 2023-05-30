@@ -89,7 +89,8 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year")
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") +
+  geom_smooth(method = 'lm', se = FALSE)
 
 chinatown_bar <- chinatown_bar + ylim(0,100)
 
@@ -125,10 +126,29 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") +
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year")
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") +
+  geom_smooth(method = 'lm', se = FALSE)
 
 wallingford_bar <- wallingford_bar + ylim(0,100)
 
 # Add interactivity 
 wallingford_bar + geom_text()
 wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")
+
+#turn into line chart 
+w_line_race_df <- group_by(wallingford_filt_df, YEAR_FINAL)
+
+w_line_race_df <- summarize(w_line_race_df,
+                            perc_Asian = mean(perc_asian),
+                            perc_Black = mean(perc_black),
+                            perc_AIAN = mean(perc_aian),
+                            perc_NHPI = mean(perc_nhpi),
+                            )
+wallingford_line <- ggplot(w_line_race_df, aes(x = YEAR_FINAL)) +
+  geom_line(aes(y = perc_Asian), color = "forestgreen") +
+  geom_line(aes(y = perc_Black), color = "red") +
+  geom_line(aes(y = perc_AIAN), color = "blue") + 
+  geom_line(aes(y = perc_NHPI), color = "purple") +
+  labs( x = "Year" , y = "Race Distribution")
+  
+wallingford_line + ylim(0,100)
