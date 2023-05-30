@@ -174,6 +174,7 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
   ) + theme(legend.spacing.y = unit(1, "cm")) 
 
 # Make interactive plot 
+cid_bar + ylim(0,100)
 cid_bar + geom_text()
 cid_bar <- ggplotly(cid_bar, tooltip = "text")
 cid_bar
@@ -203,7 +204,8 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
     fill = "Racial demographic"
   )
 
-# Make interactive plot 
+# Make interactive plot
+wall_bar + ylim(0,100)
 wall_bar + geom_text()
 wall_bar <- ggplotly(wall_bar, tooltip = "text")
 
@@ -261,3 +263,8 @@ wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_stat
 
 wall_line + geom_text()
 wall_line <- ggplotly(wall_line, tooltip = "text")
+
+# Create grouped bar charts for income distribution in Chinatown ----
+
+
+# Create grouped bar charts for income distribution in Wallingford ----

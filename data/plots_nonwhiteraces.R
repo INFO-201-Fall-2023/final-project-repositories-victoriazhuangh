@@ -86,11 +86,17 @@ chinatown_race_df <- rbind(chinatown_asian,chinatown_black,chinatown_aian,chinat
 chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 
 #Barchart 
-chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group)) +
+chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
+                                               text = perc)) +
   geom_bar(position="stack", stat="identity") +
   labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year")
 
 chinatown_bar <- chinatown_bar + ylim(0,100)
+
+# Add interactivity 
+chinatown_bar + geom_text()
+chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
+
 #Create stacked barchart for Wallingford 
 
 #group by Year 
@@ -116,8 +122,13 @@ wallingford_nhpi <- summarize(wallingford_filt_df,
 wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aian,wallingford_nhpi)
 
 #Barchart
-wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group)) +
+wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
+                                                   text = perc)) +
   geom_bar(position="stack", stat="identity") +
   labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year")
 
 wallingford_bar <- wallingford_bar + ylim(0,100)
+
+# Add interactivity 
+wallingford_bar + geom_text()
+wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")

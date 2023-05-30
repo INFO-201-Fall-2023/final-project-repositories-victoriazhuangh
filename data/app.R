@@ -185,8 +185,8 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
     ),
     
     fluidRow(
-      column(6, wellPanel(plotOutput(outputId = "cid_dem"))),
-      column(6, wellPanel(plotOutput(outputId = "wall_dem")))
+      column(6, wellPanel(plotlyOutput(outputId = "cid_dem"))),
+      column(6, wellPanel(plotlyOutput(outputId = "wall_dem")))
     )
   )
   
@@ -257,11 +257,11 @@ server <- function(input, output){
     return(wall_bar)
   })
   
-  output$cid_dem <- renderPlot({
+  output$cid_dem <- renderPlotly({
     return(chinatown_bar)
   })
   
-  output$wall_dem <- renderPlot({
+  output$wall_dem <- renderPlotly({
     return(wallingford_bar)
   })
   
