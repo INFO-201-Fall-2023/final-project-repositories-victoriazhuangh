@@ -50,7 +50,7 @@ bu_per_yr_wallingford <- summarize(wallingford_grp_df,
                                    units_built = n_distinct(GEO_ID))
 
 # Create Chinatown bar graph
-<<<<<<< Updated upstream
+
 bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity") 
 
@@ -59,7 +59,7 @@ plot(bar_bu_chinatown)
 # Create Wallingford bar graph
 bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity")
-=======
+
 #bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
   #geom_bar(stat = "identity") +
   #geom_smooth(method=lm, se=FALSE)
@@ -69,7 +69,6 @@ bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y
 #bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
   #geom_bar(stat = "identity") +
   #geom_smooth(method=lm, se=FALSE)
->>>>>>> Stashed changes
 
 #plot(bar_bu_wallingford)
 
@@ -97,14 +96,13 @@ nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
 nonwhite_wallingford_df <- summarize(wallingford_grp_df_2,
                                      perc_nonwhite = mean(percNonWhite))
 
-<<<<<<< Updated upstream
+
 bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
   geom_bar(stat = "identity")
-=======
+
 #bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
   #geom_bar(stat = "identity") +
   #geom_smooth(method=lm, se=FALSE)
->>>>>>> Stashed changes
 
 #plot(bar_nonwhite_wallingford)
 
@@ -186,12 +184,8 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
-<<<<<<< Updated upstream
-  ) + theme(legend.spacing.y = unit(1, "cm"))
-=======
-  ) + theme(legend.spacing.y = unit(1, "cm")) #+
-  #geom_smooth(method = 'lm', se = FALSE)
->>>>>>> Stashed changes
+  ) #+ theme(legend.spacing.y = unit(1, "cm")
+            #+ geom_smooth(method = 'lm', se = FALSE)
 
 # Make interactive plot 
 cid_bar + ylim(0,100)
@@ -223,12 +217,7 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
-<<<<<<< Updated upstream
-  ) 
-=======
-  ) #+
-  #geom_smooth(method = 'lm', se = FALSE)
->>>>>>> Stashed changes
+  ) #+ geom_smooth(method = 'lm', se = FALSE)
 
 
 # Make interactive plot

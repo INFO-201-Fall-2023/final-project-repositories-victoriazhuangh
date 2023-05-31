@@ -10,35 +10,36 @@ intro_pg <- tabPanel("Introduction",
                      fluidPage(theme = shinytheme("readable"),
                                
                                # Title 
-                               h1("Gentrification in Seattle: A Comparison of the Chinatown-International District
-     and Wallingford (2013-2019)"),
+                               h1("Gentrification in Seattle: A Comparison of the Chinatown-International District 
+                                  and Wallingford (2013-2019)"),
                                
                                # Authors 
                                h4("Aileen Kuang and Victoria Zhuang"),
                                
-                               h2("So, what is gentrification, and why is it important?"),
-                               p("Gentrification results from migration of affluent people into areas that have 
-    historically been home to Black, indigenous, and other people of color, which displaces
-    those original residents. Developers and corporations often claim that gentrification 
-    increases the quality of life within target neighborhoods; however, in reality, it can 
-    also lead to a loss of culture, history, and feelings of connection between community
-    members.  And, not only does gentrification impact culture, it threatens 
-    the food and housing security of existing residents in gentrifying areas who may not 
-      be able to afford increasing rent and food prices (Fogel)."),
+                               h2("What is gentrification, and why is it important?"),
+                               p("Gentrification results from migration of affluent people into areas that have historically been 
+                               home to Black, indigenous, and other people of color, which displaces
+                               those original residents. Developers and corporations often claim that gentrification 
+                               increases the quality of life within target neighborhoods; however, in reality, it can 
+                               also lead to a loss of culture, history, and feelings of connection between community
+                               members. And, not only does gentrification impact culture, it threatens the food and housing
+                               security of existing residents in gentrifying areas who may not be able to afford increasing 
+                                 rent and food prices (Fogel)."), 
+    
                                
                                h2("Why Seattle, and why the CID and Wallingford?"),
                                p("When discussing gentrification, it is important to recognize the ongoing displacement
-    in Seattle, the third most quickly gentrifying city in the United States after Washington, D.C.
-    and Portland (Fogel). An example of a gentrifying neighborhood in Seattle is the 
-    Chinatown-International District (CID), which has a history dating back to the beginning
-    of the twentieth century, has been identified as one of the neighborhoods facing the
-    most risk of displacement (Kuo, \"International District Development Wave\"). With its rich history and cultural presence in Seattle,
-    displacement of the CID would result in the loss of culture and community along with homes and 
-    local businesses. Additionally, Wallingford (a North Seattle neighborhood that has close proximity
-    to Lake Union and the University District) has faced gentrification in recent history ‒ after the 
-    Boeing slump in the late twentieth century, the prices of Wallingford homes rapidly increased (Dorpat).
-    The rising home and living prices would have likely led to the displacement of preexisting residents 
-    in the area."),
+                               in Seattle, the third most quickly gentrifying city in the United States after Washington, D.C.
+                               and Portland (Fogel). An example of a gentrifying neighborhood in Seattle is the 
+                               Chinatown-International District (CID), which has a history dating back to the beginning
+                               of the twentieth century, has been identified as one of the neighborhoods facing the
+                               most risk of displacement (Kuo, \"International District Development Wave\"). With its rich history and cultural presence in Seattle,
+                               displacement of the CID would result in the loss of culture and community along with homes and 
+                               local businesses. Additionally, Wallingford (a North Seattle neighborhood that has close proximity
+                               to Lake Union and the University District) has faced gentrification in recent history ‒ after the 
+                               Boeing slump in the late twentieth century, the prices of Wallingford homes rapidly increased (Dorpat).
+                               The rising home and living prices would have likely led to the displacement of preexisting residents 
+                                 in the area."),
                                
                                br(),
                                div(img(src = "https://www.theurbanist.org/wp-content/uploads/2022/06/china-gat-696x750.png", 
@@ -154,20 +155,20 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                              ),
                              
                              p("From these graphs, we can see that while the rate of demolition remains relatively stable and similar
-    in Chinatown and Wallingford, we can see that the rate of construction is significantly different: 
-    while the rate of construction is generally increasing in Chinatown, the rate of construction is 
-    generally decreasing in Wallingford (though it is also important to note that the rate of 
-    construction is not steadily increasing in either neighborhood)."),
+                             in Chinatown and Wallingford, we can see that the rate of construction is significantly different: 
+                             while the rate of construction is generally increasing in Chinatown, the rate of construction is 
+                             generally decreasing in Wallingford (though it is also important to note that the rate of 
+                               construction is not steadily increasing in either neighborhood)."),
                              
                              p("Some other key takeaways from these graphs are:"),
                              tags$ol(
                                tags$li("The relative difference between the rate of demolition and construction differs between
-              the two neighborhoods -- as time passes, it increases in Chinatown but decreases in Wallingford.
-              Moreover, the rates of demolition and construction remain vastly different in 
-              Wallingford; however, in Chinatown, they almost intersect twice."),
-                               tags$li("The rates of construction changed drastically in 2018 for both neighborhoods. In 
-              Wallingford, the number of constructed units dropped drastically, but the number of 
-              constructed units rose drastically in Chinatown.")
+                               the two neighborhoods -- as time passes, it increases in Chinatown but decreases in Wallingford.
+                               Moreover, the rates of demolition and construction remain vastly different in Wallingford; 
+                               however, in Chinatown, they almost intersect twice."),
+                               tags$li("The rates of construction changed drastically in 2018 for both neighborhoods. In
+                               Wallingford, the number of constructed units dropped drastically, but the number of 
+                               constructed units rose drastically in Chinatown.")
                              )
                              
                            )
@@ -199,9 +200,8 @@ income_pg <- tabPanel("Income Distribution",
                         titlePanel("Comparing the Income Distribution of Chinatown and Wallingford (2013-2019)"),
                         
                         p("In the maps below, we examine the income distribution in Chinatown and Wallingford by year. 
-    Select a year from the dropdown menu to display the maps for that year."),
-<<<<<<< Updated upstream
-                        
+                          Select a year from the dropdown menu to display the maps for that year."),
+
                         # Create sidebar layout
                         sidebarLayout(
                           # Select a year on the sidebar 
@@ -215,11 +215,41 @@ income_pg <- tabPanel("Income Distribution",
                           mainPanel(
                             # Display maps associated with the selected year 
                             plotOutput(outputId = "map_inc"))
-                        )
+                        ),
+                        
+                        
                       ),
+                      
+                      p("Here are some main takeaways from these maps:"),
+                      
+                      tags$ol(
+                        tags$li("From 2013 to 2019, Chinatown was largely dominated by those with a 
+              yearly income of less than $10,000. However, from 2016 to 2018, the 
+              eastern-most block group in the neighborhood became dominated by
+              those with a yearly income of $150,000-$199,999; this is consistent with
+              the uptick of constructed units in that area (shown in our prior maps).
+              The abundance of built units during that time frame is, then, a possible 
+              explanation for this sudden change in the income distribution of this area."),
+                        tags$li("While the dominant income brackets in Chinatown remained relatively stable, the dominant income 
+              groups in Wallingford varied greatly as time passed. In 2013, the neighborhood exhibited high
+              economic diversity, as three block groups were mostly populated by those making less than $10,000
+              a year, three block groups were mostly populated by those making $200,000 or more, 
+              and the other five block groups were dominated by different income groups. However, 
+              in 2019, Wallingford became", em("much"), "less economically diverse -- five of the 
+              eleven block groups were dominated by those with a yearly income of $200,000 or more.
+              This is surprising, as the number of constructed units in the units 
+              seem to be decreasing as the years go on."),
+                        tags$li("The spatial distribution of the dominant income groups in Wallingford and Chinatown
+              is also interesting to note, especially in comparison to the number of units built over the years.
+              In Wallingford, there are three eastern-most block groups that remain dominated by those with a 
+              yearly income of less than $10,000; incidentally, those same block groups also experience 
+              the most construction in later years. Similarly, in Chinatown, the western-most block groups
+              (which are also the block groups that remain populated by low-income individuals) experience 
+              the most construction in 2019. Because our analysis ends at 2019, it may not be sufficient 
+              enough to confirm whether construction in low-income areas leads to high displacement.")
+                      )
 )
-=======
-    
+
     # Create sidebar layout
     sidebarLayout(
       # Select a year on the sidebar 
@@ -233,38 +263,8 @@ income_pg <- tabPanel("Income Distribution",
       mainPanel(
         # Display maps associated with the selected year 
         plotOutput(outputId = "map_inc"))
-      ),
-    
-    p("Here are some main takeaways from these maps:"),
-    tags$ol(
-      tags$li("From 2013 to 2019, Chinatown was largely dominated by those with a 
-              yearly income of less than $10,000. However, from 2016 to 2018, the 
-              eastern-most block group in the neighborhood became dominated by
-              those with a yearly income of $150,000-$199,999; this is consistent with
-              the uptick of constructed units in that area (shown in our prior maps).
-              The abundance of built units during that time frame is, then, a possible 
-              explanation for this sudden change in the income distribution of this area."),
-      tags$li("While the dominant income brackets in Chinatown remained relatively stable, the dominant income 
-              groups in Wallingford varied greatly as time passed. In 2013, the neighborhood exhibited high
-              economic diversity, as three block groups were mostly populated by those making less than $10,000
-              a year, three block groups were mostly populated by those making $200,000 or more, 
-              and the other five block groups were dominated by different income groups. However, 
-              in 2019, Wallingford became", em("much"), "less economically diverse -- five of the 
-              eleven block groups were dominated by those with a yearly income of $200,000 or more.
-              This is surprising, as the number of constructed units in the units 
-              seem to be decreasing as the years go on."),
-      tags$li("The spatial distribution of the dominant income groups in Wallingford and Chinatown
-              is also interesting to note, especially in comparison to the number of units built over the years.
-              In Wallingford, there are three eastern-most block groups that remain dominated by those with a 
-              yearly income of less than $10,000; incidentally, those same block groups also experience 
-              the most construction in later years. Similarly, in Chinatown, the western-most block groups
-              (which are also the block groups that remain populated by low-income individuals) experience 
-              the most construction in 2019. Because our analysis ends at 2019, it may not be sufficient 
-              enough to confirm whether construction in low-income areas leads to high displacement.")
-    ),
-    )
-  )
->>>>>>> Stashed changes
+      )
+  
 
 # Create UI  ----
 ui <- navbarPage("INFO 201 Final Project",
