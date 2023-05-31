@@ -51,14 +51,14 @@ bu_per_yr_wallingford <- summarize(wallingford_grp_df,
 
 # Create Chinatown bar graph
 
-bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
-  geom_bar(stat = "identity")
+#bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
+  #geom_bar(stat = "identity")
 
-plot(bar_bu_chinatown)
+#plot(bar_bu_chinatown)
 
 # Create Wallingford bar graph
-bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
-  geom_bar(stat = "identity")
+#bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
+  #geom_bar(stat = "identity")
 
 #bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
   #geom_bar(stat = "identity") +
@@ -178,13 +178,19 @@ cid_bar <- ggplotly(cid_bar, tooltip = "text")
 
 
 #Create line chart for White and Nonwhite in Chinatown
-chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc)) +
-  geom_line(aes(col = group)) + ggtitle("Chinatown White and Non-White Race Distribution") +
-  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
-
-chinatown_wnw_line <- chinatown_wnw_line + ylim(0,100)
+chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL, 
+                                         y = perc, 
+                                         text = perc, 
+                                         col = group)) +
+  geom_line() +
+  labs(
+    title = "Chinatown White and Non-White Race Distribution",
+    x = "Year",
+    y = "Percentage",
+    color = "Racial Distribution")
 
 #make interactive
+chinatown_wnw_line + ylim(0,100)
 chinatown_wnw_line + geom_text()
 chinatown_wnw_line <- ggplotly(chinatown_wnw_line, tooltip = "text")
 
@@ -220,13 +226,19 @@ wall_bar + geom_text()
 wall_bar <- ggplotly(wall_bar, tooltip = "text")
 
 #Creating line charts for white/non-white residents in Wallingford
-wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc)) +
-  geom_line(aes(col = group)) + ggtitle("Wallingford White and Non-White Race Distribution") +
-  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
-
-wallingford_wnw_line <- wallingford_wnw_line + ylim(0,100)
+wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL, 
+                                            y = perc, 
+                                            text = perc, 
+                                            col = group)) +
+  geom_line() + 
+  labs(
+    title = "Wallingford White and Non-White Race Distribution",
+    x = "Year",
+    y = "Percentage", 
+    color = "Racial Distribution")
 
 #make interactive
+wallingford_wnw_line + ylim(0,100)
 wallingford_wnw_line + geom_text()
 wallingford_wnw_line <- ggplotly(wallingford_wnw_line, tooltip = "text")
 
@@ -282,12 +294,9 @@ wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_stat
 wall_line + geom_text()
 wall_line <- ggplotly(wall_line, tooltip = "text")
 
-
-
 # Create grouped bar charts for income distribution in Chinatown ----
 # Append income dfs for all years ----
 all_inc_df <- rbind(inc_2013, inc_2014, inc_2015, inc_2016, inc_2017, inc_2018, inc_2019)
-
 # Delete unnecessary columns ----
 all_inc_df <- all_inc_df[,c(1:20, 37:39)]
 
@@ -372,10 +381,7 @@ filt_cid <- all_inc_df2$GEO_ID == "1500000US530330090001" |
 cid_inc_df <- all_inc_df2[filt_cid,]
 
 # Group and summarize by year and percent ----
-
 # Create stacked bar charts for income distribution ----
 # more specifically, the lowest and highest income brackets
-
 # Create grouped bar charts for income distribution in Wallingford ----
-
 # Filter data for Wallingford ----

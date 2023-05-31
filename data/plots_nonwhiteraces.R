@@ -90,26 +90,28 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
-
-    labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
-
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") #+
-  #geom_smooth(method = 'lm', se = FALSE)
-
-chinatown_bar <- chinatown_bar + ylim(0,100)
+  labs(fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
+chinatown_bar + ylim(0,100)
 chinatown_bar + geom_text()
 chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
 
 #Add line chart 
-chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, text = perc)) +
-  geom_line(aes(col = group)) + ggtitle("Chinatown Non-White Race Distribution") +
-  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
-
-chinatown_line <- chinatown_line + ylim(0,100)
+chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, 
+                                                y = perc, 
+                                                text = perc, 
+                                                group = group,
+                                                color = group)) +
+  geom_line() + 
+  labs(
+    title = "Chinatown Non-White Race Distribution",
+    x = "Year", 
+    y = "Percentage", 
+    color = "Racial Distribution")
 
 #add interactivity
+chinatown_line + ylim(0,100)
 chinatown_line + geom_text()
 chinatown_line <- ggplotly(chinatown_line, tooltip = "text")
 
@@ -141,25 +143,27 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") +
-
   labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
 
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") #+
-  #geom_smooth(method = 'lm', se = FALSE)
-
-wallingford_bar <- wallingford_bar + ylim(0,100)
-
 # Add interactivity 
+wallingford_bar + ylim(0,100)
 wallingford_bar + geom_text()
 wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")
 
 #turn into line chart 
-wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, text = perc)) +
-  geom_line(aes(col = group)) + ggtitle("Wallingford Non-White Race Distribution") +
-  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
-
-wallingford_line <- wallingford_line + ylim(0,100)
+wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, 
+                                                    y = perc, 
+                                                    text = perc, 
+                                                    group = group,
+                                                    color = group)) +
+  geom_line() +
+  labs(
+    title = "Wallingford Non-White Race Distribution",
+    x = "Year",
+    y = "Percentage",
+    color = "Racial Distribution")
 
 # Add interactivity 
+wallingford_line + ylim(0,100)
 wallingford_line + geom_text()
 wallingford_line <- ggplotly(wallingford_line, tooltip = "text")

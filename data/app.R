@@ -32,7 +32,7 @@ intro_pg <- tabPanel("Introduction",
                                in Seattle, the third most quickly gentrifying city in the United States after Washington, D.C.
                                and Portland (Fogel). An example of a gentrifying neighborhood in Seattle is the
                                Chinatown-International District (CID), which has a history dating back to the beginning
-                               of the twentieth century, has been identified as one of the neighborhoods facing the
+                               of the twentieth century and has been identified as one of the neighborhoods facing the
                                most risk of displacement (Kuo, \"International District Development Wave\"). With its rich history and cultural presence in Seattle,
                                displacement of the CID would result in the loss of culture and community along with homes and
                                local businesses. Additionally, Wallingford (a North Seattle neighborhood that has close proximity
@@ -78,8 +78,7 @@ intro_pg <- tabPanel("Introduction",
             to map our data."),
                                  tags$li(a(href = "https://data.census.gov/table?q=table+b02001&g=050XX00US53033$1500000&tid=ACSDT5Y2020.B02001",
                                            "Table B02001"), "from the U.S. Census. This data provides information about the
-            racial makeup of block groups in the United States. This information is useful in our project,
-            as it "),
+            racial makeup of block groups in the United States."),
                                  tags$li(a(href = "https://data.census.gov/table?q=american+community+survey+economics&t=Income+and+Poverty&g=050XX00US53033$1500000&tid=ACSDT5Y2021.B19001",
                                            "Table B19001"), "from the U.S. Census. This data provides information about the
             income distribution of block groups in the United States.")
@@ -170,7 +169,6 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                                Wallingford, the number of constructed units dropped drastically, but the number of
                                constructed units rose drastically in Chinatown.")
                              )
-
                            )
 )
 
@@ -193,8 +191,8 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                             br(),
 
                             fluidRow(
-                              column(6, wellPanel(plotlyOutput(outputId = "cid_line_plot"))),
-                              column(6, wellPanel(plotlyOutput(outputId = "wall_line_plot")))
+                              column(6, wellPanel(plotlyOutput(outputId = "cid_race_line"))),
+                              column(6, wellPanel(plotlyOutput(outputId = "wall_race_line")))
                             ),
 
                             fluidRow(
@@ -202,7 +200,6 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                               column(6, wellPanel(plotlyOutput(outputId = "wall_wnw_line")))
                             )
                           )
-
 )
 
 # Create analysis page 3: Comparing Income Distribution in Chinatown and Wallingford (2013-2019) ----
@@ -227,9 +224,7 @@ income_pg <- tabPanel("Income Distribution",
                           mainPanel(
                             # Display maps associated with the selected year
                             plotOutput(outputId = "map_inc"))
-                        ),
-
-
+                        )
                       ),
 
                       p("Here are some main takeaways from these maps:"),
@@ -261,21 +256,7 @@ income_pg <- tabPanel("Income Distribution",
               enough to confirm whether construction in low-income areas leads to high displacement.")
                       )
 )
-
-    # Create sidebar layout
-    sidebarLayout(
-      # Select a year on the sidebar
-      sidebarPanel(
-        selectInput(inputId = "inc_year",
-                    label = "Year",
-                    choices = c(2013, 2014, 2015, 2016, 2017, 2018, 2019)),
-        width = 2
-      ),
-
-      mainPanel(
-        # Display maps associated with the selected year
-        plotOutput(outputId = "map_inc"))
-      )
+      
 
 
 # Create UI  ----
@@ -333,7 +314,7 @@ server <- function(input, output){
     return(wallingford_line)
   })
 
-  output$cid_wnw_line <- renderPlotly({
+  output$cid_nwn_line <- renderPlotly({
     return(chinatown_wnw_line)
   })
 
@@ -341,12 +322,7 @@ server <- function(input, output){
     return(wallingford_wnw_line)
   })
 
-  output$wall_race_line <- renderPlotly({
-   return(wallingford_line)
- })
-
   output$map_inc <- renderPlot({
-
     if (input$inc_year == 2013){
       make_inc_map(2013, sf_2013)
     } else if (input$inc_year == 2014){
@@ -362,8 +338,8 @@ server <- function(input, output){
     } else if (input$inc_year == 2019){
       make_inc_map(2019, sf_2019)
     }
-
   })
+  
 }
 
 # Run app ----
