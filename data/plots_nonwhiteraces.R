@@ -91,8 +91,8 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") +
-  geom_smooth(method = 'lm', se = FALSE)
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
+
 
 chinatown_bar <- chinatown_bar + ylim(0,100)
 
@@ -117,6 +117,8 @@ chinatown_line<- ggplot(cid_line_race_df, aes(x = YEAR_FINAL)) +
   labs( x = "Year" , y = "Race Distribution")
 
 chinatown_line <- chinatown_line + ylim(0,100)
+
+#add interactivity
 
 #Create stacked barchart for Wallingford 
 
@@ -146,8 +148,8 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") +
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") +
-  geom_smooth(method = 'lm', se = FALSE)
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
+
 
 wallingford_bar <- wallingford_bar + ylim(0,100)
 
