@@ -200,6 +200,7 @@ income_pg <- tabPanel("Income Distribution",
                         
                         p("In the maps below, we examine the income distribution in Chinatown and Wallingford by year. 
     Select a year from the dropdown menu to display the maps for that year."),
+<<<<<<< Updated upstream
                         
                         # Create sidebar layout
                         sidebarLayout(
@@ -217,6 +218,53 @@ income_pg <- tabPanel("Income Distribution",
                         )
                       ),
 )
+=======
+    
+    # Create sidebar layout
+    sidebarLayout(
+      # Select a year on the sidebar 
+      sidebarPanel(
+        selectInput(inputId = "inc_year", 
+                    label = "Year",
+                    choices = c(2013, 2014, 2015, 2016, 2017, 2018, 2019)),
+        width = 2
+      ),
+      
+      mainPanel(
+        # Display maps associated with the selected year 
+        plotOutput(outputId = "map_inc"))
+      ),
+    
+    p("Here are some main takeaways from these maps:"),
+    tags$ol(
+      tags$li("From 2013 to 2019, Chinatown was largely dominated by those with a 
+              yearly income of less than $10,000. However, from 2016 to 2018, the 
+              eastern-most block group in the neighborhood became dominated by
+              those with a yearly income of $150,000-$199,999; this is consistent with
+              the uptick of constructed units in that area (shown in our prior maps).
+              The abundance of built units during that time frame is, then, a possible 
+              explanation for this sudden change in the income distribution of this area."),
+      tags$li("While the dominant income brackets in Chinatown remained relatively stable, the dominant income 
+              groups in Wallingford varied greatly as time passed. In 2013, the neighborhood exhibited high
+              economic diversity, as three block groups were mostly populated by those making less than $10,000
+              a year, three block groups were mostly populated by those making $200,000 or more, 
+              and the other five block groups were dominated by different income groups. However, 
+              in 2019, Wallingford became", em("much"), "less economically diverse -- five of the 
+              eleven block groups were dominated by those with a yearly income of $200,000 or more.
+              This is surprising, as the number of constructed units in the units 
+              seem to be decreasing as the years go on."),
+      tags$li("The spatial distribution of the dominant income groups in Wallingford and Chinatown
+              is also interesting to note, especially in comparison to the number of units built over the years.
+              In Wallingford, there are three eastern-most block groups that remain dominated by those with a 
+              yearly income of less than $10,000; incidentally, those same block groups also experience 
+              the most construction in later years. Similarly, in Chinatown, the western-most block groups
+              (which are also the block groups that remain populated by low-income individuals) experience 
+              the most construction in 2019. Because our analysis ends at 2019, it may not be sufficient 
+              enough to confirm whether construction in low-income areas leads to high displacement.")
+    ),
+    )
+  )
+>>>>>>> Stashed changes
 
 # Create UI  ----
 ui <- navbarPage("INFO 201 Final Project",

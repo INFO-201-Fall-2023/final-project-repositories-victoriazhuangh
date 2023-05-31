@@ -50,6 +50,7 @@ bu_per_yr_wallingford <- summarize(wallingford_grp_df,
                                    units_built = n_distinct(GEO_ID))
 
 # Create Chinatown bar graph
+<<<<<<< Updated upstream
 bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity") 
 
@@ -58,8 +59,19 @@ plot(bar_bu_chinatown)
 # Create Wallingford bar graph
 bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
   geom_bar(stat = "identity")
+=======
+#bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
+  #geom_bar(stat = "identity") +
+  #geom_smooth(method=lm, se=FALSE)
+#plot(bar_bu_chinatown)
 
-plot(bar_bu_wallingford)
+# Create Wallingford bar graph
+#bar_bu_wallingford <- ggplot(data = bu_per_yr_wallingford, aes(x = YEAR_FINAL, y = units_built)) +
+  #geom_bar(stat = "identity") +
+  #geom_smooth(method=lm, se=FALSE)
+>>>>>>> Stashed changes
+
+#plot(bar_bu_wallingford)
 
 # Create demographics plot ----
 
@@ -70,26 +82,31 @@ chinatown_grp_df_2 <- group_by(chinatown_filt_df, YEAR_FINAL)
 nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
                                    perc_nonwhite = mean(percNonWhite))
 
-bar_nonwhite_chinatown <- ggplot(nonwhite_chinatown_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
-  geom_bar(stat = "identity") +
-  coord_flip() +
-  labs(
-    title = "Percentage of Non-White Residents in Chinatown (2013-2018)",
-    x = "Year",
-    y = "Percentage"
-  )
+#bar_nonwhite_chinatown <- ggplot(nonwhite_chinatown_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
+  #geom_bar(stat = "identity") +
+  #coord_flip() +
+  #labs(
+    #title = "Percentage of Non-White Residents in Chinatown (2013-2018)",
+    #x = "Year",
+    #y = "Percentage"
+  #)
+#plot(bar_nonwhite_chinatown)
 
-plot(bar_nonwhite_chinatown)
-
-wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
+#wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
 
 nonwhite_wallingford_df <- summarize(wallingford_grp_df_2,
                                      perc_nonwhite = mean(percNonWhite))
 
+<<<<<<< Updated upstream
 bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
   geom_bar(stat = "identity")
+=======
+#bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, y = perc_nonwhite)) +
+  #geom_bar(stat = "identity") +
+  #geom_smooth(method=lm, se=FALSE)
+>>>>>>> Stashed changes
 
-plot(bar_nonwhite_wallingford)
+#plot(bar_nonwhite_wallingford)
 
 #Find percentage of Black residents in all populations
 joined_df$percBlack <- joined_df$totalEstBlack / joined_df$totalEstPop *100
@@ -169,7 +186,12 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
+<<<<<<< Updated upstream
   ) + theme(legend.spacing.y = unit(1, "cm"))
+=======
+  ) + theme(legend.spacing.y = unit(1, "cm")) #+
+  #geom_smooth(method = 'lm', se = FALSE)
+>>>>>>> Stashed changes
 
 # Make interactive plot 
 cid_bar + ylim(0,100)
@@ -201,7 +223,12 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
+<<<<<<< Updated upstream
   ) 
+=======
+  ) #+
+  #geom_smooth(method = 'lm', se = FALSE)
+>>>>>>> Stashed changes
 
 
 # Make interactive plot
@@ -258,8 +285,9 @@ wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_stat
     color = "Unit Status"
   )
 
-wall_line + geom_text()
+wall_line + geom_text() 
 wall_line <- ggplotly(wall_line, tooltip = "text")
+
 
 
 # Create grouped bar charts for income distribution in Chinatown ----
@@ -350,48 +378,10 @@ filt_cid <- all_inc_df2$GEO_ID == "1500000US530330090001" |
 cid_inc_df <- all_inc_df2[filt_cid,]
 
 # Group and summarize by year and percent ----
-grp <- group_by(cid_inc_df, Year, income_bracket)
-cid_inc_df_2 <- summarize(grp, 
-                          total = sum(Count))
-
-
-
 
 # Create stacked bar charts for income distribution ----
 # more specifically, the lowest and highest income brackets 
 
-cid_inc_bar <- ggplot(df_10k[filt_cid,], aes(x = Year, y = Count)) +
-  geom_bar(stat="identity")
-
-cid_inc_bar_2 <- ggplot(df_200k[filt_cid,], aes(x = Year, y = Count)) +
-  geom_bar(stat="identity")
-
 # Create grouped bar charts for income distribution in Wallingford ----
 
 # Filter data for Wallingford ----
-
-filt_wall <- all_inc_df2$GEO_ID == "1500000US530330050001" |
-  all_inc_df2$GEO_ID == "1500000US530330050002" |
-  all_inc_df2$GEO_ID == "1500000US530330050003" |
-  all_inc_df2$GEO_ID == "1500000US530330051001" |
-  all_inc_df2$GEO_ID == "1500000US530330051002" |
-  all_inc_df2$GEO_ID == "1500000US530330051003" |
-  all_inc_df2$GEO_ID == "1500000US530330052001" |
-  all_inc_df2$GEO_ID == "1500000US530330052002" |
-  all_inc_df2$GEO_ID == "1500000US530330052003" |
-  all_inc_df2$GEO_ID == "1500000US530330052004" |
-  all_inc_df2$GEO_ID == "1500000US530330052005"
-
-# Group by and summarize ----
-
-wall_inc_10k_df <- df_10k[filt_wall,]
-wall_inc_200k_df <- df_200k
-
-grp_wall <- group_by(wall_inc_10k_df, Year, income_bracket)
-wall_inc_df_2 <- summarize(grp_wall,
-                           total = sum(Count))
-
-# Create stacked bar charts 
-
-wall_inc_bar <- ggplot(wall_inc_df_2, aes(x = Year, y = total)) +
-  geom_bar(stat = "identity")

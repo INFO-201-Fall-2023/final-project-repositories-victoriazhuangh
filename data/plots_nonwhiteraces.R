@@ -91,8 +91,13 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
+<<<<<<< Updated upstream
   labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
 
+=======
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") #+
+  #geom_smooth(method = 'lm', se = FALSE)
+>>>>>>> Stashed changes
 
 chinatown_bar <- chinatown_bar + ylim(0,100)
 
@@ -148,8 +153,13 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") +
+<<<<<<< Updated upstream
   labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
 
+=======
+  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") #+
+  #geom_smooth(method = 'lm', se = FALSE)
+>>>>>>> Stashed changes
 
 wallingford_bar <- wallingford_bar + ylim(0,100)
 
