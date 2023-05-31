@@ -168,14 +168,13 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
     x = "Year",
     y = "Percentage",
     fill = "Racial demographic"
-  ) #+ theme(legend.spacing.y = unit(1, "cm")
-            #+ geom_smooth(method = 'lm', se = FALSE)
-
+  ) + theme(legend.spacing.y = unit(1, "cm"))
+            
 # Make interactive plot
-cid_bar + ylim(0,100)
+cid_bar <- cid_bar + ylim(0,100)
 cid_bar + geom_text()
 cid_bar <- ggplotly(cid_bar, tooltip = "text")
-cid_bar
+
 
 
 #Create line chart for White and Nonwhite in Chinatown
