@@ -25,7 +25,6 @@ chinatown_filt_df$perc_aian <- chinatown_filt_df$totalEstAIAN / chinatown_filt_d
 #NHPI
 chinatown_filt_df$perc_nhpi <- chinatown_filt_df$totalEstNHPI/ chinatown_filt_df$totalEstPop *100
 
-
 # Create mask for Wallingford
 wallingford_ct <- joined_df$GEO_ID == "1500000US530330050001" |
   joined_df$GEO_ID == "1500000US530330050002" |
@@ -104,7 +103,7 @@ chinatown_bar + geom_text()
 chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
 
 #Add line chart 
-chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc)) +
+chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, text = perc)) +
   geom_line(aes(col = group)) + ggtitle("Chinatown Non-White Race Distribution") +
   labs(x = "Year", y = "Percentage", color = "Racial Distribution")
 
@@ -155,7 +154,7 @@ wallingford_bar + geom_text()
 wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")
 
 #turn into line chart 
-wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc)) +
+wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, text = perc)) +
   geom_line(aes(col = group)) + ggtitle("Wallingford Non-White Race Distribution") +
   labs(x = "Year", y = "Percentage", color = "Racial Distribution")
 

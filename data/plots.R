@@ -90,10 +90,7 @@ nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
     #y = "Percentage"
   #)
 #plot(bar_nonwhite_chinatown)
-
-plot(bar_nonwhite_chinatown)
-
-
+#plot(bar_nonwhite_chinatown)
 
 wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
 

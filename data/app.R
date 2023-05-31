@@ -320,14 +320,13 @@ server <- function(input, output){
     return(wallingford_bar)
   })
   
- # output$cid_race_line <- renderPlotly({
-  #  return(chinatown_line)
- # })
+ output$cid_race_line <- renderPlotly({
+  return(chinatown_line)
+  })
   
-#  output$wall_race_line <- renderPlotly({
-  #  return(wallingford_line)
-#  })
-  
+  output$wall_race_line <- renderPlotly({
+   return(wallingford_line)
+ })
   
   output$map_inc <- renderPlot({
     
