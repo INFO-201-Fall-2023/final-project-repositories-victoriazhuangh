@@ -104,24 +104,15 @@ chinatown_bar + geom_text()
 chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
 
 #Add line chart 
-cid_line_race_df <- group_by(chinatown_filt_df, YEAR_FINAL)
-
-cid_line_race_df <- summarize(cid_line_race_df,
-                              perc_Asian = mean(perc_asian),
-                              perc_Black = mean(perc_black),
-                              perc_AIAN = mean(perc_aian),
-                              perc_NHPI = mean(perc_nhpi)
-                              )
-chinatown_line<- ggplot(cid_line_race_df, aes(x = YEAR_FINAL)) +
-  geom_line(aes(y = perc_Asian), color = "forestgreen") +
-  geom_line(aes(y = perc_Black), color = "red") +
-  geom_line(aes(y = perc_AIAN), color = "blue") + 
-  geom_line(aes(y = perc_NHPI), color = "purple") +
-  labs( x = "Year" , y = "Race Distribution")
+chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc)) +
+  geom_line(aes(col = group)) + ggtitle("Chinatown Non-White Race Distribution") +
+  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
 
 chinatown_line <- chinatown_line + ylim(0,100)
 
 #add interactivity
+chinatown_line + geom_text()
+chinatown_line <- ggplotly(chinatown_line, tooltip = "text")
 
 #Create stacked barchart for Wallingford 
 
@@ -164,19 +155,12 @@ wallingford_bar + geom_text()
 wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")
 
 #turn into line chart 
-w_line_race_df <- group_by(wallingford_filt_df, YEAR_FINAL)
+wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc)) +
+  geom_line(aes(col = group)) + ggtitle("Wallingford Non-White Race Distribution") +
+  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
 
-w_line_race_df <- summarize(w_line_race_df,
-                            perc_Asian = mean(perc_asian),
-                            perc_Black = mean(perc_black),
-                            perc_AIAN = mean(perc_aian),
-                            perc_NHPI = mean(perc_nhpi),
-                            )
-wallingford_line <- ggplot(w_line_race_df, aes(x = YEAR_FINAL)) +
-  geom_line(aes(y = perc_Asian), color = "forestgreen") +
-  geom_line(aes(y = perc_Black), color = "red") +
-  geom_line(aes(y = perc_AIAN), color = "blue") + 
-  geom_line(aes(y = perc_NHPI), color = "purple") +
-  labs( x = "Year" , y = "Race Distribution")
-  
 wallingford_line <- wallingford_line + ylim(0,100)
+
+# Add interactivity 
+wallingford_line + geom_text()
+wallingford_line <- ggplotly(wallingford_line, tooltip = "text")

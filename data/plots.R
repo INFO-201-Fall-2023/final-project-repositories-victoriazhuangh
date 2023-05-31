@@ -52,7 +52,7 @@ bu_per_yr_wallingford <- summarize(wallingford_grp_df,
 # Create Chinatown bar graph
 
 bar_bu_chinatown <- ggplot(data = bu_per_yr_chinatown, aes(x = YEAR_FINAL, y = units_built)) +
-  geom_bar(stat = "identity") 
+  geom_bar(stat = "identity")
 
 plot(bar_bu_chinatown)
 
@@ -91,7 +91,11 @@ nonwhite_chinatown_df <- summarize(chinatown_grp_df_2,
   #)
 #plot(bar_nonwhite_chinatown)
 
-#wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
+plot(bar_nonwhite_chinatown)
+
+
+
+wallingford_grp_df_2 <- group_by(wallingford_filt_df, YEAR_FINAL)
 
 nonwhite_wallingford_df <- summarize(wallingford_grp_df_2,
                                      perc_nonwhite = mean(percNonWhite))
@@ -106,23 +110,6 @@ bar_nonwhite_wallingford <- ggplot(nonwhite_wallingford_df, aes(x = YEAR_FINAL, 
 
 #plot(bar_nonwhite_wallingford)
 
-#Find percentage of Black residents in all populations
-joined_df$percBlack <- joined_df$totalEstBlack / joined_df$totalEstPop *100
-
-#Find percentage of Asian residents in all populations
-joined_df$percAsian <- joined_df$totalEstAsian/ joined_df$totalEstPop * 100
-
-chinatown_filt_df$percAsian <- joined_df$percAsian[chinatown_ct]
-#Find percentage of AIAN residents in all populations
-joined_df$percAIAN <- joined_df$totalEstAIAN/ joined_df$totalEstPop * 100
-
-#Find percentage of NHPI residents in all populations
-joined_df$percNHPI <- joined_df$totalEstNHPI/ joined_df$totalEstPop * 100
-
-#Find percentage of other residents in all populations
-joined_df$percOther <- joined_df$totalEstOther / joined_df$totalEstPop * 100
-
-#Bar plot for Asian demographic in Chinatown
 
 # Group by and summarize
 #chinatown_asian_dem_df <- group_by(chinatown_filt_df, YEAR_FINAL)
@@ -161,10 +148,10 @@ joined_df$percOther <- joined_df$totalEstOther / joined_df$totalEstPop * 100
 
 # Create stacked white/nonwhite plot for Chinatown ----
 
-# Group chinatown_filt_df by year 
+# Group chinatown_filt_df by year
 cid_grp <- group_by(chinatown_filt_df, YEAR_FINAL)
 
-# Summarize 
+# Summarize
 cid_w_df <- summarize(cid_grp,
                     perc = mean(percWhite),
                     group = "White")
@@ -178,7 +165,7 @@ cid_df <- rbind(cid_nw_df, cid_w_df)
 
 # Plot
 cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
-  geom_bar(position="stack", stat="identity") + 
+  geom_bar(position="stack", stat="identity") +
   labs(
     title = "Percentage of white vs. nonwhite residents (2013-2019)",
     x = "Year",
@@ -187,17 +174,28 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
   ) #+ theme(legend.spacing.y = unit(1, "cm")
             #+ geom_smooth(method = 'lm', se = FALSE)
 
-# Make interactive plot 
+# Make interactive plot
 cid_bar + ylim(0,100)
 cid_bar + geom_text()
 cid_bar <- ggplotly(cid_bar, tooltip = "text")
 cid_bar
 
 
+#Create line chart for White and Nonwhite in Chinatown
+chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc)) +
+  geom_line(aes(col = group)) + ggtitle("Chinatown White and Non-White Race Distribution") +
+  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
+
+chinatown_wnw_line <- chinatown_wnw_line + ylim(0,100)
+
+#make interactive
+chinatown_wnw_line + geom_text()
+chinatown_wnw_line <- ggplotly(chinatown_wnw_line, tooltip = "text")
+
 # Create stacked white/nonwhite plot for Wallingford ----
 wall_grp <- group_by(wallingford_filt_df, YEAR_FINAL)
 
-# Summarize 
+# Summarize
 wall_w_df <- summarize(wall_grp,
                        perc = mean(percWhite),
                        group = "White")
@@ -206,10 +204,10 @@ wall_nw_df <- summarize(wall_grp,
                         perc = mean(percNonWhite),
                         group = "Non-white")
 
-# Append 
+# Append
 wall_df <- rbind(wall_nw_df, wall_w_df)
 
-# Plot 
+# Plot
 wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
   geom_bar(position="stack", stat="identity") +
   labs(
@@ -224,6 +222,17 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
 wall_bar + ylim(0,100)
 wall_bar + geom_text()
 wall_bar <- ggplotly(wall_bar, tooltip = "text")
+
+#Creating line charts for white/non-white residents in Wallingford
+wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc)) +
+  geom_line(aes(col = group)) + ggtitle("Wallingford White and Non-White Race Distribution") +
+  labs(x = "Year", y = "Percentage", color = "Racial Distribution")
+
+wallingford_wnw_line <- wallingford_wnw_line + ylim(0,100)
+
+#make interactive
+wallingford_wnw_line + geom_text()
+wallingford_wnw_line <- ggplotly(wallingford_wnw_line, tooltip = "text")
 
 # Create line charts for demo/new units in Chinatown ----
 
@@ -274,7 +283,7 @@ wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_stat
     color = "Unit Status"
   )
 
-wall_line + geom_text() 
+wall_line + geom_text()
 wall_line <- ggplotly(wall_line, tooltip = "text")
 
 
@@ -354,8 +363,8 @@ names(df_200k)[names(df_200k) == "X200k_or_more"] <- "Count"
 
 # Append again ----
 all_inc_df2 <- rbind(df_10k, df_10k_14.99k, df_15k_19.99k, df_20k_24.99k, df_25k_29.99k,
-                     df_30k_34.99k, df_35k_39.99k, df_40k_44.99k, df_45k_49.99k, 
-                     df_50k_59.99k, df_60k_74.99k, df_75k_99.99k, df_100k_124.99k, 
+                     df_30k_34.99k, df_35k_39.99k, df_40k_44.99k, df_45k_49.99k,
+                     df_50k_59.99k, df_60k_74.99k, df_75k_99.99k, df_100k_124.99k,
                      df_125k_149.99k, df_150k_199.99k, df_200k)
 
 # Filter for CID -----
@@ -369,7 +378,7 @@ cid_inc_df <- all_inc_df2[filt_cid,]
 # Group and summarize by year and percent ----
 
 # Create stacked bar charts for income distribution ----
-# more specifically, the lowest and highest income brackets 
+# more specifically, the lowest and highest income brackets
 
 # Create grouped bar charts for income distribution in Wallingford ----
 
