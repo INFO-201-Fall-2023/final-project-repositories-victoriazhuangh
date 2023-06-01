@@ -16,72 +16,78 @@ intro_pg <- tabPanel("Introduction",
                                # Authors
                                h4("Aileen Kuang and Victoria Zhuang"),
                                
+                               h2("Project Summary"),
+                               h5("This project aims to examine the relationship between race, income, and gentrification. 
+                               More specifically, we ask: What is the relationship between constructed/demolished units and racial/income demographics
+                               in the International District? In Wallingford? How do existing population demographics influence the rate 
+                               at which new developments appear, and how do new developments affect demographics?"),
+
                                h2("What is gentrification, and why is it important?"),
-                               p("Gentrification results from migration of affluent people into areas that have historically been
+                               p("Gentrification results from the migration of affluent people into areas that have historically been
                                home to Black, indigenous, and other people of color, which displaces
                                those original residents. Developers and corporations often claim that gentrification
                                increases the quality of life within target neighborhoods; however, in reality, it can
                                also lead to a loss of culture, history, and feelings of connection between community
                                members. And, not only does gentrification impact culture, it threatens the food and housing
                                security of existing residents in gentrifying areas who may not be able to afford increasing
-                                 rent and food prices (Fogel)."),
-                               
+                               rent and food prices (Fogel)."),
                                
                                h2("Why Seattle, and why the CID and Wallingford?"),
-                               p("When discussing gentrification, it is important to recognize the ongoing displacement
-                               in Seattle, the third most quickly gentrifying city in the United States after Washington, D.C.
-                               and Portland (Fogel). An example of a gentrifying neighborhood in Seattle is the
-                               Chinatown-International District (CID), which has a history dating back to the beginning
-                               of the twentieth century and has been identified as one of the neighborhoods facing the
-                               most risk of displacement (Kuo, \"International District Development Wave\"). With its rich history and cultural presence in Seattle,
-                               displacement of the CID would result in the loss of culture and community along with homes and
-                               local businesses. Additionally, Wallingford (a North Seattle neighborhood that has close proximity
-                               to Lake Union and the University District) has faced gentrification in recent history ‒ after the
-                               Boeing slump in the late twentieth century, the prices of Wallingford homes rapidly increased (Dorpat).
-                               The rising home and living prices would have likely led to the displacement of preexisting residents
-                                 in the area."),
-                               
+                               p("When discussing gentrification, we believe that it is crucial to 
+                                 recognize the ongoing displacement occuring throughout Seattle, which
+                                 is the third most quickly gentrifying city in the United States (Fogel).
+                                 The Chinatown-International District (also referred to as Chinatown or
+                                 the CID), a neighborhood that is largely dominated by low-income, elderly
+                                 Asian residents and has a history dating back to the beginning of
+                                 the 1900s, has been named as one of the neighborhoods at 
+                                 most risk of displacement in the city (Kuo, \"International District Development Wave\"). 
+                                 Moreover, it has recently been identified as one of the eleven
+                                 most endangered historic areas in the nation by the National Trust for
+                                 Historic Preservation. With its rich history and cultural presence,
+                                 further displacement in the CID would result in the continued loss 
+                                 of culture and community."),
+                               p("The CID is, consequently, a neighborhood that is useful for our study of 
+                                 the relationship between racial demographics, income distribution,
+                                 and gentrification/displacement. In this project, we compare Chinatown 
+                                 to Wallingford (a North Seattle neighboorhood that is", em("extremely"), 
+                                 "different from the CID in terms of racial demographics and economic 
+                                 diversity -- it is largely populated by high-income and white 
+                                 individuals) to further highlight a possible relationship between 
+                                 race, income, and displacement."),
+                               p("In the making of this project, we also chose to only examine the data
+                                 for the years 2013-2019. Because of the COVID-19 pandemic, the data for 
+                                 2020 may be misrepresentative of patterns in gentrification."),
+
                                br(),
                                div(img(src = "https://www.theurbanist.org/wp-content/uploads/2022/06/china-gat-696x750.png",
                                        height = "300px",
                                        width = "300px"),
                                    style="text-align: center; margin-bottom: 6px;"),
-                               div(tags$figcaption("From Kuo, \"Watching Chinatown’s Gentrifying/Generational Change.\" These
-                      images depict a building in Chinatown eight years apart -- the bottom image
-                      is from 2008, and the top image is from 2016."),
-                                   style="text-align: center;"),
+                               div(tags$figcaption("From Kuo, \"Watching Chinatown’s Gentrifying/Generational Change.\" These 
+                               images depict a building in Chinatown eight years apart -- the bottom imageis from 2008, and the 
+                                                   top image is from 2016."), style="text-align: center;"),
                                br(),
-                               
-                               p("We can see that both Wallingford and the CID have been impacted by gentrification. There is, however,
-    a key difference between the two neighborhoods: Wallingford is predominantly white, while
-    the CID is not (Niche). This difference suggests that the gentrification faced in both neighborhoods
-    is not equal; therefore, in our project, we will explore and compare gentrification in the Chinatown-International
-    District and Wallingford for the years 2013-2020."),
-                               h5("More specifically, we ask: What is the relationship between built units and racial/income demographics
-    in the International District? In Wallingford? How do existing population demographics influence the rate
-    at which new developments appear, and how do new developments affect demographics?"),
                                
                                h2("Data Used"),
                                
                                p("This project uses the following data:"),
                                tags$ol(
                                  tags$li(a(href = "https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614500%2C-122.330455%2C12.00&showTable=true",
-                                           "Built Units Since 2010"), "from City of Seattle GIS Progam. This data set
-            provides information about built and demolished units in Seattle (a
-            \"unit\" does not refer to an entire building, but individual home/business
-            spaces within a building). Such information is useful in our project, as
-            construction and demolition patterns can lead to insights about an area's rate
-            of gentrification."),
+                                           "Built Units Since 2010"), "from City of Seattle GIS Progam. This data set 
+                                           provides information about built and demolished units in Seattle (a 
+                                           \"unit\" does not refer to an entire building, but individual home/business 
+                                           spaces within a building). Such information is useful in our project, as 
+                                           construction and demolition patterns can lead to insights about an area's rate 
+                                           of gentrification."),
                                  tags$li(a(href = "https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::census-block-groups-2010/explore?location=47.608203%2C-122.341500%2C12.00",
-                                           "Census Block Groups 2010"), "from City of Seattle GIS Program. This data set
-            provides a shapefile of Seattle. We use this shapefile throughout our project
-            to map our data."),
+                                           "Census Block Groups 2010"), "from City of Seattle GIS Program. This data set 
+                                            provides a shapefile of Seattle. We use this shapefile throughout our project to map our data."),
                                  tags$li(a(href = "https://data.census.gov/table?q=table+b02001&g=050XX00US53033$1500000&tid=ACSDT5Y2020.B02001",
-                                           "Table B02001"), "from the U.S. Census. This data provides information about the
-            racial makeup of block groups in the United States."),
+                                           "Table B02001"), "from the U.S. Census. This data provides information about the 
+                                           racial makeup of block groups in the United States."),
                                  tags$li(a(href = "https://data.census.gov/table?q=american+community+survey+economics&t=Income+and+Poverty&g=050XX00US53033$1500000&tid=ACSDT5Y2021.B19001",
-                                           "Table B19001"), "from the U.S. Census. This data provides information about the
-            income distribution of block groups in the United States.")
+                                           "Table B19001"), "from the U.S. Census. This data provides information about the 
+                                           income distribution of block groups in the United States.")
                                ),
                                
                                h2("References"),
@@ -135,18 +141,18 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                              
                              p("From scrolling through these maps, we can notice that:"),
                              tags$ol(
-                               tags$li("Until 2016, the number of constructed units in Chinatown is significantly
-              less than that of Wallingford."),
-                               tags$li("The spatial centers of construction and demolition vary year-by-year for both
-              neighborhoods."),
+                               tags$li("Until 2016, the number of constructed
+                                       units in Chinatown is significantly less than that of Wallingford."),
+                               tags$li("The spatial centers of construction and 
+                                       demolition vary year-by-year for both neighborhoods."),
                              ),
                              
                              br(),
                              
-                             p("We have also created line charts that summarize the rate of
-    construction and demolition of units in both neighborhoods (shown below). To view
-    the specific number of units constructed or demolished for a single
-    year, hover your mouse over that point in the line."),
+                             p("We have also created line charts that summarize the rate of 
+                             construction and demolition of units in both neighborhoods (shown below). To view 
+                             the specific number of units constructed or demolished for a single
+                             year, hover your mouse over that point in the line."),
                              
                              fluidRow(
                                column(6, wellPanel(plotlyOutput(outputId = "cid_line_plot"))),
@@ -157,7 +163,7 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                              in Chinatown and Wallingford, we can see that the rate of construction is significantly different:
                              while the rate of construction is generally increasing in Chinatown, the rate of construction is
                              generally decreasing in Wallingford (though it is also important to note that the rate of
-                               construction is not steadily increasing in either neighborhood)."),
+                             construction is not steadily increasing in either neighborhood)."),
                              
                              p("Some other key takeaways from these graphs are:"),
                              tags$ol(
