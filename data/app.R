@@ -178,6 +178,8 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                           fluidPage(
                             titlePanel("Comparing White and Non-white Populations in Chinatown and Wallingford (2013-2019)"),
                             
+                            br(), 
+                            
                             p("The graphs below display the racial distribution throughout the years in Chinatown and Wallingford. 
                               To see specific percentages, hover your cursor over the bars and you will be able to track the changes in race distribution over the years."),
                             
@@ -221,8 +223,11 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                             fluidRow(
                               column(6, wellPanel(plotlyOutput(outputId = "cid_race_line"))),
                               column(6, wellPanel(plotlyOutput(outputId = "wall_race_line")))
-                            )
+                            ),
                             
+                            p("The data for race demographics seem to defy the perceived implications of gentrification. 
+                              Yet does this data prove that gentrification does not exist in these two districts? 
+                              Purely relying on racial demographics might not give us enough information.")
                           )
 )
 
