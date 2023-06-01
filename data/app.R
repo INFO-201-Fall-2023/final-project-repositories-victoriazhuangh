@@ -184,6 +184,8 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                           fluidPage(
                             titlePanel("Comparing White and Non-white Populations in Chinatown and Wallingford (2013-2019)"),
                             
+                            br(), 
+                            
                             p("The graphs below display the racial distribution throughout the years in Chinatown and Wallingford. 
                               To see specific percentages, hover your cursor over the bars and you will be able to track the changes in race distribution over the years."),
                             
