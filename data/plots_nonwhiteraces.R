@@ -90,10 +90,11 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
-  labs(fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
+  labs(title = "Chinatown Nonwhite Racial Demographic", 
+       fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
-chinatown_bar + ylim(0,100)
+chinatown_bar <- chinatown_bar + ylim(0,100)
 chinatown_bar + geom_text()
 chinatown_bar <- ggplotly(chinatown_bar, tooltip = "text")
 
@@ -108,10 +109,10 @@ chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL,
     title = "Chinatown Non-White Race Distribution",
     x = "Year", 
     y = "Percentage", 
-    color = "Racial Distribution")
+    color = "Racial Demographic")
 
 #add interactivity
-chinatown_line + ylim(0,100)
+chinatown_line <- chinatown_line + ylim(0,100)
 chinatown_line + geom_text()
 chinatown_line <- ggplotly(chinatown_line, tooltip = "text")
 
@@ -142,11 +143,12 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 #Barchart
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
-  geom_bar(position="stack", stat="identity") +
-  labs ( fill = "Racial Makeup - Non-White", y = "Percentage", x = "Year") 
+  geom_bar(position="stack", stat="identity") + 
+  labs ( title = "Wallingford Nonwhite Racial Demographic",
+          fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
-wallingford_bar + ylim(0,100)
+wallingford_bar <- wallingford_bar + ylim(0,100)
 wallingford_bar + geom_text()
 wallingford_bar <- ggplotly(wallingford_bar, tooltip = "text")
 
@@ -161,9 +163,9 @@ wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL,
     title = "Wallingford Non-White Race Distribution",
     x = "Year",
     y = "Percentage",
-    color = "Racial Distribution")
+    color = "Racial Demographic")
 
 # Add interactivity 
-wallingford_line + ylim(0,100)
+wallingford_line <- wallingford_line + ylim(0,100)
 wallingford_line + geom_text()
 wallingford_line <- ggplotly(wallingford_line, tooltip = "text")

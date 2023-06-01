@@ -8,14 +8,14 @@ source("plots_nonwhiteraces.R")
 # Create introduction page ----
 intro_pg <- tabPanel("Introduction",
                      fluidPage(theme = shinytheme("readable"),
-
+                               
                                # Title
                                h1("Gentrification in Seattle: A Comparison of the Chinatown-International District
                                   and Wallingford (2013-2019)"),
-
+                               
                                # Authors
                                h4("Aileen Kuang and Victoria Zhuang"),
-
+                               
                                h2("What is gentrification, and why is it important?"),
                                p("Gentrification results from migration of affluent people into areas that have historically been
                                home to Black, indigenous, and other people of color, which displaces
@@ -25,8 +25,8 @@ intro_pg <- tabPanel("Introduction",
                                members. And, not only does gentrification impact culture, it threatens the food and housing
                                security of existing residents in gentrifying areas who may not be able to afford increasing
                                  rent and food prices (Fogel)."),
-
-
+                               
+                               
                                h2("Why Seattle, and why the CID and Wallingford?"),
                                p("When discussing gentrification, it is important to recognize the ongoing displacement
                                in Seattle, the third most quickly gentrifying city in the United States after Washington, D.C.
@@ -40,7 +40,7 @@ intro_pg <- tabPanel("Introduction",
                                Boeing slump in the late twentieth century, the prices of Wallingford homes rapidly increased (Dorpat).
                                The rising home and living prices would have likely led to the displacement of preexisting residents
                                  in the area."),
-
+                               
                                br(),
                                div(img(src = "https://www.theurbanist.org/wp-content/uploads/2022/06/china-gat-696x750.png",
                                        height = "300px",
@@ -51,7 +51,7 @@ intro_pg <- tabPanel("Introduction",
                       is from 2008, and the top image is from 2016."),
                                    style="text-align: center;"),
                                br(),
-
+                               
                                p("We can see that both Wallingford and the CID have been impacted by gentrification. There is, however,
     a key difference between the two neighborhoods: Wallingford is predominantly white, while
     the CID is not (Niche). This difference suggests that the gentrification faced in both neighborhoods
@@ -60,9 +60,9 @@ intro_pg <- tabPanel("Introduction",
                                h5("More specifically, we ask: What is the relationship between built units and racial/income demographics
     in the International District? In Wallingford? How do existing population demographics influence the rate
     at which new developments appear, and how do new developments affect demographics?"),
-
+                               
                                h2("Data Used"),
-
+                               
                                p("This project uses the following data:"),
                                tags$ol(
                                  tags$li(a(href = "https://data-seattlecitygis.opendata.arcgis.com/datasets/SeattleCityGIS::built-units-since-2010/explore?location=47.614500%2C-122.330455%2C12.00&showTable=true",
@@ -83,7 +83,7 @@ intro_pg <- tabPanel("Introduction",
                                            "Table B19001"), "from the U.S. Census. This data provides information about the
             income distribution of block groups in the United States.")
                                ),
-
+                               
                                h2("References"),
                                a(href = "https://urban.uw.edu/news/gentrification-and-changing-foodscapes-in-seattle/#:~:text=In%20Seattle%2C%2050%25%20of%20eligible,47%25%20between%202000%20and%202013",
                                  "Fogel, Rebecca. \"Gentrification and changing foodscapes in Seattle.\""),
@@ -109,11 +109,11 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                            fluidPage(
                              # Create title
                              titlePanel("Comparing New and Demolished Units in Chinatown and Wallingford (2013-2019)"),
-
+                             
                              p("In the maps below, we examine the spatial distribution of constructed and demolished units
       in Chinatown and Wallingford by year. Select a year from the dropdown menu to display the maps
       for that year."),
-
+                             
                              # Create sidebar layout
                              sidebarLayout(
                                # Select a year on the sidebar
@@ -123,7 +123,7 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                                              choices = c(2013, 2014, 2015, 2016, 2017, 2018, 2019)),
                                  width = 2
                                ),
-
+                               
                                mainPanel(
                                  # Display maps associated with the selected year
                                  fluidRow(
@@ -132,7 +132,7 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                                  )
                                )
                              ),
-
+                             
                              p("From scrolling through these maps, we can notice that:"),
                              tags$ol(
                                tags$li("Until 2016, the number of constructed units in Chinatown is significantly
@@ -140,25 +140,25 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                                tags$li("The spatial centers of construction and demolition vary year-by-year for both
               neighborhoods."),
                              ),
-
+                             
                              br(),
-
+                             
                              p("We have also created line charts that summarize the rate of
     construction and demolition of units in both neighborhoods (shown below). To view
     the specific number of units constructed or demolished for a single
     year, hover your mouse over that point in the line."),
-
+                             
                              fluidRow(
                                column(6, wellPanel(plotlyOutput(outputId = "cid_line_plot"))),
                                column(6, wellPanel(plotlyOutput(outputId = "wall_line_plot")))
                              ),
-
+                             
                              p("From these graphs, we can see that while the rate of demolition remains relatively stable and similar
                              in Chinatown and Wallingford, we can see that the rate of construction is significantly different:
                              while the rate of construction is generally increasing in Chinatown, the rate of construction is
                              generally decreasing in Wallingford (though it is also important to note that the rate of
                                construction is not steadily increasing in either neighborhood)."),
-
+                             
                              p("Some other key takeaways from these graphs are:"),
                              tags$ol(
                                tags$li("The relative difference between the rate of demolition and construction differs between
@@ -174,31 +174,55 @@ built_units_pg <- tabPanel("Built and Demolished Units",
 
 # Create analysis page 2: Comparing White-to-Nonwhite Population Ratio in Chinatown and Wallingford (2013-2019) ----
 comp_white_pg <- tabPanel("White and Non-White Populations",
-
+                          
                           fluidPage(
                             titlePanel("Comparing White and Non-white Populations in Chinatown and Wallingford (2013-2019)"),
-
+                            
+                            p("The graphs below display the racial distribution throughout the years in Chinatown and Wallingford. 
+                              To see specific percentages, hover your cursor over the bars and you will be able to track the changes in race distribution over the years."),
+                            
                             fluidRow(
                               column(6, wellPanel(plotlyOutput(outputId = "cid_nw_w"))),
                               column(6, wellPanel(plotlyOutput(outputId = "wall_nw_w")))
                             ),
-
+                            
+                            p("These first two bar charts showcase the overall white versus non-white race distribution between the two districts. 
+                            As seen above, Chinatown is a predominately non-white district while Wallingford is a predominantly white district. 
+                            According to patterns of gentrification, communities like Chinatown, which predominantly involve non-white residents, should have seen a higher rate of displacement among original residents, meaning that the number of white residents were predicted to increase. 
+                            However, our data shows the opposite. In recent years, despite the amount of newly built units, the number of non-white residents in Chinatown has risen."),
+                      
+                          
+                            fluidRow(
+                              column(6, wellPanel(plotlyOutput(outputId = "cid_nwn_line"))),
+                              column(6, wellPanel(plotlyOutput(outputId = "wall_wnw_line")))
+                            ),
+                            
+                            p("Compared to Chinatown, Wallingford, a predominantly white district, has seen a decrease in its White population despite the implications that gentrification would lead to an increase in the white population. 
+                            Instead, the non-white residents of Wallingford have steadily increased over the past few years. 
+                            Although both areas have seen an increase in non-white residents, the trend line for Chinatown appears steeper and starts at around 2017 while Wallingfords non-white residents trend line appears to be more gradual starting in 2018. "),
+                            
+                            
+                            br(),
+                            
+                            p("The racial demographics of Chinatown and Wallingford seem to contradict the implications of gentrification."),
+                            
+                            
                             fluidRow(
                               column(6, wellPanel(plotlyOutput(outputId = "cid_dem"))),
                               column(6, wellPanel(plotlyOutput(outputId = "wall_dem")))
                             ),
-
-                            br(),
-
+                            
+                            p("In order to examine this phenomenon further, we have presented two barcharts with their accompanying line charts, highlighting the non-white racial distribution in both districts. 
+                            Chinatown’s non-white racial demographic displays Asians as the predominant race, which correlates to the districts history of Asian immigrants. 
+                            There is also some intersectionality in past years with Black residents but this intersectionality disappears nearing 2017 when black residents decreased in a steady decline while Asian residents increased. 
+                            As of 2019, Asian residents are nearly 47% of the whole population. Similarly, in Wallingford, the predominant non-white race are Asians who make up around 15% of the overall district population by 2019. 
+                            However, unlike Chinatown, Asians remain the predominant non-white race without intersectionality for the existing timeline. "), 
+                            
                             fluidRow(
                               column(6, wellPanel(plotlyOutput(outputId = "cid_race_line"))),
                               column(6, wellPanel(plotlyOutput(outputId = "wall_race_line")))
-                            ),
-
-                            fluidRow(
-                              column(6, wellPanel(plotlyOutput(outputId = "cid_nwn_line"))),
-                              column(6, wellPanel(plotlyOutput(outputId = "wall_wnw_line")))
                             )
+                            
                           )
 )
 
@@ -207,10 +231,10 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
 income_pg <- tabPanel("Income Distribution",
                       fluidPage(
                         titlePanel("Comparing the Income Distribution of Chinatown and Wallingford (2013-2019)"),
-
+                        
                         p("In the maps below, we examine the income distribution in Chinatown and Wallingford by year.
                           Select a year from the dropdown menu to display the maps for that year."),
-
+                        
                         # Create sidebar layout
                         sidebarLayout(
                           # Select a year on the sidebar
@@ -220,15 +244,15 @@ income_pg <- tabPanel("Income Distribution",
                                         choices = c(2013, 2014, 2015, 2016, 2017, 2018, 2019)),
                             width = 2
                           ),
-
+                          
                           mainPanel(
                             # Display maps associated with the selected year
                             plotOutput(outputId = "map_inc"))
                         )
                       ),
-
+                      
                       p("Here are some main takeaways from these maps:"),
-
+                      
                       tags$ol(
                         tags$li("From 2013 to 2019, Chinatown was largely dominated by those with a
               yearly income of less than $10,000. However, from 2016 to 2018, the
@@ -256,7 +280,7 @@ income_pg <- tabPanel("Income Distribution",
               enough to confirm whether construction in low-income areas leads to high displacement.")
                       )
 )
-      
+
 
 
 # Create UI  ----
@@ -269,59 +293,59 @@ ui <- navbarPage("INFO 201 Final Project",
 
 # Create server ----
 server <- function(input, output){
-
+  
   output$map_new <- renderPlot({
     year_sf <- aggregate(input$year)
     map <- make_map_new(input$year, year_sf)
     return(map)
   })
-
+  
   output$map_demo <- renderPlot({
     year_sf <- aggregate(input$year)
     map <- make_map_dem(input$year, year_sf)
     return(map)
   })
-
+  
   output$cid_line_plot <- renderPlotly({
     return(cid_line)
   })
-
+  
   output$wall_line_plot <- renderPlotly({
     return(wall_line)
   })
-
+  
   output$cid_nw_w <- renderPlotly({
     return(cid_bar)
   })
-
+  
   output$wall_nw_w <- renderPlotly({
     return(wall_bar)
   })
-
+  
   output$cid_dem <- renderPlotly({
     return(chinatown_bar)
   })
-
+  
   output$wall_dem <- renderPlotly({
     return(wallingford_bar)
   })
-
+  
   output$cid_race_line <- renderPlotly({
     return(chinatown_line)
   })
-
+  
   output$wall_race_line <- renderPlotly({
     return(wallingford_line)
   })
-
+  
   output$cid_nwn_line <- renderPlotly({
     return(chinatown_wnw_line)
   })
-
+  
   output$wall_wnw_line <- renderPlotly ({
     return(wallingford_wnw_line)
   })
-
+  
   output$map_inc <- renderPlot({
     if (input$inc_year == 2013){
       make_inc_map(2013, sf_2013)

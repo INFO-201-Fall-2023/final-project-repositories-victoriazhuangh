@@ -164,10 +164,10 @@ cid_df <- rbind(cid_nw_df, cid_w_df)
 cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
   geom_bar(position="stack", stat="identity") +
   labs(
-    title = "Percentage of white vs. nonwhite residents (2013-2019)",
+    title = "Chinatown Distribution of Total Residents(2013-2019)",
     x = "Year",
     y = "Percentage",
-    fill = "Racial demographic"
+    fill = "Racial Demographic"
   ) + theme(legend.spacing.y = unit(1, "cm"))
             
 # Make interactive plot
@@ -187,7 +187,7 @@ chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL,
     title = "Chinatown White and Non-White Race Distribution",
     x = "Year",
     y = "Percentage",
-    color = "Racial Distribution")
+    color = "Racial Demographic")
 
 #make interactive
 chinatown_wnw_line + ylim(0,100)
@@ -213,15 +213,15 @@ wall_df <- rbind(wall_nw_df, wall_w_df)
 wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
   geom_bar(position="stack", stat="identity") +
   labs(
-    title = "Percentage of white vs. nonwhite residents (2013-2019)",
+    title = "Wallingford Total Residents Distribution (2013-2019)",
     x = "Year",
     y = "Percentage",
-    fill = "Racial demographic"
+    fill = "Racial Demographic"
   ) #+ geom_smooth(method = 'lm', se = FALSE)
 
 
 # Make interactive plot
-wall_bar + ylim(0,100)
+wall_bar <- wall_bar + ylim(0,100)
 wall_bar + geom_text()
 wall_bar <- ggplotly(wall_bar, tooltip = "text")
 
@@ -235,7 +235,7 @@ wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL,
     title = "Wallingford White and Non-White Race Distribution",
     x = "Year",
     y = "Percentage", 
-    color = "Racial Distribution")
+    color = "Racial Demographic")
 
 #make interactive
 wallingford_wnw_line + ylim(0,100)
