@@ -163,6 +163,7 @@ cid_df <- rbind(cid_nw_df, cid_w_df)
 # Plot
 cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
   geom_bar(position="stack", stat="identity") +
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Chinatown Distribution of Total Residents(2013-2019)",
     x = "Year",
@@ -183,6 +184,7 @@ chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL,
                                          text = perc, 
                                          col = group)) +
   geom_line() +
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Chinatown White and Non-White Race Distribution",
     x = "Year",
@@ -212,6 +214,7 @@ wall_df <- rbind(wall_nw_df, wall_w_df)
 # Plot
 wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = perc)) +
   geom_bar(position="stack", stat="identity") +
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Wallingford Total Residents Distribution (2013-2019)",
     x = "Year",
@@ -231,6 +234,7 @@ wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL,
                                             text = perc, 
                                             col = group)) +
   geom_line() + 
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Wallingford White and Non-White Race Distribution",
     x = "Year",
@@ -255,16 +259,17 @@ cid_new_df <- summarize(cid_grp,
 cid_bu_df <- rbind(cid_demo_df, cid_new_df)
 
 cid_line <- ggplot(cid_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_status, color = unit_status, text = total)) +
-  geom_line() +
+  geom_line() + 
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Number of Units Constructed and Demolished in Chinatown (2013-2019)",
     x = "Year",
     y = "Total Units",
     color = "Unit Status"
-  )
+  ) 
 
 cid_line + geom_text()
-cid_line <- ggplotly(cid_line, tooltip = "text")
+cid_line <- ggplotly(cid_line, tooltip = "text") 
 
 # Create line charts for demo/new units in Wallingford ----
 
@@ -284,6 +289,7 @@ wall_bu_df <- rbind(wall_new_df, wall_demo_df)
 
 wall_line <- ggplot(wall_bu_df, aes(x = YEAR_FINAL, y = total, group = unit_status, color = unit_status, text = total)) +
   geom_line() +
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Number of Units Constructed and Demolished in Wallingford (2013-2019)",
     x = "Year",

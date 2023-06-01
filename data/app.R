@@ -114,14 +114,15 @@ intro_pg <- tabPanel("Introduction",
 
 # Create analysis page 1: Comparing New Built Units in Chinatown and Wallingford (2013-2019) ----
 
-built_units_pg <- tabPanel("Built and Demolished Units",
+built_units_pg <- tabPanel("Constructed and Demolished Units",
                            fluidPage(
                              # Create title
-                             titlePanel("Comparing New and Demolished Units in Chinatown and Wallingford (2013-2019)"),
+                             titlePanel("Comparing Constructed and Demolished Units in Chinatown and Wallingford (2013-2019)"),
                              
-                             p("In the maps below, we examine the spatial distribution of constructed and demolished units
-      in Chinatown and Wallingford by year. Select a year from the dropdown menu to display the maps
-      for that year."),
+                             p("The number of constructed and demolished units in an area can be an indicator of gentrification 
+                             or displacement -- an increase in built and demolished units may suggest that the area is quickly being 
+                             gentrified. So, in the maps below, we examine the spatial distribution of constructed and demolished units
+                             in Chinatown and Wallingford by year. To view maps for a specific year, use the dropdown menu."),
                              
                              # Create sidebar layout
                              sidebarLayout(
@@ -178,11 +179,16 @@ built_units_pg <- tabPanel("Built and Demolished Units",
                                Wallingford, the number of constructed units dropped drastically, but the number of
                                constructed units rose drastically in Chinatown.")
                              )
-                           )
+                           ),
+                           
+                           p("All in all, the trends seen in the maps and line charts indicate that Chinatown is facing an increasing 
+                             rate of gentrification, while the rate of gentrification is decreasing in Wallingford. This is consistent 
+                             with much of the narratives presented about displacement in the CID. To further examine these trends in 
+                             relation to race, please continue to the next tab.")
 )
 
 # Create analysis page 2: Comparing White-to-Nonwhite Population Ratio in Chinatown and Wallingford (2013-2019) ----
-comp_white_pg <- tabPanel("White and Non-White Populations",
+comp_white_pg <- tabPanel("Racial Demographics",
                           
                           fluidPage(
                             titlePanel("Comparing White and Non-white Populations in Chinatown and Wallingford (2013-2019)"),
@@ -246,8 +252,10 @@ income_pg <- tabPanel("Income Distribution",
                       fluidPage(
                         titlePanel("Comparing the Income Distribution of Chinatown and Wallingford (2013-2019)"),
                         
-                        p("In the maps below, we examine the income distribution in Chinatown and Wallingford by year.
-                          Select a year from the dropdown menu to display the maps for that year."),
+                        p("The trends we noticed in the racial demographics of both neighborhoods were surprising.
+                        So, we turn to the income distribution to see whether it is consistent with what we know
+                        about gentrification. We examine this data for Chinatown and Wallingford in the maps below --
+                        select a year from the dropdown menu to display the maps for that year."),
                         
                         # Create sidebar layout
                         sidebarLayout(

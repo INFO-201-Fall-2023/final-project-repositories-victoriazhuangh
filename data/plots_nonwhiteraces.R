@@ -90,6 +90,7 @@ chinatown_race_df <- group_by(chinatown_race_df, YEAR_FINAL)
 chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = group,
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
+  scale_x_continuous(n.breaks=7) +
   labs(title = "Chinatown Nonwhite Racial Demographic", 
        fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
@@ -105,6 +106,7 @@ chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL,
                                                 group = group,
                                                 color = group)) +
   geom_line() + 
+  scale_x_continuous(n.breaks=7) + 
   labs(
     title = "Chinatown Non-White Race Distribution",
     x = "Year", 
@@ -144,6 +146,7 @@ wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aia
 wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fill = group, 
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") + 
+  scale_x_continuous(n.breaks=7) +
   labs ( title = "Wallingford Nonwhite Racial Demographic",
           fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
@@ -159,6 +162,7 @@ wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL,
                                                     group = group,
                                                     color = group)) +
   geom_line() +
+  scale_x_continuous(n.breaks=7) +
   labs(
     title = "Wallingford Non-White Race Distribution",
     x = "Year",

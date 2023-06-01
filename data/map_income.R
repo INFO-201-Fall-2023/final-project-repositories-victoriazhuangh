@@ -578,11 +578,13 @@ highlighted neighborhood is Chinatown.",
       width_hint = 0.4,
       unit_category = "metric",
       style = "bar",
-      location = "bl"
+      location = "br"
     ) +
     annotation_north_arrow(
-      location = "tr",
-      style = north_arrow_fancy_orienteering
+      location = "tl",
+      style = north_arrow_fancy_orienteering,
+      height = unit(0.8, "cm"),
+      width = unit(0.8, "cm")
     ) + labs(
       title = "Map of Seattle",
     ) + 
@@ -595,7 +597,7 @@ highlighted neighborhood is Chinatown.",
   # Create full map 
   map <- ggdraw() +
     draw_plot(main_map) +
-    draw_plot(inset_map, x = 0.6, y = 0.4, width = 0.3, height = 0.35)
+    draw_plot(inset_map, x = 0.5, y = 0.35, width = 0.5, height = 0.5)
   
   # Plot map
   plot(map)
