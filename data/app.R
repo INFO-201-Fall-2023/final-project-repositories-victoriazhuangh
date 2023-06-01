@@ -227,8 +227,11 @@ comp_white_pg <- tabPanel("White and Non-White Populations",
                             fluidRow(
                               column(6, wellPanel(plotlyOutput(outputId = "cid_race_line"))),
                               column(6, wellPanel(plotlyOutput(outputId = "wall_race_line")))
-                            )
+                            ),
                             
+                            p("The data for race demographics seem to defy the perceived implications of gentrification. 
+                              Yet does this data prove that gentrification does not exist in these two districts? 
+                              Purely relying on racial demographics might not give us enough information.")
                           )
 )
 
