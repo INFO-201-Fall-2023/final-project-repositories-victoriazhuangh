@@ -120,9 +120,10 @@ built_units_pg <- tabPanel("Constructed and Demolished Units",
                              titlePanel("Comparing Constructed and Demolished Units in Chinatown and Wallingford (2013-2019)"),
                              
                              p("The number of constructed and demolished units in an area can be an indicator of gentrification 
-                             or displacement -- an increase in built and demolished units may suggest that the area is quickly being 
-                             gentrified. So, in the maps below, we examine the spatial distribution of constructed and demolished units
-                             in Chinatown and Wallingford by year. To view maps for a specific year, use the dropdown menu."),
+                             or displacement -- an increase in built units may suggest that the area is quickly being 
+                             gentrified, and an increase in demolished units may suggest the same. So, in the maps below, 
+                             we examine the spatial distribution of constructed and demolished units in Chinatown and Wallingford by year. 
+                             To view maps for a specific year, use the dropdown menu."),
                              
                              # Create sidebar layout
                              sidebarLayout(
@@ -143,13 +144,12 @@ built_units_pg <- tabPanel("Constructed and Demolished Units",
                                )
                              ),
                              
-                             p("From scrolling through these maps, we can notice that:"),
-                             tags$ol(
-                               tags$li("Until 2016, the number of constructed
-                                       units in Chinatown is significantly less than that of Wallingford."),
-                               tags$li("The spatial centers of construction and 
-                                       demolition vary year-by-year for both neighborhoods."),
-                             ),
+                             p("From scrolling through these maps, we can notice multiple things. First, the
+                               number of constructed units in Chinatown is significantly less than
+                               Wallingford until 2016, which suggests that there may have been a significant
+                               event that year. Additionally, the spatial centers of construction and demolition
+                               vary year-by-year within both neighborhoods, so it is difficult to distinguish
+                               a pattern of displacement within Chinatown or Wallingford."),
                              
                              br(),
                              
@@ -191,7 +191,7 @@ built_units_pg <- tabPanel("Constructed and Demolished Units",
 comp_white_pg <- tabPanel("Racial Demographics",
                           
                           fluidPage(
-                            titlePanel("Comparing White and Non-white Populations in Chinatown and Wallingford (2013-2019)"),
+                            titlePanel("Comparing Racial Demographics in Chinatown and Wallingford (2013-2019)"),
                             
                             br(), 
                             
