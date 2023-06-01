@@ -14,9 +14,9 @@ intro_pg <- tabPanel("Introduction",
                                   and Wallingford (2013-2019)"),
                                
                                # Authors
-                               h4("Aileen Kuang and Victoria Zhuang"),
+                               h4("By Aileen Kuang and Victoria Zhuang"),
                                
-                               h2("Project Summary"),
+                               h2("Project Question"),
                                h5("This project aims to examine the relationship between race, income, and gentrification. 
                                More specifically, we ask: What is the relationship between constructed/demolished units and racial/income demographics
                                in the International District? In Wallingford? How do existing population demographics influence the rate 
@@ -64,7 +64,7 @@ intro_pg <- tabPanel("Introduction",
                                        width = "300px"),
                                    style="text-align: center; margin-bottom: 6px;"),
                                div(tags$figcaption("From Kuo, \"Watching Chinatown’s Gentrifying/Generational Change.\" These 
-                               images depict a building in Chinatown eight years apart -- the bottom imageis from 2008, and the 
+                               images depict a building in Chinatown eight years apart -- the bottom image is from 2008, and the 
                                                    top image is from 2016."), style="text-align: center;"),
                                br(),
                                
@@ -91,6 +91,9 @@ intro_pg <- tabPanel("Introduction",
                                ),
                                
                                h2("References"),
+                               a(href= "https://www.historylink.org/file/3461",
+                                 "Dorpat, Paul. \"Seattle Neighborhoods: Wallingford — Thumbnail History.\""),
+                               br(),
                                a(href = "https://urban.uw.edu/news/gentrification-and-changing-foodscapes-in-seattle/#:~:text=In%20Seattle%2C%2050%25%20of%20eligible,47%25%20between%202000%20and%202013",
                                  "Fogel, Rebecca. \"Gentrification and changing foodscapes in Seattle.\""),
                                br(),
@@ -100,8 +103,8 @@ intro_pg <- tabPanel("Introduction",
                                a(href = "https://www.theurbanist.org/2022/03/22/cid-growing-pains-and-opportunities/",
                                  "Kuo, Shawn. \"International District Development Wave Comes with Growing Pains and Opportunities.\""),
                                br(),
-                               a(href= "https://www.historylink.org/file/3461",
-                                 "Dorpat, Paul. \"Seattle Neighborhoods: Wallingford — Thumbnail History.\""),
+                               a(href = "https://www.seattletimes.com/seattle-news/transportation/seattle-neighborhood-placed-on-unfortunate-historic-places-list/",
+                                 "Lindblom, Mike and Yoon-Hendricks, Alexandra. \"Seattle neighborhood placed on unfortunate historic places list.\""),
                                br(),
                                a(href = "https://www.niche.com/places-to-live/n/wallingford-seattle-wa/residents/", "Niche. \"Wallingford.\""),
                                br(),
