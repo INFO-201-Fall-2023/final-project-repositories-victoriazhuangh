@@ -73,12 +73,12 @@ chinatown_black <- summarize(chinatown_filt_df,
 
 chinatown_aian <- summarize(chinatown_filt_df,
                              perc = mean(perc_aian),
-                             group = "Percent AIAN"
+                             group = "Percent American Indian and Alaska Native"
 )
 
 chinatown_nhpi <- summarize(chinatown_filt_df,
                              perc = mean(perc_nhpi),
-                             group = "Percent NHPI"
+                             group = "Percent National Hawaiian Pacific Islander"
 )
 
 chinatown_race_df <- rbind(chinatown_asian,chinatown_black,chinatown_aian,chinatown_nhpi)
