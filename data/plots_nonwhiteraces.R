@@ -73,12 +73,12 @@ chinatown_black <- summarize(chinatown_filt_df,
 
 chinatown_aian <- summarize(chinatown_filt_df,
                              perc = mean(perc_aian),
-                             group = "Percent American Indian and Alaska Native"
+                             group = "Percent AIAN (American Indian and Alaska Native)"
 )
 
 chinatown_nhpi <- summarize(chinatown_filt_df,
                              perc = mean(perc_nhpi),
-                             group = "Percent National Hawaiian Pacific Islander"
+                             group = "Percent NHPI (Native Hawaiian / Pacific Islander)"
 )
 
 chinatown_race_df <- rbind(chinatown_asian,chinatown_black,chinatown_aian,chinatown_nhpi)
@@ -92,7 +92,7 @@ chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = 
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
   labs(title = "Breakdown of Non-white Racial Groups in Chinatown (2013-2019)", 
-       fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
+       fill = "Non-white Racial Groups", y = "Percentage", x = "Year") 
 
 # Add interactivity 
 chinatown_bar <- chinatown_bar + ylim(0,100)
@@ -111,7 +111,7 @@ chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL,
     title = "Changes in Non-white Racial Groups in Chinatown (2013-2019)",
     x = "Year", 
     y = "Percentage", 
-    color = "Racial Demographic")
+    color = "Non-white Racial Groups")
 
 #add interactivity
 chinatown_line <- chinatown_line + ylim(0,100)
@@ -134,11 +134,11 @@ wallingford_black <- summarize(wallingford_filt_df,
 
 wallingford_aian <- summarize(wallingford_filt_df,
                                perc = mean(perc_aian),
-                               group = "Percent AIAN")
+                               group = "Percent AIAN (American Indian and Alaska Native)")
 
 wallingford_nhpi <- summarize(wallingford_filt_df,
                                perc = mean(perc_nhpi),
-                               group = "Percent NHPI")
+                               group = "Percent NHPI (Native Hawaiian / Pacific Islander)")
 
 wallingford_race_df <- rbind(wallingford_asian,wallingford_black,wallingford_aian,wallingford_nhpi)
 
@@ -148,7 +148,7 @@ wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fil
   geom_bar(position="stack", stat="identity") + 
   scale_x_continuous(n.breaks=7) +
   labs ( title = "Breakdown of Non-white Racial Groups in Wallingford (2013-2019)",
-          fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
+          fill = "Non-white Racial Groups", y = "Percentage", x = "Year") 
 
 # Add interactivity 
 wallingford_bar <- wallingford_bar + ylim(0,100)
@@ -167,7 +167,7 @@ wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL,
     title = "Changes in Non-white Racial Groups in Wallingford (2013-2019)",
     x = "Year",
     y = "Percentage",
-    color = "Racial Demographic")
+    color = "Non-white Racial Groups")
 
 # Add interactivity 
 wallingford_line <- wallingford_line + ylim(0,100)

@@ -236,7 +236,7 @@ wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL,
   geom_line() + 
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Changes in White and Non-White Population in Wallingford (2013-2019)",
+    title = "Changes in White and Non-White Populations in Wallingford (2013-2019)",
     x = "Year",
     y = "Percentage", 
     color = "Racial Demographic")
