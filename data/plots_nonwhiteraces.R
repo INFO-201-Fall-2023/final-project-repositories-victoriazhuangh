@@ -91,7 +91,7 @@ chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = 
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
-  labs(title = "Chinatown Nonwhite Racial Demographic", 
+  labs(title = "Breakdown of Non-white Racial Demographics in Chinatown", 
        fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
@@ -147,7 +147,7 @@ wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fil
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") + 
   scale_x_continuous(n.breaks=7) +
-  labs ( title = "Wallingford Nonwhite Racial Demographic",
+  labs ( title = "Breakdown of Non-white Racial Demographics in Wallingford",
           fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
