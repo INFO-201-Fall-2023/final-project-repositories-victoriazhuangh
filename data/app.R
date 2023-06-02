@@ -69,7 +69,9 @@ intro_pg <- tabPanel("Introduction",
                                                    top image is from 2016."), style="text-align: center;"),
                                br(),
                                
-                               h2("Data Used"),
+                               h2("Data"),
+                               
+                               h5("Data Sources"),
                                
                                p("This project uses the following data:"),
                                tags$ol(
@@ -104,8 +106,11 @@ intro_pg <- tabPanel("Introduction",
                                          Our approach to income was similar in which we had data indicating the amount of people who belonged in a certain income bracket. We then used those values to find the percentages of each bracket out of the total popuation")
                                 ),
                                
-                              
-                               
+                              h5("Potential Biases"),
+                              p("As with any other data set, our data may have errors and biases that affect our project. For instance, 
+                                 the Built Units data set from the City of Seattle GIS Program was not well-documented, which could have 
+                                led to errors in our analysis. Additionally, for the Census data (specifically Table B19001), there is a 
+                                potential for sampling bias, which could have also affected our analysis."),
                                
                                h2("References"),
                                a(href= "https://www.historylink.org/file/3461",
