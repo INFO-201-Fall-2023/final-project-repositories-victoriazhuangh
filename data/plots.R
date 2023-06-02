@@ -165,7 +165,7 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Chinatown Distribution of Total Residents(2013-2019)",
+    title = "Chinatown Racial Demographic over Time (2013-2019)",
     x = "Year",
     y = "Percentage",
     fill = "Racial Demographic"
@@ -216,7 +216,7 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Wallingford Total Residents Distribution (2013-2019)",
+    title = "Wallingford Racial Demographic over Time (2013-2019)",
     x = "Year",
     y = "Percentage",
     fill = "Racial Demographic"

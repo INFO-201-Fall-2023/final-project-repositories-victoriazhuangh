@@ -25,12 +25,13 @@ intro_pg <- tabPanel("Introduction",
                                h2("What is gentrification, and why is it important?"),
                                p("Gentrification results from the migration of affluent people into areas that have historically been
                                home to Black, indigenous, and other people of color, which displaces
-                               those original residents. Developers and corporations often claim that gentrification
-                               increases the quality of life within target neighborhoods; however, in reality, it can
-                               also lead to a loss of culture, history, and feelings of connection between community
-                               members. And, not only does gentrification impact culture, it threatens the food and housing
-                               security of existing residents in gentrifying areas who may not be able to afford increasing
-                               rent and food prices (Fogel)."),
+                               those original residents. Developers, corporations and usually, the government, 
+                               often claim that gentrification increases the quality of life within target neighborhoods 
+                               - leading to a reduction in crime rates, economic stabilitzation of low-income areas, new economic oppourtunities etc..
+                               however, in reality, it can also lead to the loss of culture, history, and connection between community
+                               members. The process of gentrification heavily involves developers and corporations who renovate existing infrastructure or develop new infrastructure 
+                               that increases the price of rent and proverty value, resulting in an increase of newcomers and the displacement of existing residences, 
+                               who may be unable to afford the increase rent and food prices (Fogel)."),
                                
                                h2("Why Seattle, and why the CID and Wallingford?"),
                                p("When discussing gentrification, we believe that it is crucial to 
@@ -89,6 +90,22 @@ intro_pg <- tabPanel("Introduction",
                                            "Table B19001"), "from the U.S. Census. This data provides information about the 
                                            income distribution of block groups in the United States.")
                                ),
+                               
+                               h5("Data Wrangling and Processing"),
+                               p("In order to assess the evidence and impact of gentrification, we initially created a merged dataframe containing income, demographic and infrastructure information from both districts.
+                                 We merged the differnt datasets by using GEOID values which were aggregated to the census block group level for the Built Units dataset"),
+                               tags$ol(
+                                 tags$li(" In the \"Built Units since 2010\" dataset, we utilized the constructed, demolished and net units to create a timeline for the development of Chinatown and Wallingford.
+                                         This dataset was especially useful in shaping the overall map and subsequent line graphs of developing and demolishing infrastruture."),
+                               
+                                 tags$li("We used the following three datasets to construct a cohesive picture of Seattle and its different districts, specifically focusing on the demographics and income of the two districts. 
+                                         For demographics, we created separate dataframes that analyze percentages of white and non-white residents. After focusing the braoder range of white vs non-white residents, we dived more into the specifics of the non-white residents,
+                                         The data, attained from the above datasets included populations of certain races in certain areas, through these values, we were able to find the specific percents for each race. 
+                                         Our approach to income was similar in which we had data indicating the amount of people who belonged in a certain income bracket. We then used those values to find the percentages of each bracket out of the total popuation")
+                                ),
+                               
+                              
+                               
                                
                                h2("References"),
                                a(href= "https://www.historylink.org/file/3461",
