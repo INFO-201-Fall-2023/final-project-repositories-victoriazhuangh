@@ -91,7 +91,7 @@ chinatown_bar <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL, y = perc, fill = 
                                                text = perc)) +
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
-  labs(title = "Breakdown of Non-white Racial Demographics in Chinatown", 
+  labs(title = "Breakdown of Non-white Racial Groups in Chinatown (2013-2019)", 
        fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
@@ -108,7 +108,7 @@ chinatown_line <- ggplot(chinatown_race_df, aes(x = YEAR_FINAL,
   geom_line() + 
   scale_x_continuous(n.breaks=7) + 
   labs(
-    title = "Chinatown Non-White Race Distribution",
+    title = "Changes in Non-white Racial Groups in Chinatown (2013-2019)",
     x = "Year", 
     y = "Percentage", 
     color = "Racial Demographic")
@@ -147,7 +147,7 @@ wallingford_bar <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL, y = perc, fil
                                                    text = perc)) +
   geom_bar(position="stack", stat="identity") + 
   scale_x_continuous(n.breaks=7) +
-  labs ( title = "Breakdown of Non-white Racial Demographics in Wallingford",
+  labs ( title = "Breakdown of Non-white Racial Groups in Wallingford (2013-2019)",
           fill = "Racial Demographic - Non-White", y = "Percentage", x = "Year") 
 
 # Add interactivity 
@@ -164,7 +164,7 @@ wallingford_line <- ggplot(wallingford_race_df, aes(x = YEAR_FINAL,
   geom_line() +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Wallingford Non-White Race Distribution",
+    title = "Changes in Non-white Racial Groups in Wallingford (2013-2019)",
     x = "Year",
     y = "Percentage",
     color = "Racial Demographic")

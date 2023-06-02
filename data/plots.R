@@ -165,7 +165,7 @@ cid_bar <- ggplot(cid_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = per
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Chinatown Racial Demographic over Time (2013-2019)",
+    title = "Percentage of White vs. Non-white Residents in Chinatown (2013-2019)",
     x = "Year",
     y = "Percentage",
     fill = "Racial Demographic"
@@ -186,7 +186,7 @@ chinatown_wnw_line <- ggplot(cid_df, aes(x = YEAR_FINAL,
   geom_line() +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Chinatown White and Non-White Race Distribution",
+    title = "Changes in White and Non-White Populations in Chinatown (2013-2019)",
     x = "Year",
     y = "Percentage",
     color = "Racial Demographic")
@@ -216,7 +216,7 @@ wall_bar <- ggplot(wall_df, aes(x = YEAR_FINAL, y = perc, fill = group, text = p
   geom_bar(position="stack", stat="identity") +
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Wallingford Racial Demographic over Time (2013-2019)",
+    title = "Percentage of White vs. Non-white Residents in Wallingford (2013-2019)",
     x = "Year",
     y = "Percentage",
     fill = "Racial Demographic"
@@ -236,7 +236,7 @@ wallingford_wnw_line <- ggplot(wall_df, aes(x = YEAR_FINAL,
   geom_line() + 
   scale_x_continuous(n.breaks=7) +
   labs(
-    title = "Wallingford White and Non-White Race Distribution",
+    title = "Changes in White and Non-White Population in Wallingford (2013-2019)",
     x = "Year",
     y = "Percentage", 
     color = "Racial Demographic")
